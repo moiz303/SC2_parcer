@@ -4,8 +4,6 @@ from collections import defaultdict
 
 
 def parse_replay_to_json(replay_path, output_path):
-    print(f"Загрузка реплея: {replay_path}\n")
-
     replay = sc2reader.load_replay(
         replay_path,
         load_level=4,
@@ -95,6 +93,7 @@ def parse_replay_to_json(replay_path, output_path):
             'replay_file': replay_path,
             'version': replay.release_string,
             'duration': f"{replay.length.seconds // 60} minutes {replay.length.seconds % 60} seconds",
+            'fps': float(replay.game_fps),
             'map': replay.map_name,
             'players': [
                 {
