@@ -1,0 +1,5875 @@
+{
+  "metadata": {
+    "replay_file": "C:\\Users\\0\\Documents\\StarCraft II\\Accounts\\497425130\\2-S2-1-9745761\\Replays\\Multiplayer\\Taito Citadel LE (2).SC2Replay",
+    "version": "5.0.15.96592",
+    "duration": "15 minutes 30 seconds",
+    "map": "Taito Citadel LE",
+    "players": [
+      {
+        "name": "Moizz",
+        "race": "Зерги",
+        "team": "Team 1: Player 1 - Moizz (Зерги)",
+        "result": "Win",
+        "is_human": true
+      },
+      {
+        "name": "ИИ 1 (знаток)",
+        "race": "Терраны",
+        "team": "Team 2: Player 2 - ИИ 1 (знаток) (Терраны)",
+        "result": "Loss",
+        "is_human": false
+      }
+    ]
+  },
+  "units": [
+    {
+      "unit_id": 51642369,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 0,
+      "died_frame": 8126,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 44.0,
+          "y": 140.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 37.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 26.0,
+          "y": 130.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 62652417,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 2713,
+      "died_frame": 17129,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 132.0,
+          "y": 63.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 138.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 125.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 121.0,
+          "y": 54.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 69.0,
+          "y": 98.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 65798146,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 4089,
+      "died_frame": 8711,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 129.0,
+          "y": 69.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 128.0,
+          "y": 56.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 125.0,
+          "y": 53.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 125.0,
+          "y": 43.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 127.0,
+          "y": 42.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 125.0,
+          "y": 38.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 66322433,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 3724,
+      "died_frame": 8772,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 131.0,
+          "y": 70.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 127.0,
+          "y": 56.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 123.0,
+          "y": 52.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 124.0,
+          "y": 43.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 127.0,
+          "y": 43.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 125.0,
+          "y": 37.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 66584579,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 4921,
+      "died_frame": 9188,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 128.0,
+          "y": 69.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 127.0,
+          "y": 56.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 123.0,
+          "y": 52.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 125.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 127.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 126.0,
+          "y": 38.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8880,
+          "time": 555.0,
+          "x": 128.0,
+          "y": 39.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 71827458,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 5320,
+      "died_frame": 7730,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 130.0,
+          "y": 70.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 125.0,
+          "y": 54.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 81788929,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 7374,
+      "died_frame": 12360,
+      "frames": [
+        {
+          "frame": 7440,
+          "time": 465.0,
+          "x": 48.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 44.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 31.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 30.0,
+          "y": 129.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 58982402,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 3291,
+      "died_frame": 7940,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 126.0,
+          "y": 53.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 61865985,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 2459,
+      "died_frame": 8592,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 124.0,
+          "y": 53.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 123.0,
+          "y": 43.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 127.0,
+          "y": 42.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 62914563,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 5047,
+      "died_frame": 7888,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 128.0,
+          "y": 54.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 63438849,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 2990,
+      "died_frame": 7937,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 127.0,
+          "y": 46.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 64225282,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 3789,
+      "died_frame": 7973,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 131.0,
+          "y": 48.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 66060289,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 3690,
+      "died_frame": 7745,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 54.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 67895297,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 4123,
+      "died_frame": 7809,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 54.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 70516737,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 4522,
+      "died_frame": 7881,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 56.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 71041025,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 4568,
+      "died_frame": 9178,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 127.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 124.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 126.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 124.0,
+          "y": 39.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8880,
+          "time": 555.0,
+          "x": 125.0,
+          "y": 41.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 72089602,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 7269,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 51.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 72351746,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 5526,
+      "died_frame": 8946,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 128.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 122.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 126.0,
+          "y": 43.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 125.0,
+          "y": 39.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 73924610,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 5867,
+      "died_frame": 7774,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 129.0,
+          "y": 48.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 75759617,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 5864,
+      "died_frame": 7703,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 130.0,
+          "y": 49.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 76021761,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 6005,
+      "died_frame": 8677,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 127.0,
+          "y": 54.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 127.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 128.0,
+          "y": 40.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 76283907,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 7272,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 128.0,
+          "y": 50.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 76546050,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 6798,
+      "died_frame": 7729,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 128.0,
+          "y": 48.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 77332482,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 6795,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 139.0,
+          "y": 54.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 77594625,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 6484,
+      "died_frame": 7701,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 127.0,
+          "y": 53.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 78118914,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 7276,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 124.0,
+          "y": 53.0,
+          "z": 0.0
+        },
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 132.0,
+          "y": 51.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 81526785,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 7328,
+      "died_frame": 7846,
+      "frames": [
+        {
+          "frame": 7680,
+          "time": 480.0,
+          "x": 126.0,
+          "y": 48.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 81002500,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 7693,
+      "died_frame": 12458,
+      "frames": [
+        {
+          "frame": 7920,
+          "time": 495.0,
+          "x": 32.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 30.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 56623105,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 695,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 111.0,
+          "y": 42.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 61603850,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 8039,
+      "died_frame": 8167,
+      "frames": [
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 125.0,
+          "y": 38.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 64749576,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 7773,
+      "died_frame": 12342,
+      "frames": [
+        {
+          "frame": 8160,
+          "time": 510.0,
+          "x": 32.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 77070349,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 8035,
+      "died_frame": 8400,
+      "frames": [
+        {
+          "frame": 8400,
+          "time": 525.0,
+          "x": 133.0,
+          "y": 44.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 64487433,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 8392,
+      "died_frame": 8707,
+      "frames": [
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 132.0,
+          "y": 43.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 72876033,
+      "type": "Drone",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 5062,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 123.0,
+          "y": 32.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 83361793,
+      "type": "Drone",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 7653,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 133.0,
+          "y": 37.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 83886081,
+      "type": "Drone",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 7657,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 8640,
+          "time": 540.0,
+          "x": 132.0,
+          "y": 37.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 74711045,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 8585,
+      "died_frame": 8931,
+      "frames": [
+        {
+          "frame": 8880,
+          "time": 555.0,
+          "x": 129.0,
+          "y": 42.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 61603854,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 8883,
+      "died_frame": 12555,
+      "frames": [
+        {
+          "frame": 9120,
+          "time": 570.0,
+          "x": 129.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 9600,
+          "time": 600.0,
+          "x": 125.0,
+          "y": 44.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 116.0,
+          "y": 52.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 66322439,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 8878,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 9120,
+          "time": 570.0,
+          "x": 130.0,
+          "y": 43.0,
+          "z": 0.0
+        },
+        {
+          "frame": 9600,
+          "time": 600.0,
+          "x": 126.0,
+          "y": 41.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 115.0,
+          "y": 51.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 121.0,
+          "y": 53.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 61.0,
+          "y": 104.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 49.0,
+          "y": 114.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 43.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 41.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 38.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 42.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 46.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 46.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 44.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 47.0,
+          "y": 153.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 64.0,
+          "y": 129.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 67371009,
+      "type": "Drone",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 3941,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 9360,
+          "time": 585.0,
+          "x": 127.0,
+          "y": 31.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 12845058,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 11238,
+      "died_frame": 12491,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 121.0,
+          "y": 49.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 15990786,
+      "type": "Raven",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 10799,
+      "died_frame": 12639,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 120.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 37224450,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 11366,
+      "died_frame": 12497,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 120.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 51642372,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 8172,
+      "died_frame": 12632,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 121.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 63176716,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 9719,
+      "died_frame": 16761,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 115.0,
+          "y": 54.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 120.0,
+          "y": 56.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 64487434,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 9449,
+      "died_frame": 12491,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 122.0,
+          "y": 53.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 65011726,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10332,
+      "died_frame": 12486,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 116.0,
+          "y": 52.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 65798156,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 9723,
+      "died_frame": 17921,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 117.0,
+          "y": 51.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 121.0,
+          "y": 54.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 65.0,
+          "y": 102.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 60.0,
+          "y": 110.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 50.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 48.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 43.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 45.0,
+          "y": 131.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 66060296,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10336,
+      "died_frame": 12594,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 119.0,
+          "y": 50.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 72613889,
+      "type": "Overlord",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 5022,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 113.0,
+          "y": 59.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 73662467,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 9340,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 119.0,
+          "y": 49.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 123.0,
+          "y": 54.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 43.0,
+          "y": 116.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 42.0,
+          "y": 119.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 41.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 49.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 47.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 52.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 62.0,
+          "y": 124.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 74186765,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 9050,
+      "died_frame": 12684,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 123.0,
+          "y": 56.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 74711049,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 9733,
+      "died_frame": 18551,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 115.0,
+          "y": 53.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 121.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 64.0,
+          "y": 106.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 54.0,
+          "y": 114.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 126.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 47.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 44.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 47.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 49.0,
+          "y": 138.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 75235352,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 9848,
+      "died_frame": 12536,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 120.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 75759626,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 9345,
+      "died_frame": 12523,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 120.0,
+          "y": 50.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 83623948,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 9728,
+      "died_frame": 16549,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 114.0,
+          "y": 56.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 119.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 86245377,
+      "type": "Raven",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 10138,
+      "died_frame": 12493,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 120.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 87293953,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10180,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 123.0,
+          "y": 48.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 123.0,
+          "y": 51.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 49.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 48.0,
+          "y": 131.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 50.0,
+          "y": 139.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 52.0,
+          "y": 138.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 87556097,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10185,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 126.0,
+          "y": 50.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 124.0,
+          "y": 52.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 65.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 60.0,
+          "y": 110.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 48.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 47.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 47.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 138.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 45.0,
+          "y": 140.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 47.0,
+          "y": 147.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 87818241,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10188,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 120.0,
+          "y": 47.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 120.0,
+          "y": 52.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 45.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 47.0,
+          "y": 131.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 136.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 48.0,
+          "y": 140.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 88866817,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10328,
+      "died_frame": 16486,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 114.0,
+          "y": 55.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 120.0,
+          "y": 55.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 90177537,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 10488,
+      "died_frame": 12623,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 124.0,
+          "y": 56.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 92536833,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 10967,
+      "died_frame": 12517,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 119.0,
+          "y": 56.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 92798977,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10979,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 125.0,
+          "y": 48.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 122.0,
+          "y": 50.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 116.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 47.0,
+          "y": 119.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 45.0,
+          "y": 131.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 50.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 51.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 51.0,
+          "y": 139.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 93061121,
+      "type": "Queen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 10984,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 121.0,
+          "y": 48.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 121.0,
+          "y": 51.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 57.0,
+          "y": 107.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 48.0,
+          "y": 115.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 50.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 47.0,
+          "y": 128.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 133.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 95158273,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 11226,
+      "died_frame": 18828,
+      "frames": [
+        {
+          "frame": 12480,
+          "time": 780.0,
+          "x": 122.0,
+          "y": 50.0,
+          "z": 0.0
+        },
+        {
+          "frame": 12720,
+          "time": 795.0,
+          "x": 122.0,
+          "y": 53.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 50.0,
+          "y": 114.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 42.0,
+          "y": 119.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 40.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 45.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 47.0,
+          "y": 149.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 12845059,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 12499,
+      "died_frame": 16587,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 64.0,
+          "y": 104.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 50069506,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14207,
+      "died_frame": 17792,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 65.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 62.0,
+          "y": 106.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 49.0,
+          "y": 115.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 47.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 45.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 44.0,
+          "y": 133.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 64749578,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14604,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 65.0,
+          "y": 100.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 62.0,
+          "y": 102.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 54.0,
+          "y": 109.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 52.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 50.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 45.0,
+          "y": 127.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 47.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 48.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 49.0,
+          "y": 137.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 48.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 51.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 54.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 52.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 55.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 47.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 65.0,
+          "y": 123.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 66584584,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 13744,
+      "died_frame": 16741,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 63.0,
+          "y": 98.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 71041031,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14210,
+      "died_frame": 16634,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 63.0,
+          "y": 102.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 74186766,
+      "type": "SiegeTank",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 12784,
+      "died_frame": 16776,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 57.0,
+          "y": 106.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 82313225,
+      "type": "Raven",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 13549,
+      "died_frame": 17259,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 56.0,
+          "y": 107.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 37.0,
+          "y": 129.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 88604681,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 13399,
+      "died_frame": 16629,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 60.0,
+          "y": 107.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 90439700,
+      "type": "Raven",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 13453,
+      "died_frame": 17273,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 58.0,
+          "y": 109.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 58.0,
+          "y": 106.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 94633999,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14721,
+      "died_frame": 16699,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 64.0,
+          "y": 102.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 94896139,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 13000,
+      "died_frame": 16563,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 60.0,
+          "y": 106.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 98828292,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 12844,
+      "died_frame": 16642,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 64.0,
+          "y": 105.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 99614729,
+      "type": "SiegeTank",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 13837,
+      "died_frame": 16747,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 56.0,
+          "y": 105.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 101449733,
+      "type": "Thor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 14221,
+      "died_frame": 16848,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 59.0,
+          "y": 108.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 101711876,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14222,
+      "died_frame": 16637,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 66.0,
+          "y": 104.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 102236167,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15670,
+      "died_frame": 16626,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 65.0,
+          "y": 106.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 105381889,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14725,
+      "died_frame": 16660,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 64.0,
+          "y": 103.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 106430466,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15786,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 65.0,
+          "y": 101.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 62.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 53.0,
+          "y": 111.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 46.0,
+          "y": 118.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 44.0,
+          "y": 119.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 42.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 43.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 51.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 52.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 51.0,
+          "y": 155.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 67.0,
+          "y": 125.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 108003329,
+      "type": "Raven",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 14987,
+      "died_frame": 17250,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 59.0,
+          "y": 105.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 57.0,
+          "y": 106.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 40.0,
+          "y": 131.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 110100496,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15278,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 66.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 63.0,
+          "y": 104.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 52.0,
+          "y": 112.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 47.0,
+          "y": 118.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 44.0,
+          "y": 118.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 43.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 49.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 49.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 46.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 50.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 48.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 154.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 52.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 66.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 110624769,
+      "type": "SiegeTank",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 15182,
+      "died_frame": 16681,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 59.0,
+          "y": 106.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 112721921,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15665,
+      "died_frame": 16632,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 63.0,
+          "y": 101.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 115343361,
+      "type": "Thor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 15995,
+      "died_frame": 16647,
+      "frames": [
+        {
+          "frame": 16560,
+          "time": 1035.0,
+          "x": 59.0,
+          "y": 104.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 9175043,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16192,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 64.0,
+          "y": 102.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 54.0,
+          "y": 111.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 47.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 43.0,
+          "y": 115.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 41.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 43.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 45.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 46.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 51.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 46.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 68.0,
+          "y": 125.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 51642380,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 13437,
+      "died_frame": 16804,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 64.0,
+          "y": 105.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 65011728,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 12496,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 65.0,
+          "y": 106.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 51.0,
+          "y": 114.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 47.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 43.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 41.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 42.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 46.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 44.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 49.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 58.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 147.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 71303170,
+      "type": "SiegeTank",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 14891,
+      "died_frame": 16900,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 57.0,
+          "y": 110.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 78381064,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14608,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 62.0,
+          "y": 110.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 51.0,
+          "y": 115.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 46.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 43.0,
+          "y": 116.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 44.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 40.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 48.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 52.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 51.0,
+          "y": 126.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 61.0,
+          "y": 127.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 80478232,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14617,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 63.0,
+          "y": 107.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 54.0,
+          "y": 115.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 46.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 42.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 50.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 49.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 48.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 70.0,
+          "y": 124.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 80740370,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14620,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 64.0,
+          "y": 104.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 54.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 52.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 49.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 46.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 48.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 49.0,
+          "y": 136.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 43.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 45.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 47.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 49.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 57.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 60.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 86507530,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 13433,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 62.0,
+          "y": 109.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 53.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 48.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 41.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 39.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 44.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 47.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 46.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 50.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 52.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19680,
+          "time": 1230.0,
+          "x": 50.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 52.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 52.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 67.0,
+          "y": 127.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 99876869,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 12850,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 65.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 51.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 46.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 42.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 41.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 42.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 47.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 50.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 50.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 51.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 51.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 59.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 67.0,
+          "y": 127.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 104333313,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14600,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 64.0,
+          "y": 107.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 56.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 49.0,
+          "y": 118.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 46.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 43.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 44.0,
+          "y": 134.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 47.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 49.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 50.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 51.0,
+          "y": 154.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 67.0,
+          "y": 124.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 107479046,
+      "type": "SiegeTank",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 15036,
+      "died_frame": 16876,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 57.0,
+          "y": 108.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 109576200,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16127,
+      "died_frame": 16807,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 60.0,
+          "y": 107.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 111411206,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15273,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 63.0,
+          "y": 105.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 53.0,
+          "y": 114.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 48.0,
+          "y": 119.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 45.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 42.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 41.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 48.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 44.0,
+          "y": 139.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 43.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 51.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 62.0,
+          "y": 127.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 112197635,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15654,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 66.0,
+          "y": 105.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 127.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 48.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 44.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 46.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 48.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 51.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 52.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 55.0,
+          "y": 153.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 49.0,
+          "y": 134.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 113508353,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 15781,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 63.0,
+          "y": 108.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 55.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 51.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 47.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 42.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 44.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 45.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 46.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 49.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 50.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 49.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 56.0,
+          "y": 148.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 115605510,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16107,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 65.0,
+          "y": 105.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 51.0,
+          "y": 116.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 45.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 42.0,
+          "y": 119.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 42.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 46.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 48.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 48.0,
+          "y": 143.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 116129797,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16119,
+      "died_frame": 17867,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 63.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 50.0,
+          "y": 114.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 44.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 45.0,
+          "y": 132.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 116654081,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16112,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 62.0,
+          "y": 108.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 52.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 46.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 43.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 51.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19680,
+          "time": 1230.0,
+          "x": 49.0,
+          "y": 144.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 116916225,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16116,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 61.0,
+          "y": 107.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 51.0,
+          "y": 116.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 44.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 41.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 44.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 50.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 52.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19680,
+          "time": 1230.0,
+          "x": 53.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 60.0,
+          "y": 149.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 120061953,
+      "type": "Thor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 16179,
+      "died_frame": 16816,
+      "frames": [
+        {
+          "frame": 16800,
+          "time": 1050.0,
+          "x": 60.0,
+          "y": 109.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 15990789,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 12841,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 52.0,
+          "y": 111.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 42.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 39.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 43.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 46.0,
+          "y": 131.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 50.0,
+          "y": 138.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 52.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 54.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 52.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 57.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 64.0,
+          "y": 122.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 109314058,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16123,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17040,
+          "time": 1065.0,
+          "x": 54.0,
+          "y": 116.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 49.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 46.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 43.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 47.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 50.0,
+          "y": 137.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 42.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 46.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 44.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 47.0,
+          "y": 154.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 54.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 59.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 66.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 89653260,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 13117,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 44.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 41.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 40.0,
+          "y": 128.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 44.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 46.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 47.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 53.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 55.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 57.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 62.0,
+          "y": 123.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 95682574,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16398,
+      "died_frame": 17705,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 47.0,
+          "y": 130.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 97255425,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 11757,
+      "died_frame": 17300,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 42.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 101974022,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16401,
+      "died_frame": 17602,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 50.0,
+          "y": 130.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 105119745,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 14717,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 42.0,
+          "y": 118.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 40.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 39.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 43.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 133.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 65.0,
+          "y": 121.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 105644033,
+      "type": "Medivac",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 14795,
+      "died_frame": 17331,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 43.0,
+          "y": 121.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 112459778,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16405,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 50.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 50.0,
+          "y": 128.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 45.0,
+          "y": 126.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 44.0,
+          "y": 153.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 59.0,
+          "y": 126.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 63.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 115867672,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16395,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 51.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 49.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 44.0,
+          "y": 125.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 49.0,
+          "y": 136.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 44.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 47.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 46.0,
+          "y": 147.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 119537666,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16189,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17280,
+          "time": 1080.0,
+          "x": 49.0,
+          "y": 117.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 47.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 44.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 47.0,
+          "y": 130.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 50.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 43.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 51.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 51.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 54.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 50.0,
+          "y": 127.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 70.0,
+          "y": 125.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 55050243,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 17408,
+      "died_frame": 17678,
+      "frames": [
+        {
+          "frame": 17520,
+          "time": 1095.0,
+          "x": 52.0,
+          "y": 138.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 53477377,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 0,
+      "died_frame": 17825,
+      "frames": [
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 35.0,
+          "y": 130.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 53739521,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 0,
+      "died_frame": 17796,
+      "frames": [
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 35.0,
+          "y": 130.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 71565317,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 17601,
+      "died_frame": 17963,
+      "frames": [
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 48.0,
+          "y": 136.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 90439723,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 17552,
+      "died_frame": 17965,
+      "frames": [
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 50.0,
+          "y": 135.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 95420435,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 17663,
+      "died_frame": 17926,
+      "frames": [
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 49.0,
+          "y": 137.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 114032642,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16412,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 17760,
+          "time": 1110.0,
+          "x": 40.0,
+          "y": 121.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 52.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 55.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 59.0,
+          "y": 148.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 61865988,
+      "type": "Marauder",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 17887,
+      "died_frame": 18129,
+      "frames": [
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 48.0,
+          "y": 138.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 116391955,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17053,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18000,
+          "time": 1125.0,
+          "x": 48.0,
+          "y": 131.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 48.0,
+          "y": 136.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 45.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 49.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 48.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 49.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 63.0,
+          "y": 129.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 786435,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17050,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 46.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 42.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 44.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 45.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 46.0,
+          "y": 153.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 54.0,
+          "y": 152.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 67633154,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 5359,
+      "died_frame": 18257,
+      "frames": [
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 50.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 94634012,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17047,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18240,
+          "time": 1140.0,
+          "x": 47.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 48.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 53.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 54.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 55.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 46.0,
+          "y": 134.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 67108871,
+      "type": "Marine",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 18399,
+      "died_frame": 18480,
+      "frames": [
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 53.0,
+          "y": 142.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 103284776,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17059,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 50.0,
+          "y": 135.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 43.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 48.0,
+          "y": 143.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 103809036,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 15571,
+      "died_frame": 18509,
+      "frames": [
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 48.0,
+          "y": 142.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 113246210,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 16410,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18480,
+          "time": 1155.0,
+          "x": 51.0,
+          "y": 138.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 44.0,
+          "y": 147.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 47.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 45.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 48.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 52.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 61.0,
+          "y": 126.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 65.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 55050245,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17690,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 54.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 48.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 49.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 53.0,
+          "y": 156.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 48.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 71.0,
+          "y": 123.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 86769669,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17636,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 50.0,
+          "y": 139.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 48.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19680,
+          "time": 1230.0,
+          "x": 48.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 50.0,
+          "y": 154.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 90701864,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17633,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 54.0,
+          "y": 124.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 55.0,
+          "y": 152.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 95420436,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17930,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 49.0,
+          "y": 140.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 54.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 54.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 56.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 58.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 46.0,
+          "y": 132.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 101974029,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17686,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18720,
+          "time": 1170.0,
+          "x": 57.0,
+          "y": 123.0,
+          "z": 0.0
+        },
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 46.0,
+          "y": 139.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 44.0,
+          "y": 138.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 48.0,
+          "y": 145.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 62652461,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17622,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 52.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 54.0,
+          "y": 146.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 56.0,
+          "y": 149.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 85983240,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17629,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 47.0,
+          "y": 142.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 52.0,
+          "y": 156.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 97255435,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17925,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 48.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 52.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 55.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 62.0,
+          "y": 138.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 112984067,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17932,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 18960,
+          "time": 1185.0,
+          "x": 52.0,
+          "y": 140.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 52.0,
+          "y": 148.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 59.0,
+          "y": 149.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 47.0,
+          "y": 132.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 12845078,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17697,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 43.0,
+          "y": 145.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 48.0,
+          "y": 144.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 17039371,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17694,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 47.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19440,
+          "time": 1215.0,
+          "x": 45.0,
+          "y": 143.0,
+          "z": 0.0
+        },
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 45.0,
+          "y": 153.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 52.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 45.0,
+          "y": 132.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 67.0,
+          "y": 123.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 60293127,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17624,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 19200,
+          "time": 1200.0,
+          "x": 43.0,
+          "y": 137.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 49.0,
+          "y": 129.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 68.0,
+          "y": 127.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 67108873,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18501,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 57.0,
+          "y": 144.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 48.0,
+          "y": 150.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 92536874,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 17617,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 19920,
+          "time": 1245.0,
+          "x": 46.0,
+          "y": 155.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 52.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 67.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 20447260,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18505,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 56.0,
+          "y": 151.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 70.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 93323286,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 19432,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 58.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 63.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 101449791,
+      "type": "Hydralisk",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 19439,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 59.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 65.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 111673371,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18488,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20160,
+          "time": 1260.0,
+          "x": 52.0,
+          "y": 152.0,
+          "z": 0.0
+        },
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 66.0,
+          "y": 127.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 60030979,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 19277,
+      "died_frame": 20405,
+      "frames": [
+        {
+          "frame": 20400,
+          "time": 1275.0,
+          "x": 65.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 48234526,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18477,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 65.0,
+          "y": 122.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 54001675,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18494,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 71.0,
+          "y": 126.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 97779722,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18484,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 68.0,
+          "y": 128.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 103546920,
+      "type": "Roach",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "born_frame": 18481,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 61.0,
+          "y": 124.0,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "unit_id": 104857610,
+      "type": "SCV",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Терраны",
+      "born_frame": 15382,
+      "died_frame": 20662,
+      "frames": [
+        {
+          "frame": 20640,
+          "time": 1290.0,
+          "x": 70.0,
+          "y": 133.0,
+          "z": 0.0
+        }
+      ]
+    }
+  ]
+}
