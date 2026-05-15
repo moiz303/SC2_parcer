@@ -2,6 +2,8 @@ import sc2reader
 import json
 from collections import defaultdict
 
+from parce_buildings import parse_replay_buildings_to_json as pb
+
 
 def parse_replay_to_json(replay_path, output_path):
     replay = sc2reader.load_replay(
@@ -31,33 +33,30 @@ def parse_replay_to_json(replay_path, output_path):
 
     # Обрабатываем трекер-события (основной источник данных)
     for event in replay.tracker_events:
-
         # СОБЫТИЕ: рождение юнита
         if event.name == 'UnitBornEvent':
-            stats['born'] += 1
+            if event.unit.is_army or event.unit.is_worker:
+                stats['born'] += 1
 
-            # Определяем владельца
-            owner_name = 'Neutral'
-            owner_race = 'Neutral'
+                # Определяем владельца
+                owner_name = ''
+                owner_race = 'Neutral'
 
+                if hasattr(event, 'unit_controller') and event.unit_controller:
+                    # unit_controller — это ID игрока
+                    if event.unit_controller.pid in players_by_id:
+                        owner_name = players_by_id[event.unit_controller.pid].name
+                        owner_race = players_by_id[event.unit_controller.pid].play_race
 
-            if hasattr(event, 'unit_controller') and event.unit_controller:
-                # unit_controller — это ID игрока
-                if event.unit_controller.pid in players_by_id:
-                    owner_name = players_by_id[event.unit_controller.pid].name
-                    owner_race = players_by_id[event.unit_controller.pid].play_race
-
-            unit_info[event.unit_id] = {
-                'type': event.unit_type_name,
-                'owner_name': owner_name,
-                'owner_race': owner_race,
-                'born_frame': event.frame
-            }
+                unit_info[event.unit_id] = {
+                    'type': event.unit_type_name,
+                    'owner_name': owner_name,
+                    'owner_race': owner_race,
+                    'born_frame': event.frame
+                }
 
         # СОБЫТИЕ: позиции юнитов (самое важное!)
         elif event.name == 'UnitPositionsEvent':
-            stats['positions'] += 1
-
             # event.units содержит словарь типа {unit_name [unit_id]: (x, y, z)}
             units_dict = dict(event.units)
             for unit_data, cords in units_dict.items():
@@ -66,7 +65,9 @@ def parse_replay_to_json(replay_path, output_path):
                 y = cords[1]
                 z = cords[2] if len(cords) > 2 else 0.0
 
-                if unit_id in unit_info:
+                if unit_id in unit_info.keys():
+                    stats['positions'] += len(units_dict)
+
                     unit_positions[unit_id].append({
                         'frame': event.frame,
                         'time': event.frame / replay.game_fps,
@@ -77,8 +78,12 @@ def parse_replay_to_json(replay_path, output_path):
 
         # СОБЫТИЕ: смерть юнита
         elif event.name == 'UnitDiedEvent':
-            stats['died'] += 1
-            unit_deaths[event.unit_id] = event.frame
+            unit = event.unit
+            unit_id = unit.id
+
+            if unit.is_army or unit.is_worker:
+                unit_deaths[unit_id] = event.frame
+                stats['died'] += 1
 
     print(f"\nСтатистика обработки:")
     print(f"  Рождений юнитов: {stats['born']}")
@@ -87,41 +92,52 @@ def parse_replay_to_json(replay_path, output_path):
     print(f"  Смен типа: {stats['type_change']}")
     print(f"  Уникальных юнитов с треками: {len(unit_positions)}")
 
-    # ========== НОРМАЛИЗАЦИЯ ВРЕМЕНИ ==========
-    # Находим минимальное время среди всех позиций
+    # ========== НОРМАЛИЗАЦИЯ ВРЕМЕНИ И КАДРОВ ==========
     min_time = float('inf')
+    min_frame = float('inf')
+
+    # 1. Ищем минимум среди позиций
     for positions in unit_positions.values():
         for pos in positions:
-            if pos['time'] < min_time:
-                min_time = pos['time']
+            if pos['time'] < min_time: min_time = pos['time']
+            if pos['frame'] < min_frame: min_frame = pos['frame']
 
-    print(f"\nМинимальное время в данных: {min_time:.2f} сек")
+    # 2. Ищем минимум среди рождений
+    for info in unit_info.values():
+        if info['born_frame'] is not None and info['born_frame'] < min_frame:
+            min_frame = info['born_frame']
+            # Пересчитываем min_time из найденного минимального кадра
+            min_time = min_frame / replay.game_fps
 
-    # Если минимальное время > 0, вычитаем его из всех таймстампов
-    if min_time > 0 and min_time != float('inf'):
-        # Нормализуем время в позициях
+    # 3. Ищем минимум среди смертей (на случай, если юнит умер до первой позиции)
+    for frame in unit_deaths.values():
+        if frame is not None and frame < min_frame:
+            min_frame = frame
+            min_time = min_frame / replay.game_fps
+
+    print(f"\nАбсолютный минимум: кадр {min_frame} | время {min_time:.2f} сек")
+
+    # 4. Применяем сдвиг ТОЛЬКО если данные начинаются не с нуля
+    if min_frame > 0 and min_frame != float('inf'):
+        # Сдвигаем позиции
         for positions in unit_positions.values():
             for pos in positions:
                 pos['time'] -= min_time
+                pos['frame'] -= min_frame
 
-        # Нормализуем born_frame (переводим в секунды, вычитаем, переводим обратно в кадры)
-        fps = replay.game_fps
-        for unit_id in unit_info:
-            if unit_info[unit_id]['born_frame'] is not None:
-                born_time = unit_info[unit_id]['born_frame'] / fps
-                born_time -= min_time
-                unit_info[unit_id]['born_frame'] = max(0, int(born_time * fps))
+        # Сдвигаем рождения
+        for info in unit_info.values():
+            if info['born_frame'] is not None:
+                info['born_frame'] -= min_frame
 
-        # Нормализуем died_frame
-        for unit_id in unit_deaths:
-            if unit_deaths[unit_id] is not None:
-                death_time = unit_deaths[unit_id] / fps
-                death_time -= min_time
-                unit_deaths[unit_id] = max(0, int(death_time * fps))
+        # Сдвигаем смерти
+        for uid in unit_deaths:
+            if unit_deaths[uid] is not None:
+                unit_deaths[uid] -= min_frame
 
-        print(f"  Нормализация завершена")
+        print(f"  Нормализация завершена (сдвиг: -{min_frame} кадров)")
     else:
-        print(f"  Нормализация не требуется (min_time = {min_time})")
+        print(f"  Нормализация не требуется (данные уже начинаются с ~0)")
 
     # ========== НОРМАЛИЗАЦИЯ ПОЗИЦИЙ ==========
     # Находим минимальные и максимальные координаты
@@ -166,7 +182,7 @@ def parse_replay_to_json(replay_path, output_path):
                 {
                     'name': p.name,
                     'race': p.play_race,
-                    'team': str(p.team),
+                    'team': str(p.team.number),
                     'result': p.result,
                     'is_human': p.is_human
                 }
@@ -175,6 +191,17 @@ def parse_replay_to_json(replay_path, output_path):
         },
         'units': []
     }
+
+    # Убираем юнитов без позиций
+    for uid in unit_info:
+        if uid not in unit_positions:
+            unit_positions[uid] = []  # Явно создаём пустой список
+
+    total_units = len(unit_info)
+    units_with_tracks = sum(1 for pos in unit_positions.values() if len(pos) > 0)
+    print(f"\nВсего юнитов в памяти: {total_units}")
+    print(f"Из них с позициями: {units_with_tracks}")
+    print(f"Без позиций (прошли только по рали-поинту): {total_units - units_with_tracks}")
 
     # Собираем данные по юнитам
     for unit_id, positions in unit_positions.items():
@@ -220,7 +247,10 @@ def parse_replay_to_json(replay_path, output_path):
 
 # Использование
 if __name__ == "__main__":
-    replay_path = input("Введите путь до репея:\n")
-    output_path = "replay_output.json"
+    replay_path = input("Введите путь до реплея:\n")
+    output_units_path = "replay_units_output.json"
+    output_buildings_path = "replay_buildings_output.json"
 
-    parse_replay_to_json(replay_path, output_path)
+    parse_replay_to_json(replay_path, output_units_path)
+    print("-"*50)
+    pb(replay_path, output_buildings_path)

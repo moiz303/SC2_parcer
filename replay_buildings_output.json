@@ -1,0 +1,870 @@
+{
+  "metadata": {
+    "replay_file": "C:\\Users\\0\\Documents\\StarCraft II\\Accounts\\497425130\\2-S2-1-9745761\\Replays\\Multiplayer\\Первый норм выход в лейт.SC2Replay",
+    "version": "5.0.15.96592",
+    "duration": "13 minutes 54 seconds",
+    "fps": 16.0,
+    "map": "White Rabbit LE",
+    "players": [
+      {
+        "name": "Moizz",
+        "race": "Зерги",
+        "team": "Team 1: Player 1 - Moizz (Зерги)",
+        "result": "Win",
+        "is_human": true
+      },
+      {
+        "name": "ИИ 1 (знаток)",
+        "race": "Зерги",
+        "team": "Team 2: Player 2 - ИИ 1 (знаток) (Зерги)",
+        "result": "Loss",
+        "is_human": false
+      }
+    ]
+  },
+  "buildings": [
+    {
+      "building_id": 46137345,
+      "type": "Hatchery",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 56.0,
+          "y": 49.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 50593793,
+      "type": "Hive",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 0,
+      "died_frame": 17763,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -55.0,
+          "y": -49.5,
+          "z": 0.0
+        }
+      ],
+      "upgrades": [
+        {
+          "frame": 7491,
+          "time": 468.1875,
+          "from_type": "Hatchery",
+          "to_type": "Lair"
+        },
+        {
+          "frame": 17506,
+          "time": 1094.125,
+          "from_type": "Lair",
+          "to_type": "Hive"
+        }
+      ]
+    },
+    {
+      "building_id": 56623105,
+      "type": "SpawningPool",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 953,
+      "died_frame": 17895,
+      "frames": [
+        {
+          "frame": 953,
+          "time": 59.5625,
+          "x": -58.0,
+          "y": -43.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 57409537,
+      "type": "SpawningPool",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 1056,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 1056,
+          "time": 66.0,
+          "x": 61.0,
+          "y": 43.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 55312387,
+      "type": "Extractor",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 1081,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 1081,
+          "time": 67.5625,
+          "x": 63.0,
+          "y": 46.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 57933825,
+      "type": "Extractor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 1172,
+      "died_frame": 18091,
+      "frames": [
+        {
+          "frame": 1172,
+          "time": 73.25,
+          "x": -62.0,
+          "y": -46.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 54001666,
+      "type": "Lair",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 1690,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 1690,
+          "time": 105.625,
+          "x": 34.0,
+          "y": 55.5,
+          "z": 0.0
+        }
+      ],
+      "upgrades": [
+        {
+          "frame": 4751,
+          "time": 296.9375,
+          "from_type": "Hatchery",
+          "to_type": "Lair"
+        }
+      ]
+    },
+    {
+      "building_id": 58195971,
+      "type": "RoachWarren",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 2177,
+      "died_frame": 17535,
+      "frames": [
+        {
+          "frame": 2177,
+          "time": 136.0625,
+          "x": -52.0,
+          "y": -43.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 60293121,
+      "type": "Extractor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 2324,
+      "died_frame": 17649,
+      "frames": [
+        {
+          "frame": 2324,
+          "time": 145.25,
+          "x": -51.0,
+          "y": -56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 63700993,
+      "type": "CreepTumorBurrowed",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 3213,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 3213,
+          "time": 200.8125,
+          "x": 44.0,
+          "y": 45.5,
+          "z": 0.0
+        }
+      ],
+      "upgrades": [
+        {
+          "frame": 3457,
+          "time": 216.0625,
+          "from_type": "CreepTumorQueen",
+          "to_type": "CreepTumorBurrowed"
+        }
+      ]
+    },
+    {
+      "building_id": 70254593,
+      "type": "BanelingNest",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 4660,
+      "died_frame": 17370,
+      "frames": [
+        {
+          "frame": 4660,
+          "time": 291.25,
+          "x": -49.0,
+          "y": -46.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 70516737,
+      "type": "RoachWarren",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 4663,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 4663,
+          "time": 291.4375,
+          "x": 48.0,
+          "y": 50.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 71303169,
+      "type": "EvolutionChamber",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 4762,
+      "died_frame": 17459,
+      "frames": [
+        {
+          "frame": 4762,
+          "time": 297.625,
+          "x": -48.0,
+          "y": -52.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 73138178,
+      "type": "Extractor",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 5037,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 5037,
+          "time": 314.8125,
+          "x": 30.0,
+          "y": 62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 74448898,
+      "type": "Hive",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 5928,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 5928,
+          "time": 370.5,
+          "x": 50.0,
+          "y": 41.5,
+          "z": 0.0
+        }
+      ],
+      "upgrades": [
+        {
+          "frame": 9897,
+          "time": 618.5625,
+          "from_type": "Hatchery",
+          "to_type": "Lair"
+        },
+        {
+          "frame": 15904,
+          "time": 994.0,
+          "from_type": "Lair",
+          "to_type": "Hive"
+        }
+      ]
+    },
+    {
+      "building_id": 77070337,
+      "type": "SpineCrawler",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 6292,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 6292,
+          "time": 393.25,
+          "x": 32.0,
+          "y": 51.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 77856770,
+      "type": "HydraliskDen",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 7525,
+      "died_frame": 18218,
+      "frames": [
+        {
+          "frame": 7525,
+          "time": 470.3125,
+          "x": -61.0,
+          "y": -43.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 62652421,
+      "type": "SporeCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 7896,
+      "died_frame": 18050,
+      "frames": [
+        {
+          "frame": 7896,
+          "time": 493.5,
+          "x": -60.0,
+          "y": -55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 61603843,
+      "type": "SporeCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 8209,
+      "died_frame": 18179,
+      "frames": [
+        {
+          "frame": 8209,
+          "time": 513.0625,
+          "x": -62.0,
+          "y": -55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 76808196,
+      "type": "Extractor",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 8342,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 8342,
+          "time": 521.375,
+          "x": 27.0,
+          "y": 58.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 82837505,
+      "type": "Hatchery",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 8479,
+      "died_frame": 16514,
+      "frames": [
+        {
+          "frame": 8479,
+          "time": 529.9375,
+          "x": -33.0,
+          "y": -55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 83886082,
+      "type": "EvolutionChamber",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 8613,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 8613,
+          "time": 538.3125,
+          "x": 49.0,
+          "y": 47.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 85458945,
+      "type": "SpineCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 9011,
+      "died_frame": 17810,
+      "frames": [
+        {
+          "frame": 9011,
+          "time": 563.1875,
+          "x": -58.0,
+          "y": -56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 87031810,
+      "type": "SpineCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 9223,
+      "died_frame": 17932,
+      "frames": [
+        {
+          "frame": 9223,
+          "time": 576.4375,
+          "x": -63.0,
+          "y": -51.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 84934658,
+      "type": "HydraliskDen",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 9312,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 9312,
+          "time": 582.0,
+          "x": 49.0,
+          "y": 57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 88342529,
+      "type": "InfestationPit",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 9641,
+      "died_frame": 17778,
+      "frames": [
+        {
+          "frame": 9641,
+          "time": 602.5625,
+          "x": -58.0,
+          "y": -40.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 90701826,
+      "type": "EvolutionChamber",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 9976,
+      "died_frame": 17581,
+      "frames": [
+        {
+          "frame": 9976,
+          "time": 623.5,
+          "x": -52.0,
+          "y": -40.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 53215234,
+      "type": "SporeCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 10151,
+      "died_frame": 17303,
+      "frames": [
+        {
+          "frame": 10151,
+          "time": 634.4375,
+          "x": -46.0,
+          "y": -46.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 50331650,
+      "type": "SporeCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 10181,
+      "died_frame": 17277,
+      "frames": [
+        {
+          "frame": 10181,
+          "time": 636.3125,
+          "x": -44.0,
+          "y": -43.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 91750401,
+      "type": "Hatchery",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 10356,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 10356,
+          "time": 647.25,
+          "x": 51.0,
+          "y": 21.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 97517569,
+      "type": "Extractor",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 11325,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 11325,
+          "time": 707.8125,
+          "x": 52.0,
+          "y": 56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 99876865,
+      "type": "SpineCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 11710,
+      "died_frame": 16642,
+      "frames": [
+        {
+          "frame": 11710,
+          "time": 731.875,
+          "x": -36.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 55574530,
+      "type": "SpineCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 11816,
+      "died_frame": 16485,
+      "frames": [
+        {
+          "frame": 11816,
+          "time": 738.5,
+          "x": -26.0,
+          "y": -61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 102236165,
+      "type": "Hatchery",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 12207,
+      "died_frame": 18458,
+      "frames": [
+        {
+          "frame": 12207,
+          "time": 762.9375,
+          "x": -50.0,
+          "y": -21.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 107216897,
+      "type": "InfestationPit",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 12855,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 12855,
+          "time": 803.4375,
+          "x": 61.0,
+          "y": 19.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 105381893,
+      "type": "Extractor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 13235,
+      "died_frame": 16564,
+      "frames": [
+        {
+          "frame": 13235,
+          "time": 827.1875,
+          "x": -26.0,
+          "y": -58.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 109576194,
+      "type": "Extractor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 13279,
+      "died_frame": 16707,
+      "frames": [
+        {
+          "frame": 13279,
+          "time": 829.9375,
+          "x": -29.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 112984065,
+      "type": "Extractor",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 14019,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 14019,
+          "time": 876.1875,
+          "x": 47.0,
+          "y": 28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 111149059,
+      "type": "Spire",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 14618,
+      "died_frame": 18348,
+      "frames": [
+        {
+          "frame": 14618,
+          "time": 913.625,
+          "x": -63.0,
+          "y": -53.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 108527619,
+      "type": "SporeCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 14958,
+      "died_frame": 18662,
+      "frames": [
+        {
+          "frame": 14958,
+          "time": 934.875,
+          "x": -56.0,
+          "y": -15.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 121896961,
+      "type": "SporeCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 15006,
+      "died_frame": 18216,
+      "frames": [
+        {
+          "frame": 15006,
+          "time": 937.875,
+          "x": -43.0,
+          "y": -25.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 118489090,
+      "type": "Spire",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 15111,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 15111,
+          "time": 944.4375,
+          "x": 58.0,
+          "y": 41.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 119537666,
+      "type": "SpineCrawler",
+      "owner_name": "Moizz",
+      "owner_race": "Зерги",
+      "init_frame": 15367,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 15367,
+          "time": 960.4375,
+          "x": 45.0,
+          "y": 19.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 125042689,
+      "type": "Extractor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 15467,
+      "died_frame": 18680,
+      "frames": [
+        {
+          "frame": 15467,
+          "time": 966.6875,
+          "x": -57.0,
+          "y": -18.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 54263810,
+      "type": "Extractor",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 15532,
+      "died_frame": 18328,
+      "frames": [
+        {
+          "frame": 15532,
+          "time": 970.75,
+          "x": -46.0,
+          "y": -28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 125829121,
+      "type": "SpineCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 15574,
+      "died_frame": 18550,
+      "frames": [
+        {
+          "frame": 15574,
+          "time": 973.375,
+          "x": -54.0,
+          "y": -15.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 93323270,
+      "type": "SpineCrawler",
+      "owner_name": "ИИ 1 (знаток)",
+      "owner_race": "Зерги",
+      "init_frame": 15633,
+      "died_frame": 18601,
+      "frames": [
+        {
+          "frame": 15633,
+          "time": 977.0625,
+          "x": -56.0,
+          "y": -13.5,
+          "z": 0.0
+        }
+      ]
+    }
+  ]
+}
