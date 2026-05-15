@@ -87,6 +87,73 @@ def parse_replay_to_json(replay_path, output_path):
     print(f"  Смен типа: {stats['type_change']}")
     print(f"  Уникальных юнитов с треками: {len(unit_positions)}")
 
+    # ========== НОРМАЛИЗАЦИЯ ВРЕМЕНИ ==========
+    # Находим минимальное время среди всех позиций
+    min_time = float('inf')
+    for positions in unit_positions.values():
+        for pos in positions:
+            if pos['time'] < min_time:
+                min_time = pos['time']
+
+    print(f"\nМинимальное время в данных: {min_time:.2f} сек")
+
+    # Если минимальное время > 0, вычитаем его из всех таймстампов
+    if min_time > 0 and min_time != float('inf'):
+        # Нормализуем время в позициях
+        for positions in unit_positions.values():
+            for pos in positions:
+                pos['time'] -= min_time
+
+        # Нормализуем born_frame (переводим в секунды, вычитаем, переводим обратно в кадры)
+        fps = replay.game_fps
+        for unit_id in unit_info:
+            if unit_info[unit_id]['born_frame'] is not None:
+                born_time = unit_info[unit_id]['born_frame'] / fps
+                born_time -= min_time
+                unit_info[unit_id]['born_frame'] = max(0, int(born_time * fps))
+
+        # Нормализуем died_frame
+        for unit_id in unit_deaths:
+            if unit_deaths[unit_id] is not None:
+                death_time = unit_deaths[unit_id] / fps
+                death_time -= min_time
+                unit_deaths[unit_id] = max(0, int(death_time * fps))
+
+        print(f"  Нормализация завершена")
+    else:
+        print(f"  Нормализация не требуется (min_time = {min_time})")
+
+    # ========== НОРМАЛИЗАЦИЯ ПОЗИЦИЙ ==========
+    # Находим минимальные и максимальные координаты
+    min_x = float('inf')
+    max_x = float('-inf')
+    min_y = float('inf')
+    max_y = float('-inf')
+
+    for positions in unit_positions.values():
+        for pos in positions:
+            x = pos['x']
+            y = pos['y']
+            min_x = min(min_x, x)
+            max_x = max(max_x, x)
+            min_y = min(min_y, y)
+            max_y = max(max_y, y)
+
+    # Вычисляем центр карты
+    center_x = (min_x + max_x) / 2
+    center_y = (min_y + max_y) / 2
+
+    print(f"\nНормализация позиций:")
+    print(f"  X диапазон: {min_x:.1f} - {max_x:.1f}, центр: {center_x:.1f}")
+    print(f"  Y диапазон: {min_y:.1f} - {max_y:.1f}, центр: {center_y:.1f}")
+
+    # Вычитаем центр из всех координат
+    if center_x != 0 or center_y != 0:
+        for positions in unit_positions.values():
+            for pos in positions:
+                pos['x'] -= center_x
+                pos['y'] -= center_y
+
     # Формируем финальный JSON
     result = {
         'metadata': {
