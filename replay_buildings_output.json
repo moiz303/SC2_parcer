@@ -24,6 +24,2488 @@
   },
   "buildings": [
     {
+      "building_id": 1,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -50.0,
+          "y": -27.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 262145,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -55.0,
+          "y": -55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 524289,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 62.0,
+          "y": 51.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 786433,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 5.0,
+          "y": -60.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 1048577,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 8.0,
+          "y": 60.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 1310721,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 41.0,
+          "y": 56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 1572865,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -3.0,
+          "y": -34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 1835009,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -30.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 2097153,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 39.0,
+          "y": 60.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 2359297,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -27.0,
+          "y": -58.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 2621441,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -53.0,
+          "y": -27.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 2883585,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -3.0,
+          "y": -63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 3145729,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -7.0,
+          "y": -34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 3407873,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 64.0,
+          "y": -16.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 3670017,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -62.0,
+          "y": -49.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 3932161,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 57.0,
+          "y": 18.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 4194305,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 3.0,
+          "y": 63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 4456449,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 5.0,
+          "y": -57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 4718593,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 46.0,
+          "y": 28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 4980737,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -57.0,
+          "y": -21.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 5242881,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 62.0,
+          "y": 53.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 5505025,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -56.0,
+          "y": 7.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 5767169,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -3.0,
+          "y": 28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 6029313,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -8.0,
+          "y": -60.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 6291457,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 0.0,
+          "y": 63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 6553601,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -40.0,
+          "y": -57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 6815745,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -4.0,
+          "y": 61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 7077889,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 65.0,
+          "y": -15.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 7340033,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -40.0,
+          "y": -55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 7602177,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -7.0,
+          "y": -61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 7864321,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 63.0,
+          "y": -9.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 8126465,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 2.0,
+          "y": -24.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 8388609,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -58.0,
+          "y": -55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 8650753,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -56.0,
+          "y": -56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 8912897,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -6.0,
+          "y": -35.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 9175041,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -10.0,
+          "y": -34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 9437185,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 40.0,
+          "y": 55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 9699329,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -65.0,
+          "y": 13.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 9961473,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -32.0,
+          "y": 64.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 10223617,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -39.0,
+          "y": -60.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 10485761,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 63.0,
+          "y": 50.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 10747905,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -21.0,
+          "y": 54.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 11010049,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 21.0,
+          "y": -59.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 11272193,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 64.0,
+          "y": -12.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 11534337,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -21.0,
+          "y": 59.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 11796481,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 62.0,
+          "y": 49.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 12058625,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 29.0,
+          "y": 62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 12320769,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 1.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 12582913,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 0.0,
+          "y": -63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 12845057,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 55.0,
+          "y": -7.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 13107201,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -64.0,
+          "y": 16.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 13369345,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 64.0,
+          "y": -10.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 13631489,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 31.0,
+          "y": -64.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 13893633,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 9.0,
+          "y": 34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 14155777,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 3.0,
+          "y": 34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 14417921,
+      "type": "LabBot",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 26.0,
+          "y": -21.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 14680065,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -65.0,
+          "y": 15.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 14942209,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 65.0,
+          "y": -13.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 15204353,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -52.0,
+          "y": -56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 15466497,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -56.0,
+          "y": -26.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 15728641,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -64.0,
+          "y": 18.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 15990785,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 55.0,
+          "y": 55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 16252929,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -25.0,
+          "y": 63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 16515073,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -2.0,
+          "y": 26.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 16777217,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -20.0,
+          "y": 58.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 17039361,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 40.0,
+          "y": 59.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 17301505,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 26.0,
+          "y": 58.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 17563649,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 51.0,
+          "y": 28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 17825793,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 59.0,
+          "y": -7.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 18087937,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -51.0,
+          "y": -28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 18350081,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -33.0,
+          "y": -61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 18612225,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -5.0,
+          "y": 60.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 18874369,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 22.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 19136513,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 8.0,
+          "y": 57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 19398657,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 40.0,
+          "y": 57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 19660801,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -34.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 19922945,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -62.0,
+          "y": -51.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 20185089,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 62.0,
+          "y": 46.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 20447233,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 51.0,
+          "y": 56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 20709377,
+      "type": "UnbuildablePlatesDestructible",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -37.0,
+          "y": -50.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 20971521,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -3.0,
+          "y": 24.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 21233665,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -21.0,
+          "y": 57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 21495809,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -62.0,
+          "y": -53.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 21757953,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 4.0,
+          "y": 35.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 22020097,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -58.0,
+          "y": -22.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 22282241,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -58.0,
+          "y": -18.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 22544385,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 57.0,
+          "y": 25.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 22806529,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -47.0,
+          "y": -28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 23068673,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 57.0,
+          "y": 21.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 23330817,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -1.0,
+          "y": 62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 23592961,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -61.0,
+          "y": -54.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 23855105,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 50.0,
+          "y": 27.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 24117249,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -21.0,
+          "y": 61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 24379393,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -40.0,
+          "y": -59.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 24641537,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -2.0,
+          "y": 29.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 24903681,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 7.0,
+          "y": 34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 25165825,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 63.0,
+          "y": -19.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 25427969,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 34.0,
+          "y": 62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 25690113,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -57.0,
+          "y": -25.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 25952257,
+      "type": "DestructibleRockEx1DiagonalHugeBLUR",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 2.0,
+          "y": -33.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 26214401,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 64.0,
+          "y": -18.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 26476545,
+      "type": "DestructibleRockEx1DiagonalHugeBLUR",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -2.0,
+          "y": 34.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 26738689,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -3.0,
+          "y": 27.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 27000833,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 20.0,
+          "y": -54.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 27262977,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -63.0,
+          "y": -50.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 27525121,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -63.0,
+          "y": 19.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 27787265,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -57.0,
+          "y": -23.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 28049409,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 58.0,
+          "y": 22.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 28311553,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -64.0,
+          "y": 10.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 28573697,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 20.0,
+          "y": -58.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 28835841,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -22.0,
+          "y": 62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 29097985,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -4.0,
+          "y": -62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 29360129,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -36.0,
+          "y": -61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 29622273,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 21.0,
+          "y": -61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 29884417,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -4.0,
+          "y": -35.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 30146561,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -60.0,
+          "y": 7.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 30408705,
+      "type": "LabBot",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -27.0,
+          "y": 22.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 30670849,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 4.0,
+          "y": 62.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 30932993,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 56.0,
+          "y": 26.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 31195137,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 57.0,
+          "y": 23.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 31457281,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -9.0,
+          "y": -57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 31719425,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 2.0,
+          "y": -26.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 31981569,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 3.0,
+          "y": -28.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 32243713,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -27.0,
+          "y": 64.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 32505857,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 27.0,
+          "y": -64.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 32768001,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -6.0,
+          "y": 57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 33030145,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -28.0,
+          "y": 63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 33292289,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -63.0,
+          "y": 9.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 33554433,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 21.0,
+          "y": -57.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 33816577,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 58.0,
+          "y": 55.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 34078721,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 61.0,
+          "y": 54.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 34340865,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -64.0,
+          "y": 12.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 34603009,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 4.0,
+          "y": -61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 34865153,
+      "type": "UnbuildablePlatesDestructible",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 37.0,
+          "y": 51.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 35127297,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 2.0,
+          "y": -29.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 35389441,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 25.0,
+          "y": -63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 35651585,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 33.0,
+          "y": 61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 35913729,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 7.0,
+          "y": 61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 36175873,
+      "type": "SpacePlatformGeyser",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -63.0,
+          "y": -46.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 36438017,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 6.0,
+          "y": 35.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 36700161,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 28.0,
+          "y": -63.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 36962305,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 56.0,
+          "y": 56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 37224449,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 53.0,
+          "y": 27.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 37486593,
+      "type": "LabMineralField750",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": -41.0,
+          "y": -56.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 37748737,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 36.0,
+          "y": 61.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
+      "building_id": 38010881,
+      "type": "LabMineralField",
+      "owner_name": "None",
+      "owner_race": "Neutral",
+      "init_frame": 0,
+      "died_frame": null,
+      "frames": [
+        {
+          "frame": 0,
+          "time": 0.0,
+          "x": 3.0,
+          "y": -27.5,
+          "z": 0.0
+        }
+      ]
+    },
+    {
       "building_id": 46137345,
       "type": "Hatchery",
       "owner_name": "Moizz",
@@ -34,7 +2516,7 @@
         {
           "frame": 0,
           "time": 0.0,
-          "x": 56.0,
+          "x": 55.0,
           "y": 49.5,
           "z": 0.0
         }
@@ -51,7 +2533,7 @@
         {
           "frame": 0,
           "time": 0.0,
-          "x": -55.0,
+          "x": -56.0,
           "y": -49.5,
           "z": 0.0
         }
@@ -82,7 +2564,7 @@
         {
           "frame": 953,
           "time": 59.5625,
-          "x": -58.0,
+          "x": -59.0,
           "y": -43.5,
           "z": 0.0
         }
@@ -99,7 +2581,7 @@
         {
           "frame": 1056,
           "time": 66.0,
-          "x": 61.0,
+          "x": 60.0,
           "y": 43.5,
           "z": 0.0
         }
@@ -116,7 +2598,7 @@
         {
           "frame": 1081,
           "time": 67.5625,
-          "x": 63.0,
+          "x": 62.0,
           "y": 46.5,
           "z": 0.0
         }
@@ -133,7 +2615,7 @@
         {
           "frame": 1172,
           "time": 73.25,
-          "x": -62.0,
+          "x": -63.0,
           "y": -46.5,
           "z": 0.0
         }
@@ -150,7 +2632,7 @@
         {
           "frame": 1690,
           "time": 105.625,
-          "x": 34.0,
+          "x": 33.0,
           "y": 55.5,
           "z": 0.0
         }
@@ -175,7 +2657,7 @@
         {
           "frame": 2177,
           "time": 136.0625,
-          "x": -52.0,
+          "x": -53.0,
           "y": -43.5,
           "z": 0.0
         }
@@ -192,7 +2674,7 @@
         {
           "frame": 2324,
           "time": 145.25,
-          "x": -51.0,
+          "x": -52.0,
           "y": -56.5,
           "z": 0.0
         }
@@ -209,7 +2691,7 @@
         {
           "frame": 3213,
           "time": 200.8125,
-          "x": 44.0,
+          "x": 43.0,
           "y": 45.5,
           "z": 0.0
         }
@@ -234,7 +2716,7 @@
         {
           "frame": 4660,
           "time": 291.25,
-          "x": -49.0,
+          "x": -50.0,
           "y": -46.5,
           "z": 0.0
         }
@@ -251,7 +2733,7 @@
         {
           "frame": 4663,
           "time": 291.4375,
-          "x": 48.0,
+          "x": 47.0,
           "y": 50.5,
           "z": 0.0
         }
@@ -268,7 +2750,7 @@
         {
           "frame": 4762,
           "time": 297.625,
-          "x": -48.0,
+          "x": -49.0,
           "y": -52.5,
           "z": 0.0
         }
@@ -285,7 +2767,7 @@
         {
           "frame": 5037,
           "time": 314.8125,
-          "x": 30.0,
+          "x": 29.0,
           "y": 62.5,
           "z": 0.0
         }
@@ -302,7 +2784,7 @@
         {
           "frame": 5928,
           "time": 370.5,
-          "x": 50.0,
+          "x": 49.0,
           "y": 41.5,
           "z": 0.0
         }
@@ -333,7 +2815,7 @@
         {
           "frame": 6292,
           "time": 393.25,
-          "x": 32.0,
+          "x": 31.0,
           "y": 51.5,
           "z": 0.0
         }
@@ -350,7 +2832,7 @@
         {
           "frame": 7525,
           "time": 470.3125,
-          "x": -61.0,
+          "x": -62.0,
           "y": -43.5,
           "z": 0.0
         }
@@ -367,7 +2849,7 @@
         {
           "frame": 7896,
           "time": 493.5,
-          "x": -60.0,
+          "x": -61.0,
           "y": -55.5,
           "z": 0.0
         }
@@ -384,7 +2866,7 @@
         {
           "frame": 8209,
           "time": 513.0625,
-          "x": -62.0,
+          "x": -63.0,
           "y": -55.5,
           "z": 0.0
         }
@@ -401,7 +2883,7 @@
         {
           "frame": 8342,
           "time": 521.375,
-          "x": 27.0,
+          "x": 26.0,
           "y": 58.5,
           "z": 0.0
         }
@@ -418,7 +2900,7 @@
         {
           "frame": 8479,
           "time": 529.9375,
-          "x": -33.0,
+          "x": -34.0,
           "y": -55.5,
           "z": 0.0
         }
@@ -435,7 +2917,7 @@
         {
           "frame": 8613,
           "time": 538.3125,
-          "x": 49.0,
+          "x": 48.0,
           "y": 47.5,
           "z": 0.0
         }
@@ -452,7 +2934,7 @@
         {
           "frame": 9011,
           "time": 563.1875,
-          "x": -58.0,
+          "x": -59.0,
           "y": -56.5,
           "z": 0.0
         }
@@ -469,7 +2951,7 @@
         {
           "frame": 9223,
           "time": 576.4375,
-          "x": -63.0,
+          "x": -64.0,
           "y": -51.5,
           "z": 0.0
         }
@@ -486,7 +2968,7 @@
         {
           "frame": 9312,
           "time": 582.0,
-          "x": 49.0,
+          "x": 48.0,
           "y": 57.5,
           "z": 0.0
         }
@@ -503,7 +2985,7 @@
         {
           "frame": 9641,
           "time": 602.5625,
-          "x": -58.0,
+          "x": -59.0,
           "y": -40.5,
           "z": 0.0
         }
@@ -520,7 +3002,7 @@
         {
           "frame": 9976,
           "time": 623.5,
-          "x": -52.0,
+          "x": -53.0,
           "y": -40.5,
           "z": 0.0
         }
@@ -537,7 +3019,7 @@
         {
           "frame": 10151,
           "time": 634.4375,
-          "x": -46.0,
+          "x": -47.0,
           "y": -46.5,
           "z": 0.0
         }
@@ -554,7 +3036,7 @@
         {
           "frame": 10181,
           "time": 636.3125,
-          "x": -44.0,
+          "x": -45.0,
           "y": -43.5,
           "z": 0.0
         }
@@ -571,7 +3053,7 @@
         {
           "frame": 10356,
           "time": 647.25,
-          "x": 51.0,
+          "x": 50.0,
           "y": 21.5,
           "z": 0.0
         }
@@ -588,7 +3070,7 @@
         {
           "frame": 11325,
           "time": 707.8125,
-          "x": 52.0,
+          "x": 51.0,
           "y": 56.5,
           "z": 0.0
         }
@@ -605,7 +3087,7 @@
         {
           "frame": 11710,
           "time": 731.875,
-          "x": -36.0,
+          "x": -37.0,
           "y": -62.5,
           "z": 0.0
         }
@@ -622,7 +3104,7 @@
         {
           "frame": 11816,
           "time": 738.5,
-          "x": -26.0,
+          "x": -27.0,
           "y": -61.5,
           "z": 0.0
         }
@@ -639,7 +3121,7 @@
         {
           "frame": 12207,
           "time": 762.9375,
-          "x": -50.0,
+          "x": -51.0,
           "y": -21.5,
           "z": 0.0
         }
@@ -656,7 +3138,7 @@
         {
           "frame": 12855,
           "time": 803.4375,
-          "x": 61.0,
+          "x": 60.0,
           "y": 19.5,
           "z": 0.0
         }
@@ -673,7 +3155,7 @@
         {
           "frame": 13235,
           "time": 827.1875,
-          "x": -26.0,
+          "x": -27.0,
           "y": -58.5,
           "z": 0.0
         }
@@ -690,7 +3172,7 @@
         {
           "frame": 13279,
           "time": 829.9375,
-          "x": -29.0,
+          "x": -30.0,
           "y": -62.5,
           "z": 0.0
         }
@@ -707,7 +3189,7 @@
         {
           "frame": 14019,
           "time": 876.1875,
-          "x": 47.0,
+          "x": 46.0,
           "y": 28.5,
           "z": 0.0
         }
@@ -724,7 +3206,7 @@
         {
           "frame": 14618,
           "time": 913.625,
-          "x": -63.0,
+          "x": -64.0,
           "y": -53.5,
           "z": 0.0
         }
@@ -741,7 +3223,7 @@
         {
           "frame": 14958,
           "time": 934.875,
-          "x": -56.0,
+          "x": -57.0,
           "y": -15.5,
           "z": 0.0
         }
@@ -758,7 +3240,7 @@
         {
           "frame": 15006,
           "time": 937.875,
-          "x": -43.0,
+          "x": -44.0,
           "y": -25.5,
           "z": 0.0
         }
@@ -775,7 +3257,7 @@
         {
           "frame": 15111,
           "time": 944.4375,
-          "x": 58.0,
+          "x": 57.0,
           "y": 41.5,
           "z": 0.0
         }
@@ -792,7 +3274,7 @@
         {
           "frame": 15367,
           "time": 960.4375,
-          "x": 45.0,
+          "x": 44.0,
           "y": 19.5,
           "z": 0.0
         }
@@ -809,7 +3291,7 @@
         {
           "frame": 15467,
           "time": 966.6875,
-          "x": -57.0,
+          "x": -58.0,
           "y": -18.5,
           "z": 0.0
         }
@@ -826,7 +3308,7 @@
         {
           "frame": 15532,
           "time": 970.75,
-          "x": -46.0,
+          "x": -47.0,
           "y": -28.5,
           "z": 0.0
         }
@@ -843,7 +3325,7 @@
         {
           "frame": 15574,
           "time": 973.375,
-          "x": -54.0,
+          "x": -55.0,
           "y": -15.5,
           "z": 0.0
         }
@@ -860,7 +3342,7 @@
         {
           "frame": 15633,
           "time": 977.0625,
-          "x": -56.0,
+          "x": -57.0,
           "y": -13.5,
           "z": 0.0
         }

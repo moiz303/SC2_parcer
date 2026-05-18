@@ -1,5 +1,6 @@
 import sc2reader
 import json
+import math
 from collections import defaultdict
 
 
@@ -51,6 +52,24 @@ def parse_replay_buildings_to_json(replay_path, output_path):
                 'type': event.unit_type_name,
                 'owner_name': owner_name,
                 'owner_race': owner_race,
+                'init_frame': event.frame
+            }
+
+            # Сохраняем позицию, если есть
+            if hasattr(event, 'x') and hasattr(event, 'y'):
+                building_positions[event.unit_id].append({
+                    'frame': event.frame,
+                    'time': event.frame / replay.game_fps,
+                    'x': float(event.x),
+                    'y': float(event.y),
+                    'z': float(getattr(event, 'z', 0.0))
+                })
+
+        elif (event.name == 'UnitBornEvent') and (event.unit_controller is None):
+            building_info[event.unit_id] = {
+                'type': event.unit_type_name,
+                'owner_name': 'None',
+                'owner_race': 'Neutral',
                 'init_frame': event.frame
             }
 
