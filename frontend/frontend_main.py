@@ -16,6 +16,64 @@ class Screen(str, Enum):
     DONE = "done"
 
 
+class RoundedButton(tk.Canvas):
+    def __init__(self, parent, text, command=None, width=140, height=38, radius=12,
+                 bg="#2563eb", fg="#ffffff", active_bg=None, outline="",
+                 font=("Segoe UI", 11, "bold"), **kwargs):
+        # Цвет фона Canvas должен совпадать с фоном родительского фрейма (Card.TFrame),
+        # чтобы не было видимых границ самого холста
+        parent_bg = "#0f172a"
+        super().__init__(parent, width=width, height=height, bg=parent_bg,
+                         highlightthickness=0, **kwargs)
+
+        self.text = text
+        self.command = command
+        self.width = width
+        self.height = height
+        self.radius = radius
+        self.bg = bg
+        self.fg = fg
+        self.active_bg = active_bg or bg
+        self.outline = outline
+        self.font = font
+        self.current_bg = self.bg
+
+        self.draw_button()
+
+        # Привязываем события для эффекта наведения и клика
+        self.bind("<Enter>", self._on_enter)
+        self.bind("<Leave>", self._on_leave)
+        self.bind("<Button-1>", self._on_click)
+
+    def draw_button(self):
+        self.delete("all")
+        # Координаты для сглаженного многоугольника (имитация rounded rect)
+        points = [
+            self.radius, 0, self.width - self.radius, 0,
+            self.width, 0, self.width, self.radius,
+            self.width, self.height - self.radius, self.width, self.height,
+                            self.width - self.radius, self.height, self.radius, self.height,
+            0, self.height, 0, self.height - self.radius,
+            0, self.radius, 0, 0
+        ]
+        # Рисуем саму кнопку
+        self.create_polygon(points, smooth=True, fill=self.current_bg, outline=self.outline, width=2)
+        # Рисуем текст по центру
+        self.create_text(self.width // 2, self.height // 2, text=self.text, fill=self.fg, font=self.font)
+
+    def _on_enter(self, event):
+        self.current_bg = self.active_bg
+        self.draw_button()
+
+    def _on_leave(self, event):
+        self.current_bg = self.bg
+        self.draw_button()
+
+    def _on_click(self, event):
+        if self.command:
+            self.command()
+
+
 @dataclass
 class FrontendState:
     replay_path: str = ""
@@ -385,8 +443,8 @@ class FrontendApp(tk.Tk):
             self.preview_canvas.create_text(MAX_W // 2, MAX_H // 2, text="Preview animation", fill="#9ca3af",
                                             font=("Segoe UI", 14))
 
-        ttk.Button(inner, text="Начать создавать", style="Primary.TButton", command=self.on_start).grid(row=3, column=0,
-                                                                                                        pady=(6, 0))
+        RoundedButton(inner, text="Начать создавать", command=self.on_start,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=3, column=0, pady=(6, 0))
         return screen_frame
 
     def make_replay_screen(self) -> ttk.Frame:
@@ -399,22 +457,21 @@ class FrontendApp(tk.Tk):
         main.grid(row=0, column=1, sticky="nsew")
         main.columnconfigure(0, weight=1)
 
-        ttk.Label(main, text="Выберите повтор и папку для сохранения", style="Title.TLabel",
+        ttk.Label(main, text="Выберите повтор и папку для анимации", style="Title.TLabel",
                   justify="center").grid(row=0, column=0, sticky="ew", pady=(0, 18))
         self.replay_var = tk.StringVar(value=self.controller.state.replay_path)
         self.output_var = tk.StringVar(value=self.controller.state.output_path)
         self.save_full_var = tk.BooleanVar(value=self.controller.state.save_full_render)
 
         self.make_path_row(main, 1, "Файл повтора", self.replay_var, is_file=True)
-        self.make_path_row(main, 3, "Папка результата", self.output_var, is_file=False)
+        self.make_path_row(main, 3, "Папка для сохранения результата", self.output_var, is_file=False)
 
         check = ttk.Checkbutton(main, text="Сохранить полный рендер (весь повтор)", variable=self.save_full_var,
                                 command=self.on_save_full_toggle)
         check.grid(row=5, column=0, sticky="w", pady=(10, 20))
 
-        ttk.Button(main, text="Далее → Модели", style="Primary.TButton", command=self.on_replay_next).grid(row=6,
-                                                                                                           column=0,
-                                                                                                           sticky="e")
+        RoundedButton(main, text="Далее → Модели", command=self.on_replay_next,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=6, column=0, sticky="e")
         return frame
 
     def make_models_screen(self) -> ttk.Frame:
@@ -451,13 +508,13 @@ class FrontendApp(tk.Tk):
         buttons = ttk.Frame(main)
         buttons.grid(row=9, column=0, sticky="ew")
         buttons.columnconfigure(0, weight=1)
-        ttk.Button(buttons, text="Назад", style="Secondary.TButton", command=self.on_back).grid(row=0, column=0,
-                                                                                                sticky="w")
-        ttk.Button(buttons, text="Очистить", style="Outline.TButton", command=self.on_clear_all).grid(row=0, column=1,
-                                                                                                      sticky="w",
-                                                                                                      padx=(8, 0))
-        ttk.Button(buttons, text="Сгенерировать анимацию", style="Primary.TButton", command=self.on_generate).grid(
-            row=0, column=2, sticky="e")
+        RoundedButton(buttons, text="Назад", command=self.on_back,
+                      bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=0, sticky="w")
+        RoundedButton(buttons, text="Очистить", command=self.on_clear_all,
+                      bg="#111827", active_bg="#1f2937", fg="#e5e7eb", outline="#374151").grid(row=0, column=1,
+                                                                                               sticky="w", padx=(8, 0))
+        RoundedButton(buttons, text="Сгенерировать анимацию", command=self.on_generate,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=2, sticky="e")
         return frame
 
     def make_loading_screen(self) -> ttk.Frame:
@@ -500,11 +557,10 @@ class FrontendApp(tk.Tk):
                                                                                                       sticky="ew")
         buttons = ttk.Frame(main)
         buttons.grid(row=4, column=0, sticky="ew", pady=(20, 0))
-        ttk.Button(buttons, text="Новая обработка", style="Secondary.TButton", command=self.on_reset).grid(row=0,
-                                                                                                           column=0,
-                                                                                                           sticky="w")
-        ttk.Button(buttons, text="Готово", style="Primary.TButton", command=self.destroy).grid(row=0, column=1,
-                                                                                               sticky="w", padx=(8, 0))
+        RoundedButton(buttons, text="Новая обработка", command=self.on_reset,
+                      bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=0, sticky="w")
+        RoundedButton(buttons, text="Готово", command=self.destroy,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="w", padx=(8, 0))
         return frame
 
     def _draw_preview_canvas(self) -> None:
@@ -533,9 +589,9 @@ class FrontendApp(tk.Tk):
         ttk.Label(parent, text=label_text, style="Muted.TLabel").grid(row=row, column=0, sticky="w", pady=(8, 4))
         entry = ttk.Entry(parent, textvariable=variable, width=55)
         entry.grid(row=row + 1, column=0, sticky="ew")
-        ttk.Button(parent, text="Обзор", style="Outline.TButton",
-                   command=lambda: self.browse_path(variable, is_file)).grid(row=row + 1, column=1, padx=(8, 0),
-                                                                             sticky="ew")
+        RoundedButton(parent, text="Обзор", command=lambda: self.browse_path(variable, is_file),
+                      bg="#111827", active_bg="#1f2937", fg="#e5e7eb", outline="#374151",
+                      width=90, height=32, radius=8).grid(row=row + 1, column=1, padx=(8, 0), sticky="e")
 
     def browse_path(self, variable: tk.StringVar, is_file: bool) -> None:
         if is_file:
