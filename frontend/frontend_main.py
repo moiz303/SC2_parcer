@@ -1,11 +1,18 @@
 from __future__ import annotations
 
 import os
+import sys
+import json
+import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from dataclasses import asdict, dataclass
 from enum import Enum
 from typing import Any, Dict
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from controller_backend import BackendController, JobConfig
 
 
 class Screen(str, Enum):
@@ -14,6 +21,56 @@ class Screen(str, Enum):
     MODELS = "models"
     LOADING = "loading"
     DONE = "done"
+
+
+def find_resource_folders(root_dir: str, selected_version: str | None = None) -> Dict[str, str]:
+    """Пытается автоматически найти папки с моделями, зданиями и текстурами."""
+    result: Dict[str, str] = {"units": "", "buildings": "", "textures": ""}
+    if not root_dir or not os.path.exists(root_dir):
+        return result
+
+    def _normalize(path: str) -> str:
+        return os.path.abspath(path)
+
+    search_roots: list[str] = []
+    for candidate in [root_dir, os.path.dirname(root_dir), os.path.expanduser("~")]:
+        if candidate and os.path.exists(candidate):
+            candidate_path = _normalize(candidate)
+            if candidate_path not in search_roots:
+                search_roots.append(candidate_path)
+
+    drive_root = os.path.splitdrive(_normalize(root_dir))[0] + os.sep
+    if drive_root not in search_roots:
+        search_roots.append(drive_root)
+
+    if selected_version:
+        version_candidates = []
+        for candidate in search_roots:
+            version_path = os.path.join(candidate, selected_version)
+            if os.path.exists(version_path):
+                version_candidates.append(_normalize(version_path))
+        search_roots = version_candidates + search_roots
+
+    for search_root in search_roots:
+        if all(result.values()):
+            break
+        for dirpath, dirnames, _ in os.walk(search_root):
+            for dirname in dirnames:
+                full_path = os.path.abspath(os.path.join(dirpath, dirname))
+                path_lower = full_path.lower()
+
+                if not result["textures"] and any(token in path_lower for token in ("texture", "textures", "tex", "material", "materials")):
+                    result["textures"] = full_path
+                elif not result["units"] and ("unit" in path_lower or "units" in path_lower) and (
+                    "model" in path_lower or "models" in path_lower
+                ):
+                    result["units"] = full_path
+                elif not result["buildings"] and ("building" in path_lower or "buildings" in path_lower) and (
+                    "model" in path_lower or "models" in path_lower
+                ):
+                    result["buildings"] = full_path
+
+    return result
 
 
 class RoundedButton(tk.Canvas):
@@ -83,6 +140,7 @@ class FrontendState:
     buildings_path: str = ""
     textures_path: str = ""
     selected_version: str = "StarCraft II"
+    animation_duration: int = 45
 
 
 class FrontendController:
@@ -126,6 +184,9 @@ class FrontendController:
     def set_selected_version(self, value: str) -> None:
         self._state.selected_version = value
 
+    def set_animation_duration(self, value: int) -> None:
+        self._state.animation_duration = value
+
     def next_step(self) -> None:
         if self.current_screen == Screen.WELCOME:
             self.current_screen = Screen.REPLAY
@@ -167,15 +228,17 @@ class FrontendApp(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.controller = FrontendController()
+        self.backend = BackendController()
         self.title("Replay Master")
         self.geometry("1100x720")
         self.minsize(960, 640)
         self.configure(bg="#07111f")
 
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.project_root = os.path.dirname(self.base_dir)
         self.logo_path = os.path.join(self.base_dir, "public", "logo.svg")
         self.preview_path = os.path.join(self.base_dir, "public", "preview.gif")
-        self.icon_path = os.path.join(self.base_dir, "public", "icon.svg")
+        self.icon_path = os.path.join(self.base_dir, "public", "icon.jpg")
 
         self.style = ttk.Style(self)
         self.style.theme_use("clam")
@@ -197,7 +260,7 @@ class FrontendApp(tk.Tk):
         self.header.columnconfigure(1, weight=1)
         self.header.rowconfigure(0, weight=1)
 
-        self.logo_image = self._load_image(self.logo_path or self.icon_path, 42, 42)
+        self.logo_image = self._load_image(self.icon_path or self.logo_path, 42, 42)
         if self.logo_image is not None:
             self.logo_label = tk.Label(self.header, image=self.logo_image, bg="#0f172a", bd=0)
             self.logo_label.grid(row=0, column=0, sticky="w", padx=(0, 10))
@@ -233,6 +296,11 @@ class FrontendApp(tk.Tk):
         self.screens: Dict[Screen, ttk.Frame] = {}
         self.build_screens()
         self.show_screen(Screen.WELCOME)
+        self.protocol("WM_DELETE_WINDOW", self._on_close_app)
+
+    def _on_close_app(self):
+        self.save_history()
+        self.destroy()
 
     def build_screens(self) -> None:
         self.screens[Screen.WELCOME] = self.make_welcome_screen()
@@ -247,6 +315,8 @@ class FrontendApp(tk.Tk):
         self.screens[screen].grid(row=0, column=0, sticky="nsew")
         self.status_var.set(self.controller.status_label())
         self.version_var.set(self.controller.state.selected_version)
+        if (screen == Screen.MODELS) and not os.path.exists(self._get_config_path()):
+            self.auto_scan_resources(self.project_root)
         if screen == Screen.WELCOME:
             self._update_welcome_layout()
 
@@ -254,6 +324,32 @@ class FrontendApp(tk.Tk):
         if hasattr(self, "welcome_desc"):
             width = max(320, self.winfo_width() - 260)
             self.welcome_desc.configure(wraplength=width)
+    
+    def auto_scan_resources(self, base_dir: str) -> None:
+        """Рекурсивно пытается найти папки с моделями и текстурами без ручного выбора."""
+        if not base_dir or not os.path.exists(base_dir):
+            return
+
+        game_version = (self.version_var.get() or "").strip()
+        found = find_resource_folders(base_dir, game_version)
+
+        if not any(found.values()):
+            fallback_roots = [self.project_root, self.base_dir, os.path.expanduser("~")]
+            for fallback_root in fallback_roots:
+                if fallback_root and fallback_root != base_dir and os.path.exists(fallback_root):
+                    found = find_resource_folders(fallback_root, game_version)
+                    if any(found.values()):
+                        break
+
+        if found["units"]:
+            self.units_var.set(found["units"])
+            self.controller.set_units_path(found["units"])
+        if found["buildings"]:
+            self.buildings_var.set(found["buildings"])
+            self.controller.set_buildings_path(found["buildings"])
+        if found["textures"]:
+            self.textures_var.set(found["textures"])
+            self.controller.set_textures_path(found["textures"])
 
     def _load_image(self, path: str, width: int, height: int):
         if not path or not os.path.exists(path):
@@ -283,6 +379,56 @@ class FrontendApp(tk.Tk):
         except Exception:
             return None
         return None
+
+    def _get_config_path(self) -> str:
+        """Возвращает путь к файлу конфигурации в папке со скриптом."""
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui_config.json")
+
+    def load_history(self, screen_name) -> None:
+        """Загружает ранее сохраненные значения из JSON файла."""
+        config_path = self._get_config_path()
+        if not os.path.exists(config_path):
+            return
+
+        try:
+            with open(config_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                SCREEN_FIELDS = {
+                    "replay": {"replay_path", "output_path", "animation_duration", "save_full_render"},
+                    "models": {"units_path", "buildings_path", "textures_path", "selected_version"}
+                }
+                if screen_name in SCREEN_FIELDS:
+                    for key in SCREEN_FIELDS[screen_name]:
+                        value = data[key]
+                        if key == "animation_duration":
+                            var_name = "duration_var"
+                        elif key == "selected_version":
+                            var_name = "version_var"
+                        else:
+                            var_name = f"{'_'.join(key.split('_')[:-1])}_var"
+                        getattr(self, var_name).set(value)
+                        getattr(self.controller, f"set_{key}")(value)
+        except Exception as e:
+            print(f"Не удалось загрузить историю UI: {e}")
+
+    def save_history(self) -> None:
+        """Сохраняет текущие значения полей ввода в JSON файл."""
+        config_path = self._get_config_path()
+        try:
+            data = {
+                "replay_path": self.replay_var.get(),
+                "output_path": self.output_var.get(),
+                "units_path": self.units_var.get(),
+                "buildings_path": self.buildings_var.get(),
+                "textures_path": self.textures_var.get(),
+                "selected_version": self.version_var.get(),
+                "animation_duration": self.duration_var.get(),
+                "save_full_render": self.save_full_var.get()
+            }
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+        except Exception as e:
+            print(f"Не удалось сохранить историю UI: {e}")
 
     def _make_step_sidebar(self, parent: ttk.Frame, current_step: int) -> ttk.Frame:
         sidebar = ttk.Frame(parent, style="Card.TFrame", padding=(20, 24))
@@ -462,6 +608,8 @@ class FrontendApp(tk.Tk):
         self.replay_var = tk.StringVar(value=self.controller.state.replay_path)
         self.output_var = tk.StringVar(value=self.controller.state.output_path)
         self.save_full_var = tk.BooleanVar(value=self.controller.state.save_full_render)
+        self.duration_var = tk.IntVar(value=self.controller.state.animation_duration)
+        self.load_history("replay")
 
         self.make_path_row(main, 1, "Файл повтора", self.replay_var, is_file=True)
         self.make_path_row(main, 3, "Папка для сохранения результата", self.output_var, is_file=False)
@@ -469,6 +617,29 @@ class FrontendApp(tk.Tk):
         check = ttk.Checkbutton(main, text="Сохранить полный рендер (весь повтор)", variable=self.save_full_var,
                                 command=self.on_save_full_toggle)
         check.grid(row=5, column=0, sticky="w", pady=(10, 20))
+
+        duration_label = tk.Label(main, text="Длительность анимации (сек):",
+                                  bg="#0f172a", fg="#cbd5e1", font=("Segoe UI", 11))
+        duration_label.grid(row=6, column=0, sticky="w", pady=(0, 4))
+
+        self.duration_scale = tk.Scale(
+            main,
+            from_=30, to=75,
+            resolution=15,  # Жесткий шаг: 30 -> 45 -> 60 -> 75
+            orient="horizontal",
+            variable=self.duration_var,
+            command=self.on_duration_change,
+            length=320,
+            tickinterval=15,
+            bg="#0f172a",
+            fg="#cbd5e1",
+            troughcolor="#1f2937",
+            activebackground="#2563eb",
+            highlightthickness=0, bd=0,
+            sliderrelief="flat",
+            font=("Segoe UI", 10, "bold")
+        )
+        self.duration_scale.grid(row=7, column=0, sticky="w", pady=(0, 20))
 
         RoundedButton(main, text="Далее → Модели", command=self.on_replay_next,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=6, column=0, sticky="e")
@@ -494,6 +665,7 @@ class FrontendApp(tk.Tk):
         self.buildings_var = tk.StringVar(value=self.controller.state.buildings_path)
         self.textures_var = tk.StringVar(value=self.controller.state.textures_path)
         self.version_var = tk.StringVar(value=self.controller.state.selected_version)
+        self.load_history("models")
 
         self.make_path_row(main, 1, "Папка с моделями юнитов", self.units_var, is_file=False)
         self.make_path_row(main, 3, "Папка с моделями зданий", self.buildings_var, is_file=False)
@@ -504,6 +676,7 @@ class FrontendApp(tk.Tk):
         self.version_combo = ttk.Combobox(main, textvariable=self.version_var, values=["StarCraft II"],
                                           state="readonly")
         self.version_combo.grid(row=8, column=0, sticky="ew", pady=(0, 16))
+        self.version_combo.bind("<<ComboboxSelected>>", lambda _event: self.auto_scan_resources(self.project_root))
 
         buttons = ttk.Frame(main)
         buttons.grid(row=9, column=0, sticky="ew")
@@ -513,7 +686,7 @@ class FrontendApp(tk.Tk):
         RoundedButton(buttons, text="Очистить", command=self.on_clear_all,
                       bg="#111827", active_bg="#1f2937", fg="#e5e7eb", outline="#374151").grid(row=0, column=1,
                                                                                                sticky="w", padx=(8, 0))
-        RoundedButton(buttons, text="Сгенерировать анимацию", command=self.on_generate,
+        RoundedButton(buttons, text="Сгенерировать", command=self.on_generate,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=2, sticky="e")
         return frame
 
@@ -544,7 +717,6 @@ class FrontendApp(tk.Tk):
                                                                                                     sticky="ew",
                                                                                                     pady=(8, 16))
 
-        # Багфикс: Переименовали self.preview_canvas в self.done_canvas, чтобы не затирать основное состояние
         self.done_canvas = tk.Canvas(main, width=560, height=260, bg="#111827", highlightthickness=0)
         self.done_canvas.grid(row=2, column=0, sticky="ew", pady=(0, 16))
 
@@ -631,6 +803,9 @@ class FrontendApp(tk.Tk):
         self.controller.set_buildings_path("")
         self.controller.set_textures_path("")
 
+    def on_duration_change(self, value: str) -> None:
+        self.controller.set_animation_duration(int(float(value)))
+
     def on_generate(self) -> None:
         self.controller.set_units_path(self.units_var.get())
         self.controller.set_buildings_path(self.buildings_var.get())
@@ -640,6 +815,7 @@ class FrontendApp(tk.Tk):
                     self.controller.state.textures_path]):
             messagebox.showwarning("Пропущены поля!", "Пожалуйста, заполните все поля перед началом генерации")
             return
+        self.save_history()
         self.controller.start_generation()
         self.show_screen(Screen.LOADING)
         self.run_loading_sequence()
@@ -647,20 +823,41 @@ class FrontendApp(tk.Tk):
     def run_loading_sequence(self) -> None:
         self.progress["value"] = 0
         self.loading_label["text"] = "Подготавливаем ассеты…"
-        self.after(150, self.update_loading, 15,
-                   ["Подготавливаем ассеты…", "Получаем данные о повторе…", "Загружаем модели юнитов…",
-                    "Загружаем модели зданий…", "Накладываем текстуры…", "Рендерим анимацию…", "Сохраняем результат…"])
+        self.after(150, self._start_backend_job)
 
-    def update_loading(self, progress_value: int, stages: list[str]) -> None:
-        if progress_value >= 100:
+    def _start_backend_job(self) -> None:
+        job_config = JobConfig(
+            replay_path=self.controller.state.replay_path,
+            output_dir=self.controller.state.output_path,
+            units_path=self.controller.state.units_path,
+            buildings_path=self.controller.state.buildings_path,
+            textures_path=self.controller.state.textures_path,
+            animation_duration=self.controller.state.animation_duration,
+            save_full_render=self.controller.state.save_full_render,
+            selected_version=self.controller.state.selected_version,
+        )
+        self._update_loading_status(10, "Подготавливаем ассеты…")
+        threading.Thread(target=self._run_backend_job, args=(job_config,), daemon=True).start()
+
+    def _run_backend_job(self, job_config: JobConfig) -> None:
+        result = self.backend.run_job(job_config, progress_cb=self._update_loading_status)
+        self.after(0, self._finish_backend_job, result)
+
+    def _finish_backend_job(self, result) -> None:
+        if result.success and result.video_path:
+            self.controller.set_output_path(result.video_path)
+            self.controller.complete_generation()
+            self.done_path_var.set(result.video_path)
+            self.show_screen(Screen.DONE)
+        else:
             self.controller.complete_generation()
             self.done_path_var.set(self.controller.state.output_path or "C:/Users/User/Videos/SC2Renders/output.mp4")
             self.show_screen(Screen.DONE)
-            return
+            messagebox.showerror("Ошибка генерации", result.message or "Не удалось создать видео")
+
+    def _update_loading_status(self, progress_value: int, message: str) -> None:
         self.progress["value"] = progress_value
-        self.loading_label["text"] = stages[min(progress_value // 15, len(stages) - 1)]
-        next_value = min(progress_value + 10, 100)
-        self.after(160, self.update_loading, next_value, stages)
+        self.loading_label["text"] = message
 
     def on_reset(self) -> None:
         self.controller.reset()
@@ -671,6 +868,8 @@ class FrontendApp(tk.Tk):
         self.buildings_var.set(self.controller.state.buildings_path)
         self.textures_var.set(self.controller.state.textures_path)
         self.version_var.set(self.controller.state.selected_version)
+        self.duration_var.set(self.controller.state.animation_duration)
+
         self.show_screen(Screen.WELCOME)
 
 
