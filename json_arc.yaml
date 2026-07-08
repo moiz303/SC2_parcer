@@ -1,0 +1,189 @@
+components:
+  schemas:
+    UnifiedReplayOutput:
+      type: object
+      description: Полная объектная модель результатов парсинга игрового реплея.
+      required:
+        - metadata
+        - buildings
+        - units
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MatchMetadata'
+        buildings:
+          type: array
+          description: Список всех статических и сырьевых объектов на карте матча.
+          items:
+            $ref: '#/components/schemas/BuildingEntity'
+        units:
+          type: array
+          description: Список всех динамических юнитов и боевых единиц матча.
+          items:
+            $ref: '#/components/schemas/UnitEntity'
+
+    MatchMetadata:
+      type: object
+      required:
+        - replay_file
+        - version
+        - duration
+        - fps
+        - map
+        - players
+      properties:
+        replay_file:
+          type: string
+          example: "C:\\Users\\0\\Documents\\StarCraft II\\Replays\\Multiplayer\\game.SC2Replay"
+        version:
+          type: string
+          example: "5.0.15.96592"
+        duration:
+          type: string
+          example: "13 minutes 54 seconds"
+        fps:
+          type: number
+          format: float
+          example: 16.0
+        map:
+          type: string
+          example: "White Rabbit LE"
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerInfo'
+
+    PlayerInfo:
+      type: object
+      required:
+        - name
+        - race
+        - team
+        - result
+        - is_human
+      properties:
+        name:
+          type: string
+          example: "Moizz"
+        race:
+          type: string
+          example: "Зерги"
+        team:
+          type: string
+          example: "Team 1: Player 1 - Moizz (Зерги)"
+        result:
+          type: string
+          enum: [Win, Loss]
+          example: "Win"
+        is_human:
+          type: boolean
+          example: true
+
+    BuildingEntity:
+      type: object
+      required:
+        - entity_id
+        - type
+        - owner_name
+        - owner_race
+        - init_frame
+        - died_frame
+        - frames
+      properties:
+        entity_id:
+          type: integer
+          example: 1835009
+        type:
+          type: string
+          example: "SpacePlatformGeyser"
+        owner_name:
+          type: string
+          example: "None"
+        owner_race:
+          type: string
+          example: "Neutral"
+        init_frame:
+          type: integer
+          example: 0
+        died_frame:
+          type: integer
+          nullable: true
+          example: null
+        frames:
+          type: array
+          items:
+            $ref: '#/components/schemas/StateFrame'
+
+    UnitEntity:
+      type: object
+      required:
+        - entity_id
+        - type
+        - owner_name
+        - owner_race
+        - init_frame
+        - died_frame
+        - positions
+        - is_army
+        - born_frame
+      properties:
+        entity_id:
+          type: integer
+          example: 66584578
+        type:
+          type: string
+          example: "Roach"
+        owner_name:
+          type: string
+          example: "ИИ 1 (знаток)"
+        owner_race:
+          type: string
+          example: "Зерги"
+        init_frame:
+          type: integer
+          example: 4586
+        died_frame:
+          type: integer
+          nullable: true
+          example: 15907
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/StateFrame'
+        is_army:
+          type: boolean
+          example: true
+        born_frame:
+          type: integer
+          example: 4586
+
+    StateFrame:
+      type: object
+      description: Пространственно-временная точка фиксации объекта.
+      required:
+        - frame
+        - time
+        - x
+        - y
+        - z
+      properties:
+        frame:
+          type: integer
+          description: Номер кадра внутриигровой записи.
+          example: 18467
+        time:
+          type: number
+          format: float
+          description: Время в секундах от начала матча.
+          example: 1154.1875
+        x:
+          type: number
+          format: float
+          example: -51.0
+        y:
+          type: number
+          format: float
+          example: -20.0
+        z:
+          type: number
+          format: float
+          example: 0.0
