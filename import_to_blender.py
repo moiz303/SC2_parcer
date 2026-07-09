@@ -10,22 +10,29 @@ import sys
 # 1. ВХОДНЫЕ ПЕРЕМЕННЫЕ И ГЛОБАЛЬНЫЕ НАСТРОЙКИ
 # ==============================================================================
 # Значения по умолчанию (хардкод переменные вроде fps самого реплея)
-JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\unified_replay_output.json"
+JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\temp\unified_Золотая стена РВ.json"
 JSON_SPEEDS_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\speeds.json"
 UNITS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\unit_models"
 BUILDINGS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\building_models"
 TEXTURES_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\textures"
-OUTPUT_FILE_PATH = None
+OUTPUT_FILE_PATH = r"C:\Users\0\Desktop\result.mp4"
 RENDER_CONFIG = {}
 SAVE_FULL_RENDER = False
-DURATION = 45
-ANALYSIS = {}
+ANALYSIS = {
+    "success": True,
+    "start_frame": 14513,
+    "end_frame": 15013,
+    "duration_frames": 500,
+    "center_x": 36.0,
+    "center_y": 5.0,
+    "error": None
+}
 
 COORD_SCALE = 1.0
 MODEL_FORWARD_OFFSET = math.pi / 2
 MOVEMENT_THRESHOLD = 1.8
 ARMY_IDLE_THRESHOLD = 32
-BLENDER_FPS = 24
+BLENDER_FPS = 30
 SC2_FPS = 22.4
 
 RACE_MATERIALS = {}
@@ -73,8 +80,8 @@ def sc2_to_blender(x, y, z): return x * COORD_SCALE, -y * COORD_SCALE, z * COORD
 
 def normalize_type(obj_type, is_building=False):
     clean = str(obj_type).strip().lower().replace(" ", "")
-    if is_building and clean.startswith("labmineralfield"):
-        clean = re.sub(r'labmineralfield\d*$', 'labmineralfield', clean)
+    if is_building and "mineralfield" in clean:
+        clean = re.sub(r'^.*mineralfield.*$', 'labmineralfield', clean)
     return clean
 
 
@@ -122,7 +129,6 @@ def clear_scene():
         bpy.data.objects.remove(obj, do_unlink=True)
     # 2. Удаляем все анимации
     for act in list(bpy.data.actions):
-        act.user_clear()
         bpy.data.actions.remove(act)
     # 3. Удаляем библиотеки, чтобы Blender заново прочитал файлы с диска
     for lib in list(bpy.data.libraries):
@@ -135,7 +141,6 @@ def clear_scene():
     ]
     for collection in data_collections:
         for item in list(collection):
-            item.user_clear()
             try:
                 collection.remove(item)
             except Exception:
@@ -154,82 +159,32 @@ def clear_scene():
     RACE_MATERIALS.clear()
 
 
-def setup_scene_lighting():
-    print("Настройка освещения сцены...")
-    
-    world = bpy.context.scene.world
-    if not world:
-        world = bpy.data.worlds.new("World")
-        bpy.context.scene.world = world
-        
-    world.use_nodes = True
-    bg_node = world.node_tree.nodes.get("Background")
-    if bg_node:
-        bg_node.inputs["Color"].default_value = (0.65, 0.7, 0.75, 1.0) 
-        bg_node.inputs["Strength"].default_value = 0.5
-    sun_data = bpy.data.lights.new(name="SC2_Sun", type='SUN')
-    sun_data.energy = 2.0          # Энергия света
-    sun_data.color = (1.0, 0.98, 0.95) # Теплый белый, чтобы текстуры не синили
-    sun_data.angle = math.radians(2.5) # Легкая мягкость теней
-    
-    sun_obj = bpy.data.objects.new("SC2_Sun", sun_data)
-    bpy.context.collection.objects.link(sun_obj)
-    
-    sun_obj.rotation_euler = (math.radians(45), math.radians(15), math.radians(30))
-
-
-def setup_ground_plane():
-    print("Создание пола сцены...")
-    
-    # Создаем меши и объект (размер 500x500, чтобы точно покрыл любую карту SC2)
-    mesh = bpy.data.meshes.new("Ground_Mesh")
-    verts = [(-250, -250, 0), (250, -250, 0), (250, 250, 0), (-250, 250, 0)]
-    faces = [(0, 1, 2, 3)]
-    mesh.from_pydata(verts, [], faces)
-    mesh.update()
-    
-    ground_obj = bpy.data.objects.new("Ground_Plane", mesh)
-    bpy.context.collection.objects.link(ground_obj)
-    ground_obj.location.z = 0
-
-    # Создаем простой материал без текстур
-    mat = bpy.data.materials.new(name="Mat_Ground")
-    mat.use_nodes = True
-    bsdf = mat.node_tree.nodes.get("Principled BSDF") or mat.node_tree.nodes.get("Principled")
-    if bsdf:
-        # Темно-серый цвет (не черный, чтобы в тенях оставалась детализация)
-        bsdf.inputs["Base Color"].default_value = (0.15, 0.15, 0.15, 1.0)
-        # Матовая поверхность (шероховатость), чтобы не было лишних бликов
-        bsdf.inputs["Roughness"].default_value = 0.85 
-        
-    ground_obj.data.materials.append(mat)
-
-
 def get_race_material(unit_type, race='neutral'):
-    if unit_type in RACE_MATERIALS: 
+    if unit_type in RACE_MATERIALS:
         return RACE_MATERIALS[unit_type]
-    
+
     mat = bpy.data.materials.new(name=f"Mat_{unit_type}")
     mat.use_nodes = True
     nodes = mat.node_tree.nodes
-    
+
     for node in nodes:
         nodes.remove(node)
-        
+
     output_node = nodes.new(type='ShaderNodeOutputMaterial')
     bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
     tex_node = nodes.new(type='ShaderNodeTexImage')
-    
+
     tex_path = None
     for suffix in ['_diff.dds', '_diffuse.dds', '_diff.png', '_diffuse.png']:
         path = os.path.join(TEXTURES_FOLDER_PATH, f"{unit_type}{suffix}")
         if os.path.exists(path):
             tex_path = path
             break
-            
+
     links = mat.node_tree.links
-    
-    if (tex_path is None) and (unit_type == 'destructiblerockex1diagonalhugeblur'): # Исключение - камни, у них другoe названиe
+
+    if (tex_path is None) and (
+            unit_type == 'destructiblerockex1diagonalhugeblur'):  # Исключение - камни, у них другoe названиe
         tex_path = os.path.join(TEXTURES_FOLDER_PATH, 'purifier_destructible_rock_huge_diff.dds')
 
     # Если текстура найдена, загружаем и подключаем
@@ -240,7 +195,7 @@ def get_race_material(unit_type, race='neutral'):
             links.new(tex_node.outputs['Color'], bsdf_node.inputs['Base Color'])
         except Exception as e:
             print(f"⚠ Ошибка загрузки текстуры {tex_path}: {e}")
-            
+
     # Если текстуры нет или она не загрузилась, используем цвет расы (fallback)
     if not tex_node.image:
         race_clean = str(race).strip().lower()
@@ -248,13 +203,13 @@ def get_race_material(unit_type, race='neutral'):
                     'зерги': 'zerg', 'zerg': 'zerg',
                     'протоссы': 'protoss', 'protoss': 'protoss'}
         normalized_race = race_map.get(race_clean, 'neutral')
-        colors = {'terran': (0.2, 0.5, 0.8, 1.0), 'zerg': (0.6, 0.2, 0.2, 1.0), 
+        colors = {'terran': (0.2, 0.5, 0.8, 1.0), 'zerg': (0.6, 0.2, 0.2, 1.0),
                   'protoss': (0.8, 0.7, 0.2, 1.0), 'neutral': (0.5, 0.5, 0.5, 1.0)}
         bsdf_node.inputs["Base Color"].default_value = colors[normalized_race]
-        
+
     # Подключаем BSDF к выходу
     links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
-    
+
     RACE_MATERIALS[unit_type] = mat
     return mat
 
@@ -264,13 +219,44 @@ def create_fallback_object(cache_key, race, prefix="Unit"):
     verts = [(-0.5, -0.5, -0.5), (0.5, -0.5, -0.5), (0.5, 0.5, -0.5), (-0.5, 0.5, -0.5), (-0.5, -0.5, 0.5),
              (0.5, -0.5, 0.5), (0.5, 0.5, 0.5), (-0.5, 0.5, 0.5)]
     faces = [(0, 1, 2, 3), (4, 5, 6, 7), (0, 4, 7, 3), (1, 5, 6, 2), (0, 1, 5, 4), (3, 2, 6, 7)]
-    mesh.from_pydata(verts, [], faces);
+    mesh.from_pydata(verts, [], faces)
     mesh.update()
     obj = bpy.data.objects.new(f"{prefix}_{cache_key}", mesh)
     bpy.context.collection.objects.link(obj)
     mat = get_race_material(cache_key, race)
     if mat and len(obj.data.materials) == 0: obj.data.materials.append(mat)
     return {"root": obj, "hierarchy": [obj]}
+
+
+def render_scene(scene, out_file, analysis, save_full: bool):
+    # Настройки вывода
+    scene.render.image_settings.media_type = 'VIDEO'
+    scene.render.ffmpeg.format = 'MPEG4'
+    scene.render.ffmpeg.codec = 'H264'
+
+    old_start = scene.frame_start
+    old_end = scene.frame_end
+
+    # Настройки сцены
+    scene.render.engine = 'BLENDER_EEVEE'
+    scene.eevee.taa_render_samples = 8
+    scene.render.use_motion_blur = False
+    scene.eevee.use_raytracing = False
+    scene.eevee.use_volumetric_shadows = False
+
+    scene.frame_start = analysis.get("start_frame", 0)
+    scene.frame_end = analysis.get("end_frame", 1000)
+    scene.render.filepath = out_file
+    bpy.ops.render.render(animation=True)
+
+    if save_full:
+        scene.frame_start = old_start
+        scene.frame_end = old_end
+        scene.render.filepath = out_file
+        bpy.ops.render.render(animation=True)
+
+    scene.frame_start = old_start
+    scene.frame_end = old_end
 
 
 def is_valid_file(filename, all_keywords):
@@ -325,17 +311,17 @@ def set_visibility_keys(obj, hide_start_frame, show_start_frame, hide_end_frame)
     if hide_end_frame <= show_start_frame: hide_end_frame = show_start_frame + 2
     for target in unique_targets:
         if not target.animation_data: target.animation_data_create()
-        target.hide_viewport = True;
+        target.hide_viewport = True
         target.hide_render = True
-        target.keyframe_insert("hide_viewport", frame=hide_start_frame);
+        target.keyframe_insert("hide_viewport", frame=hide_start_frame)
         target.keyframe_insert("hide_render", frame=hide_start_frame)
-        target.hide_viewport = False;
+        target.hide_viewport = False
         target.hide_render = False
-        target.keyframe_insert("hide_viewport", frame=show_start_frame);
+        target.keyframe_insert("hide_viewport", frame=show_start_frame)
         target.keyframe_insert("hide_render", frame=show_start_frame)
-        target.hide_viewport = True;
+        target.hide_viewport = True
         target.hide_render = True
-        target.keyframe_insert("hide_viewport", frame=hide_end_frame);
+        target.keyframe_insert("hide_viewport", frame=hide_end_frame)
         target.keyframe_insert("hide_render", frame=hide_end_frame)
 
 
@@ -383,7 +369,97 @@ def force_keyframe(obj, prop, frame, value=None):
 
 
 # ==============================================================================
-# 4. ФАЗА 1: ПРЕДОБРАБОТКА (СДВИГ ЗДАНИЯ + ТРАНСФОРМОВ)
+# 4. СЕТАПЫ ОСВЕЩЕНИЯ, КАМЕРЫ И СЦЕНЫ
+# ==============================================================================
+def setup_scene_lighting():
+    print("Настройка освещения сцены...")
+
+    world = bpy.context.scene.world
+    if not world:
+        world = bpy.data.worlds.new("World")
+        bpy.context.scene.world = world
+
+    world.use_nodes = True
+    bg_node = world.node_tree.nodes.get("Background")
+    if bg_node:
+        bg_node.inputs["Color"].default_value = (0.65, 0.7, 0.75, 1.0)
+        bg_node.inputs["Strength"].default_value = 0.5
+    sun_data = bpy.data.lights.new(name="SC2_Sun", type='SUN')
+    sun_data.energy = 2.0  # Энергия света
+    sun_data.color = (1.0, 0.98, 0.95)  # Теплый белый, чтобы текстуры не синили
+    sun_data.angle = math.radians(2.5)  # Легкая мягкость теней
+
+    sun_obj = bpy.data.objects.new("SC2_Sun", sun_data)
+    bpy.context.collection.objects.link(sun_obj)
+
+    sun_obj.rotation_euler = (math.radians(45), math.radians(15), math.radians(30))
+
+
+def setup_ground_plane():
+    print("Создание пола сцены...")
+
+    # Создаем меши и объект (размер 500x500, чтобы точно покрыл любую карту SC2)
+    mesh = bpy.data.meshes.new("Ground_Mesh")
+    verts = [(-250, -250, 0), (250, -250, 0), (250, 250, 0), (-250, 250, 0)]
+    faces = [(0, 1, 2, 3)]
+    mesh.from_pydata(verts, [], faces)
+    mesh.update()
+
+    ground_obj = bpy.data.objects.new("Ground_Plane", mesh)
+    bpy.context.collection.objects.link(ground_obj)
+    ground_obj.location.z = 0
+
+    # Создаем простой материал без текстур
+    mat = bpy.data.materials.new(name="Mat_Ground")
+    mat.use_nodes = True
+    bsdf = mat.node_tree.nodes.get("Principled BSDF") or mat.node_tree.nodes.get("Principled")
+    if bsdf:
+        # Темно-серый цвет (не черный, чтобы в тенях оставалась детализация)
+        bsdf.inputs["Base Color"].default_value = (0.15, 0.15, 0.15, 1.0)
+        # Матовая поверхность (шероховатость), чтобы не было лишних бликов
+        bsdf.inputs["Roughness"].default_value = 0.85
+
+    ground_obj.data.materials.append(mat)
+
+
+def setup_analysis_camera(analysis):
+    center_x, center_y, _ = sc2_to_blender(analysis.get('center_x', 0.0), analysis.get('center_y', 0.0), 0.0)
+    start, end = analysis.get("start_frame", 0), analysis.get("end_frame", 1000)
+
+    pivot = bpy.data.objects.new("AnalysisPivot", None)
+    pivot.empty_display_type = 'PLAIN_AXES'
+    pivot.location = (center_x, center_y, 0)
+    bpy.context.collection.objects.link(pivot)
+
+    cam = bpy.data.cameras.new("AnalysisCamera")
+    cam.clip_start = 0.5
+    cam.clip_end = 350
+
+    cam_obj = bpy.data.objects.new("AnalysisCamera", cam)
+    radius, height = 65, 45
+    cam_obj.location = (0, -radius, height)
+    cam_obj.data.lens = 70.0
+
+    bpy.context.collection.objects.link(cam_obj)
+    cam_obj.parent = pivot
+
+    track = cam_obj.constraints.new('TRACK_TO')
+    track.target = pivot
+    track.track_axis = 'TRACK_NEGATIVE_Z'
+    track.up_axis = 'UP_Y'
+
+    pivot.rotation_euler[2] = 0
+    pivot.keyframe_insert("rotation_euler", frame=start)
+
+    pivot.rotation_euler[2] = math.tau
+    pivot.keyframe_insert("rotation_euler", frame=end)
+
+    bpy.context.scene.camera = cam_obj
+    return cam_obj
+
+
+# ==============================================================================
+# 5. ФАЗА 1: ПРЕДОБРАБОТКА (СДВИГ ЗДАНИЯ + ТРАНСФОРМОВ)
 # ==============================================================================
 def preprocess_data(units_data, buildings_data):
     global SC2_FPS, SPEED_CACHE, BIRTH_CACHE, ANIM_CACHE
@@ -544,7 +620,7 @@ def preprocess_data(units_data, buildings_data):
 
 
 # ==============================================================================
-# 5. ФАЗА 2: ЦЕЛЕВАЯ ЗАГРУЗКА РЕСУРСОВ (С ФИЛЬТРАЦИЕЙ ПУСТЫХ АНИМАЦИЙ)
+# 6. ФАЗА 2: ЦЕЛЕВАЯ ЗАГРУЗКА РЕСУРСОВ (С ФИЛЬТРАЦИЕЙ ПУСТЫХ АНИМАЦИЙ)
 # ==============================================================================
 def load_resources_from_folder(base_folder, all_subfolders, required_types, is_building_folder):
     if not os.path.exists(base_folder): return
@@ -570,15 +646,15 @@ def load_resources_from_folder(base_folder, all_subfolders, required_types, is_b
                 ]
                 data_to.actions = valid_action_names
             for obj in data_to.objects:
-             if obj:
-                 obj.make_local()
-                 if obj.data:
-                     obj.data.make_local()
-                     if obj.type == 'MESH':
-                         mat = get_race_material(file_type, 'neutral')
-                         if mat:
-                             obj.data.materials.clear()
-                             obj.data.materials.append(mat)
+                if obj:
+                    obj.make_local()
+                    if obj.data:
+                        obj.data.make_local()
+                        if obj.type == 'MESH':
+                            mat = get_race_material(file_type, 'neutral')
+                            if mat:
+                                obj.data.materials.clear()
+                                obj.data.materials.append(mat)
             for act in data_to.actions:
                 if act:
                     act.make_local()
@@ -612,7 +688,7 @@ def load_resources_from_folder(base_folder, all_subfolders, required_types, is_b
 
 
 # ==============================================================================
-# 6. ФАЗА 3: ИМПОРТ ЮНИТОВ
+# 7. ФАЗА 3: ИМПОРТ ЮНИТОВ
 # ==============================================================================
 def get_safe_pool(anims_dict, *states):
     for s in states:
@@ -743,7 +819,7 @@ def import_units(units_data):
 
 
 # ==============================================================================
-# 7. ФАЗА 4: ИМПОРТ ЗДАНИЙ
+# 8. ФАЗА 4: ИМПОРТ ЗДАНИЙ
 # ==============================================================================
 def import_buildings(buildings_data, max_frame):
     for idx, bldg in enumerate(buildings_data):
@@ -860,11 +936,11 @@ def _spawn_building_segment(seg, bldg, f0, obj_index):
 
 
 # ==============================================================================
-# 8. ГЛАВНЫЙ ЦИКЛ
+# 9. ГЛАВНЫЙ ЦИКЛ
 # ==============================================================================
 def import_all():
     global SC2_FPS, JSON_UNIFIED_PATH, UNITS_MODELS_FOLDER_PATH, BUILDINGS_MODELS_FOLDER_PATH, \
-        SAVE_FULL_RENDER, ANALYSIS
+        SAVE_FULL_RENDER, ANALYSIS, OUTPUT_FILE_PATH
     print("[Step 1] Очистка сцены...")
     clear_scene()
 
@@ -885,8 +961,8 @@ def import_all():
 
     units_data = replay_data.get('units', [])
     buildings_data = replay_data.get('buildings', [])
-    
-    print("[Step 3] Настройка освещения и размещение поверхности...")    
+
+    print("[Step 3] Настройка освещения и размещение поверхности...")
     setup_scene_lighting()
     setup_ground_plane()
 
@@ -910,12 +986,22 @@ def import_all():
     import_units(units_data)
     import_buildings(buildings_data, max_frame)
 
-    print("[Step 7] Финализация сцены...")
+    print("[Step 7] Подготовка пролёта камеры...")
+    camera, scene = None, bpy.context.scene
+    if ANALYSIS and ANALYSIS.get("success"):
+        camera = setup_analysis_camera(ANALYSIS)
+    scene.camera = camera
+
+    print("[Step 8] Финализация сцены...")
     final_frame = max_frame + 100
-    bpy.context.scene.frame_start = 0
-    bpy.context.scene.frame_end = final_frame
-    bpy.context.scene.render.fps = BLENDER_FPS
+    scene.frame_start = 0
+    scene.frame_end = final_frame
+    scene.render.fps = BLENDER_FPS
     print(f"Импорт завершен! Таймлайн: 0 - {final_frame}")
+
+    print("[Step 9] Рендер и запись в файл...")
+    render_scene(scene, OUTPUT_FILE_PATH, ANALYSIS, SAVE_FULL_RENDER)
+    print("ГОТОВО!")
 
 
 def load_config_from_args():
@@ -924,49 +1010,49 @@ def load_config_from_args():
     Ожидает: blender --background --python script.py -- render_payload.json output.mp4
     """
     global JSON_UNIFIED_PATH, JSON_SPEEDS_PATH, UNITS_MODELS_FOLDER_PATH, \
-           BUILDINGS_MODELS_FOLDER_PATH, TEXTURES_FOLDER_PATH, OUTPUT_FILE_PATH, RENDER_CONFIG, \
-            SAVE_FULL_RENDER, DURATION, ANALYSIS
-    
+        BUILDINGS_MODELS_FOLDER_PATH, TEXTURES_FOLDER_PATH, OUTPUT_FILE_PATH, RENDER_CONFIG, \
+        SAVE_FULL_RENDER, ANALYSIS
+
     print(f"DEBUG: sys.argv = {sys.argv}")
-    
+
     # Ищем индекс "--" разделителя
     separator_idx = -1
     try:
         separator_idx = sys.argv.index("--")
     except ValueError:
         pass
-    
+
     # Если нашли "--", берём аргументы после него
     args_start_idx = separator_idx + 1 if separator_idx >= 0 else 1
     remaining_args = sys.argv[args_start_idx:] if args_start_idx < len(sys.argv) else []
-    
+
     print(f"DEBUG: args_start_idx = {args_start_idx}, remaining_args = {remaining_args}")
-    
+
     # Ищем JSON файл с конфигом
     render_payload_path = None
     output_file = None
-    
+
     for i, arg in enumerate(remaining_args):
         if arg.endswith('.json') and os.path.exists(arg):
             render_payload_path = arg
             if i + 1 < len(remaining_args):
                 output_file = remaining_args[i + 1]
             break
-    
+
     # Если не нашли через JSON, берём первые два аргумента
     if not render_payload_path and len(remaining_args) >= 2:
         render_payload_path = remaining_args[0]
         output_file = remaining_args[1]
-    
+
     print(f"DEBUG: render_payload_path = {render_payload_path}")
     print(f"DEBUG: output_file = {output_file}")
-    
+
     # Загружаем конфиг
     if render_payload_path and os.path.exists(render_payload_path):
         try:
             with open(render_payload_path, 'r', encoding='utf-8') as f:
                 RENDER_CONFIG = json.load(f)
-            
+
             # Извлекаем пути из конфига
             JSON_UNIFIED_PATH = RENDER_CONFIG.get('unified_json_path', JSON_UNIFIED_PATH)
             JSON_SPEEDS_PATH = RENDER_CONFIG.get('speeds_json_path', JSON_SPEEDS_PATH)
@@ -975,7 +1061,8 @@ def load_config_from_args():
             TEXTURES_FOLDER_PATH = RENDER_CONFIG.get('textures_path', TEXTURES_FOLDER_PATH)
             SAVE_FULL_RENDER = RENDER_CONFIG.get('save_full_render', SAVE_FULL_RENDER)
             ANALYSIS = RENDER_CONFIG.get('analysis', ANALYSIS)
-            
+            OUTPUT_FILE_PATH = RENDER_CONFIG.get('output_path', OUTPUT_FILE_PATH)
+
             print(f"✓ Загруженный конфиг из: {render_payload_path}")
             print(f"  JSON_UNIFIED_PATH: {JSON_UNIFIED_PATH}")
             print(f"  UNITS_MODELS_FOLDER_PATH: {UNITS_MODELS_FOLDER_PATH}")
@@ -984,7 +1071,7 @@ def load_config_from_args():
             print(f"⚠ Ошибка при загрузке конфига: {e}")
             import traceback
             traceback.print_exc()
-    
+
     if output_file:
         OUTPUT_FILE_PATH = output_file
         print(f"✓ Output файл: {OUTPUT_FILE_PATH}")
