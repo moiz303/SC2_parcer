@@ -77,9 +77,7 @@ def clean_spatial_noise(deaths: List[Dict[str, Any]], radius: float = 15.0) -> L
 
 def calculate_battle_center(battle_segment: List[Dict[str, Any]]) -> Tuple[float, float]:
     """
-    Вычисляет геометрический центр сражения.
-    Использование медианы делает алгоритм устойчивым к случайным выбросам
-    (например, одиночные смерти далеко от основного замеса).
+    Вычисляет геометрический центр сражения
     """
     if not battle_segment:
         return 0.0, 0.0
@@ -90,9 +88,9 @@ def calculate_battle_center(battle_segment: List[Dict[str, Any]]) -> Tuple[float
     return statistics.median(xs), statistics.median(ys)
 
 
-def get_battle_interval(data: dict, window_seconds: float = 45.0) -> Tuple[
+def get_battle_interval(data: dict, window_seconds: float = 30.0) -> Tuple[
     Optional[int], Optional[int], Optional[Tuple[float, float]], str]:
-    fps = 22.4
+    fps = 30
     deaths = extract_combat_deaths(data)
     if not deaths:
         return None, None, None, "В реплее нет смертей боевых юнитов."
@@ -119,10 +117,9 @@ def get_battle_interval(data: dict, window_seconds: float = 45.0) -> Tuple[
     if not battle_segment:
         return None, None, None, "Не удалось локализовать интервал."
 
-    start_frame = battle_segment[0]['frame']
-    end_frame = battle_segment[-1]['frame']
+    start_frame = battle_segment[0]['frame'] - 100
+    end_frame = battle_segment[-1]['frame'] + 100
 
-    # --- НОВОЕ: Вычисляем центр сражения ---
     center_x, center_y = calculate_battle_center(battle_segment)
 
     birth_frames = [d['init_frame'] for d in battle_segment if d['init_frame'] is not None]
@@ -136,7 +133,7 @@ def get_battle_interval(data: dict, window_seconds: float = 45.0) -> Tuple[
     return start_frame, end_frame, (center_x, center_y), description
 
 
-def analyze_replay_file(filepath: Union[str, Path], window_seconds: float = 45.0) -> Dict[str, Any]:
+def analyze_replay_file(filepath: Union[str, Path], window_seconds: float = 30.0) -> Dict[str, Any]:
     """
     Интерфейсная функция для бэкенда. Возвращает структурированный Python-словарь.
     """

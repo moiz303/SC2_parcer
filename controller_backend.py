@@ -36,7 +36,11 @@ class BackendController:
     def __init__(self, base_dir: Optional[str] = None) -> None:
         self.base_dir = Path(base_dir or Path(__file__).resolve().parent)
         self.temp_dir = self.base_dir / "temp"
-        self.temp_dir.mkdir(exist_ok=True)
+
+        if self.temp_dir.exists():
+            shutil.rmtree(self.temp_dir)
+
+        self.temp_dir.mkdir(parents=True, exist_ok=True)
 
     def build_job_config(self, frontend_state: Dict[str, Any]) -> JobConfig:
         return JobConfig(
@@ -66,7 +70,7 @@ class BackendController:
         parse_replay_unified(str(replay_path), str(temp_unified_path))
 
         self._emit(progress_cb, 25, "Ищем основной бой…")
-        analysis = analyze_replay_file(str(temp_unified_path), window_seconds=min(job_config.animation_duration, 45))
+        analysis = analyze_replay_file(str(temp_unified_path), window_seconds=min(job_config.animation_duration, 30))
         if not analysis.get("success", False):
             return JobResult(success=False, message=analysis.get("error") or "Не удалось определить основной бой")
 
@@ -215,9 +219,9 @@ def run_blender_render(command: list[str], expected_output_path: Optional[Path] 
 
     # Логируем вывод Blender для отладки
     if completed.stdout:
-        print(f"[Blender stdout]\n{completed.stdout[:500]}")  # Первые 500 символов
+        print(f"[Blender stdout]\n{completed.stdout[:1000]}")  # Первые 1000 символов
     if completed.stderr:
-        print(f"[Blender stderr]\n{completed.stderr[:500]}")
+        print(f"[Blender stderr]\n{completed.stderr}")
 
     if completed.returncode != 0:
         print(f"✗ Blender завершился с ошибкой (код {completed.returncode})")

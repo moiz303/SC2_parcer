@@ -231,13 +231,12 @@ class FrontendApp(tk.Tk):
         self.backend = BackendController()
         self.title("Replay Master")
         self.geometry("1100x720")
-        self.minsize(960, 640)
+        self.resizable(False, False)
         self.configure(bg="#07111f")
 
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
         self.project_root = os.path.dirname(self.base_dir)
-        self.logo_path = os.path.join(self.base_dir, "public", "logo.svg")
-        self.preview_path = os.path.join(self.base_dir, "public", "preview.gif")
+        self.preview_path = os.path.join(self.base_dir, "public", "preview.mp4")
         self.icon_path = os.path.join(self.base_dir, "public", "icon.jpg")
 
         self.style = ttk.Style(self)
@@ -260,7 +259,7 @@ class FrontendApp(tk.Tk):
         self.header.columnconfigure(1, weight=1)
         self.header.rowconfigure(0, weight=1)
 
-        self.logo_image = self._load_image(self.icon_path or self.logo_path, 42, 42)
+        self.logo_image = self._load_image(self.icon_path, 42, 42)
         if self.logo_image is not None:
             self.logo_label = tk.Label(self.header, image=self.logo_image, bg="#0f172a", bd=0)
             self.logo_label.grid(row=0, column=0, sticky="w", padx=(0, 10))
@@ -319,11 +318,24 @@ class FrontendApp(tk.Tk):
             self.auto_scan_resources(self.project_root)
         if screen == Screen.WELCOME:
             self._update_welcome_layout()
+        if screen == Screen.DONE:
+            self._load_done_preview()
 
     def _update_welcome_layout(self) -> None:
         if hasattr(self, "welcome_desc"):
             width = max(320, self.winfo_width() - 260)
             self.welcome_desc.configure(wraplength=width)
+
+    def _load_done_preview(self) -> None:
+        """Динамически подгружает и запускает видео/GIF в момент показа экрана."""
+        output_path = str(self.done_path_var.get())
+        if not output_path or not os.path.exists(output_path):
+            return
+
+        self.done_label.configure(image="")
+
+        if output_path.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')):
+            self._setup_mp4_player(self.done_label, output_path, self.MAX_W, self.MAX_H)
     
     def auto_scan_resources(self, base_dir: str) -> None:
         """Рекурсивно пытается найти папки с моделями и текстурами без ручного выбора."""
@@ -450,61 +462,72 @@ class FrontendApp(tk.Tk):
                       font=("Segoe UI", 11, "bold")).grid(row=row, column=0, sticky="w", pady=4)
         return sidebar
 
-    def _show_fallback_preview(self) -> None:
-        self.preview_canvas.delete("all")
-        w = self.preview_canvas.winfo_width()
-        h = self.preview_canvas.winfo_height()
-        cx = w // 2 if w > 1 else 280
-        cy = h // 2 if h > 1 else 140
-        self.preview_canvas.create_text(cx, cy, text="Preview animation", fill="#9ca3af", font=("Segoe UI", 14))
 
-    def _resize_welcome_gif(self, event) -> None:
-        """Динамически изменяет размер кадров под текущий размер Canvas"""
-        if not self._gif_source_frames:
+    def _setup_mp4_player(self, label: tk.Label, video_path: str, target_width: int, target_height: int,
+                          fps: int = 24) -> None:
+        """
+        Инициализирует и запускает проигрыватель MP4-видео на указанном Label.
+        """
+        if not os.path.exists(video_path):
+            print(f"Предупреждение: Видеофайл не найден по пути: {video_path}")
             return
 
-        from PIL import ImageTk
-
-        # Берем текущие размеры, выделенные менеджвером геометрии
-        canvas_width = event.width
-        canvas_height = event.height
-
-        if canvas_width < 10 or canvas_height < 10:
+        try:
+            import cv2
+            from PIL import Image, ImageTk
+        except ImportError:
+            print("Ошибка: Для воспроизведения видео требуется установить opencv-python")
+            print("Выполните: pip install opencv-python")
             return
 
-        self._gif_frames = []
-        for img in self._gif_source_frames:
-            # Масштабируем с сохранением пропорций (aspect ratio) или вписываем жестко:
-            resized_img = img.resize((canvas_width, canvas_height), Image.Resampling.LANCZOS)
-            self._gif_frames.append(ImageTk.PhotoImage(resized_img))
-
-        self._update_gif_canvas_frame()
-
-    def _update_gif_canvas_frame(self) -> None:
-        if not self._gif_frames:
-            return
-        w = self.preview_canvas.winfo_width()
-        h = self.preview_canvas.winfo_height()
-
-        if self._canvas_gif_image_id is not None:
-            self.preview_canvas.delete(self._canvas_gif_image_id)
-
-        # Отрисовываем строго по центру Canvas
-        self._canvas_gif_image_id = self.preview_canvas.create_image(
-            w // 2, h // 2, image=self._gif_frames[self._gif_frame_index], anchor="center"
-        )
-
-    def _animate_gif(self) -> None:
-        if not hasattr(self, "_gif_frames") or not self._gif_frames:
-            return
-        if self.preview_canvas is None or self._canvas_gif_image_id is None:
+        cap = cv2.VideoCapture(video_path)
+        if not cap.isOpened():
+            print(f"Ошибка: Не удалось открыть видео {video_path}")
             return
 
-        self._gif_frame_index = (self._gif_frame_index + 1) % len(self._gif_frames)
+        frames = []
 
-        # Изменяем изображение существующего объекта в Canvas вместо пересоздания виджетов
-        self.preview_canvas.itemconfig(self._canvas_gif_image_id, image=self._gif_frames[self._gif_frame_index])
-        self.after(80, self._animate_gif)
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            pil_image = Image.fromarray(frame_rgb)
+
+            # Пропорциональный ресайз (contain)
+            img_w, img_h = pil_image.size
+            ratio_w = target_width / img_w
+            ratio_h = target_height / img_h
+            ratio = min(ratio_w, ratio_h)
+
+            new_w = max(1, int(img_w * ratio))
+            new_h = max(1, int(img_h * ratio))
+
+            resized_frame = pil_image.resize((new_w, new_h), Image.Resampling.LANCZOS)
+            photo = ImageTk.PhotoImage(resized_frame)
+            frames.append(photo)
+
+        cap.release()
+
+        if not frames:
+            return
+
+        label.frames = frames
+        label.current_frame_idx = 0
+        delay = max(40, int(1000 / fps))
+
+        def update_frame() -> None:
+            if not label.winfo_exists():
+                return
+            idx = label.current_frame_idx
+            label.configure(image=label.frames[idx])
+            label.current_frame_idx = (idx + 1) % len(label.frames)
+            label.after(delay, update_frame)
+
+        update_frame()
+
 
     def make_welcome_screen(self) -> ttk.Frame:
         screen_frame = ttk.Frame(self.content, style="Card.TFrame", padding=30)
@@ -512,7 +535,7 @@ class FrontendApp(tk.Tk):
         screen_frame.rowconfigure(0, weight=1)
 
         inner = ttk.Frame(screen_frame)
-        inner.grid(row=0, column=0, sticky="nsew")  # Добавили sticky
+        inner.grid(row=0, column=0, sticky="nsew")
         inner.columnconfigure(0, weight=1)
         inner.rowconfigure(2, weight=1)  # Даем строке с превью приоритет на расширение
 
@@ -520,15 +543,8 @@ class FrontendApp(tk.Tk):
                                  font=("Segoe UI", 27, "bold"), justify="center")
         welcome_title.grid(row=0, column=0, pady=(0, 10))
 
-        self.welcome_desc = tk.Label(
-            inner,
-            textvariable=self.welcome_desc_var,
-            bg="#0f172a",
-            fg="#cbd5e1",
-            font=("Segoe UI", 13),
-            justify="center",
-            wraplength=680,
-        )
+        self.welcome_desc = tk.Label(inner, textvariable=self.welcome_desc_var, bg="#0f172a", fg="#cbd5e1",
+                                     font=("Segoe UI", 13), justify="center", wraplength=680)
         self.welcome_desc.grid(row=1, column=0, pady=(0, 20))
 
         # Контейнер для превью
@@ -540,54 +556,11 @@ class FrontendApp(tk.Tk):
         # Жестко говорим фрейму: не раздувайся больше, чем тебе положено!
         preview_frame.grid_propagate(False)
 
-        # Базовые безопасные размеры для превью
+        self.preview_label = tk.Label(preview_frame, bg="#0f172a", bd=0, highlightthickness=0)
+        self.preview_label.grid(row=0, column=0, sticky="")
+
         MAX_W, MAX_H = 560, 280
-
-        self.preview_canvas = tk.Canvas(preview_frame, width=MAX_W, height=MAX_H, bg="#0f172a", highlightthickness=0)
-        self.preview_canvas.grid(row=0, column=0, sticky="")
-
-        self._gif_frames = []
-        self._gif_frame_index = 0
-        self._canvas_gif_image_id = None
-
-        if os.path.exists(self.preview_path):
-            from PIL import Image, ImageTk
-
-            try:
-                gif = Image.open(self.preview_path)
-
-                # Умный расчет пропорций (Aspect Ratio), чтобы не искажать гифку
-                orig_w, orig_h = gif.size
-                ratio = min(MAX_W / orig_w, MAX_H / orig_h)
-                new_w = int(orig_w * ratio)
-                new_h = int(orig_h * ratio)
-
-                # Подгоняем Canvas под идеально рассчитанный размер
-                self.preview_canvas.configure(width=new_w, height=new_h)
-
-                for frame_index in range(gif.n_frames):
-                    gif.seek(frame_index)
-                    gif_frame_img = gif.convert("RGBA")
-                    # Пропорциональный ресайз без хардкода
-                    gif_frame_img = gif_frame_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-                    self._gif_frames.append(ImageTk.PhotoImage(gif_frame_img))
-
-                if self._gif_frames:
-                    # Отрисовываем первый кадр прямо внутри Canvas
-                    self._canvas_gif_image_id = self.preview_canvas.create_image(
-                        new_w // 2, new_h // 2, image=self._gif_frames[0], anchor="center"
-                    )
-                    self._animate_gif()
-                else:
-                    raise RuntimeError("No GIF frames loaded")
-            except Exception:
-                self.preview_canvas.create_rectangle(0, 0, MAX_W, MAX_H, fill="#111827", outline="#1f2937")
-                self.preview_canvas.create_text(MAX_W // 2, MAX_H // 2, text="Preview animation", fill="#9ca3af",
-                                                font=("Segoe UI", 14))
-        else:
-            self.preview_canvas.create_rectangle(0, 0, MAX_W, MAX_H, fill="#111827", outline="#1f2937")
-            self.preview_canvas.create_text(MAX_W // 2, MAX_H // 2, text="Preview animation", fill="#9ca3af",
-                                            font=("Segoe UI", 14))
+        self._setup_mp4_player(self.preview_label, self.preview_path, MAX_W, MAX_H)
 
         RoundedButton(inner, text="Начать создавать", command=self.on_start,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=3, column=0, pady=(6, 0))
@@ -705,7 +678,6 @@ class FrontendApp(tk.Tk):
         frame = ttk.Frame(self.content, style="Card.TFrame", padding=30)
         frame.columnconfigure(1, weight=1)
         frame.rowconfigure(0, weight=1)
-
         sidebar = self._make_step_sidebar(frame, 3)
         main = ttk.Frame(frame, padding=(10, 0, 0, 0))
         main.grid(row=0, column=1, sticky="nsew")
@@ -717,44 +689,32 @@ class FrontendApp(tk.Tk):
                                                                                                     sticky="ew",
                                                                                                     pady=(8, 16))
 
-        self.done_canvas = tk.Canvas(main, width=560, height=260, bg="#111827", highlightthickness=0)
-        self.done_canvas.grid(row=2, column=0, sticky="ew", pady=(0, 16))
+        # Сохраняем размеры как атрибуты класса, чтобы использовать их при показе экрана
+        self.MAX_W, self.MAX_H = 560, 280
 
-        self._draw_preview_canvas()
-        self._animate_preview_canvas()
+        # ВАЖНО: Используем Frame + Label, а не Canvas!
+        preview_frame = tk.Frame(main, bg="#111827", bd=0, width=self.MAX_W, height=self.MAX_H)
+        preview_frame.grid(row=2, column=0, pady=(0, 16), sticky="n")
+        preview_frame.grid_propagate(False)
+
+        self.done_label = tk.Label(preview_frame, bg="#111827", bd=0, highlightthickness=0)
+        self.done_label.grid(row=0, column=0, sticky="")
 
         self.done_path_var = tk.StringVar(
             value=self.controller.state.output_path or "C:/Users/User/Videos/SC2Renders/output.mp4")
+
         ttk.Label(main, textvariable=self.done_path_var, style="Muted.TLabel", justify="center").grid(row=3, column=0,
                                                                                                       sticky="ew")
+
         buttons = ttk.Frame(main)
         buttons.grid(row=4, column=0, sticky="ew", pady=(20, 0))
+        buttons.columnconfigure(0, weight=1)
+
         RoundedButton(buttons, text="Новая обработка", command=self.on_reset,
                       bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=0, sticky="w")
         RoundedButton(buttons, text="Готово", command=self.destroy,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="w", padx=(8, 0))
         return frame
-
-    def _draw_preview_canvas(self) -> None:
-        if self.done_canvas is None:
-            return
-        self.done_canvas.delete("all")
-        self.done_canvas.create_rectangle(0, 0, 560, 260, fill="#111827", outline="#1f2937")
-        for i in range(6):
-            x = 60 + i * 70
-            h = 40 + ((i + self._preview_frame) % 6) * 20
-            self.done_canvas.create_rectangle(x, 220 - h, x + 36, 220, fill="#2563eb", outline="")
-        self.done_canvas.create_text(280, 90, text="Render preview loop", fill="#f8fafc", font=("Segoe UI", 16, "bold"))
-        self.done_canvas.create_text(280, 125, text="~45s loop • frames update continuously", fill="#94a3b8",
-                                     font=("Segoe UI", 11))
-        self.done_canvas.create_rectangle(70, 160, 490, 178, fill="#1f2937")
-        self.done_canvas.create_rectangle(70, 160, 70 + 420 * 0.3, 178, fill="#38bdf8")
-        self.done_canvas.create_oval(70 + 420 * 0.3 - 8, 152, 70 + 420 * 0.3 + 8, 168, fill="#f8fafc")
-
-    def _animate_preview_canvas(self) -> None:
-        self._preview_frame = (self._preview_frame + 1) % 8
-        self._draw_preview_canvas()
-        self.after(120, self._animate_preview_canvas)
 
     def make_path_row(self, parent: ttk.Frame, row: int, label_text: str, variable: tk.StringVar,
                       is_file: bool) -> None:

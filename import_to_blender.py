@@ -10,7 +10,7 @@ import sys
 # 1. ВХОДНЫЕ ПЕРЕМЕННЫЕ И ГЛОБАЛЬНЫЕ НАСТРОЙКИ
 # ==============================================================================
 # Значения по умолчанию (хардкод переменные вроде fps самого реплея)
-JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\temp\unified_Золотая стена РВ.json"
+JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\temp\unified_Kairos Junction LE.json"
 JSON_SPEEDS_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\speeds.json"
 UNITS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\unit_models"
 BUILDINGS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\building_models"
@@ -42,7 +42,9 @@ SPEED_CACHE = {}
 BIRTH_CACHE = {}
 
 RACE_FOLDER_MAP = {
-    "Зерги": ["zerg"], "Протоссы": ["protoss"], "Терраны": ["terran"],
+    "Зерги": ["zerg"], "Zerg": ["zerg"],
+    "Протоссы": ["protoss"], "Protoss": ["protoss"],
+    "Терраны": ["terran"], "Terran": ["terran"],
     "Neutral": ["neutral", "resources", "critters"]
 }
 
@@ -240,6 +242,7 @@ def render_scene(scene, out_file, analysis, save_full: bool):
     # Настройки сцены
     scene.render.engine = 'BLENDER_EEVEE'
     scene.eevee.taa_render_samples = 8
+    scene.render.resolution_x, scene.render.resolution_y = 1280, 720
     scene.render.use_motion_blur = False
     scene.eevee.use_raytracing = False
     scene.eevee.use_volumetric_shadows = False
