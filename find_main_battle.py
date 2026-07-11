@@ -16,7 +16,6 @@ def load_replay(filepath: Path) -> dict:
 
 def extract_combat_deaths(data: dict) -> List[Dict[str, Any]]:
     deaths = []
-    # Извлечение данных на основе структуры объектов
     for building in data.get('buildings', []):
         died_frame = building.get('died_frame')
         if died_frame is None or building.get('owner_race') == 'Neutral':
@@ -76,9 +75,7 @@ def clean_spatial_noise(deaths: List[Dict[str, Any]], radius: float = 15.0) -> L
 
 
 def calculate_battle_center(battle_segment: List[Dict[str, Any]]) -> Tuple[float, float]:
-    """
-    Вычисляет геометрический центр сражения
-    """
+    """Вычисляет геометрический центр сражения"""
     if not battle_segment:
         return 0.0, 0.0
 
@@ -134,9 +131,7 @@ def get_battle_interval(data: dict, window_seconds: float = 30.0) -> Tuple[
 
 
 def analyze_replay_file(filepath: Union[str, Path], window_seconds: float = 30.0) -> Dict[str, Any]:
-    """
-    Интерфейсная функция для бэкенда. Возвращает структурированный Python-словарь.
-    """
+    """Интерфейсная функция для бэкенда. Возвращает структурированный Python-словарь."""
     try:
         path = Path(filepath)
         data = load_replay(path)

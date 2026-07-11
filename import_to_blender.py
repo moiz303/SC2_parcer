@@ -125,7 +125,6 @@ def is_action_empty(action, threshold=1e-4):
 
 
 def clear_scene():
-    print("🧹 Очистка сцены и кэшей...")
     # 1. Удаляем все объекты
     for obj in list(bpy.data.objects):
         bpy.data.objects.remove(obj, do_unlink=True)
@@ -375,7 +374,6 @@ def force_keyframe(obj, prop, frame, value=None):
 # 4. СЕТАПЫ ОСВЕЩЕНИЯ, КАМЕРЫ И СЦЕНЫ
 # ==============================================================================
 def setup_scene_lighting():
-    print("Настройка освещения сцены...")
 
     world = bpy.context.scene.world
     if not world:
@@ -399,9 +397,6 @@ def setup_scene_lighting():
 
 
 def setup_ground_plane():
-    print("Создание пола сцены...")
-
-    # Создаем меши и объект (размер 500x500, чтобы точно покрыл любую карту SC2)
     mesh = bpy.data.meshes.new("Ground_Mesh")
     verts = [(-250, -250, 0), (250, -250, 0), (250, 250, 0), (-250, 250, 0)]
     faces = [(0, 1, 2, 3)]
@@ -412,14 +407,11 @@ def setup_ground_plane():
     bpy.context.collection.objects.link(ground_obj)
     ground_obj.location.z = 0
 
-    # Создаем простой материал без текстур
     mat = bpy.data.materials.new(name="Mat_Ground")
     mat.use_nodes = True
     bsdf = mat.node_tree.nodes.get("Principled BSDF") or mat.node_tree.nodes.get("Principled")
     if bsdf:
-        # Темно-серый цвет (не черный, чтобы в тенях оставалась детализация)
         bsdf.inputs["Base Color"].default_value = (0.15, 0.15, 0.15, 1.0)
-        # Матовая поверхность (шероховатость), чтобы не было лишних бликов
         bsdf.inputs["Roughness"].default_value = 0.85
 
     ground_obj.data.materials.append(mat)
@@ -506,7 +498,6 @@ def preprocess_data(units_data, buildings_data):
 
         bldg['birth_dur'] = birth_dur
 
-        # Рассчитываем время начала и окончания строительства
         construction_start = int(original_init_frame - birth_dur)
         construction_end = int(original_init_frame)
 
@@ -687,8 +678,6 @@ def load_resources_from_folder(base_folder, all_subfolders, required_types, is_b
                         except:
                             pass
 
-    print(f"  -> Завершено (загружено файлов: {loaded_count}).")
-
 
 # ==============================================================================
 # 7. ФАЗА 3: ИМПОРТ ЮНИТОВ
@@ -748,7 +737,6 @@ def import_units(units_data):
                 birth_dur = int(birth_act.frame_range[1] - birth_act.frame_range[0])
                 birth_end_frame = born + birth_dur
                 add_nla_strip_safe(nla_track, birth_act, born, birth_end_frame, force_loop=False)
-            # Зерги вылупляются из яиц, у них нет анимаций рождения
             else:
                 idle_pool = get_safe_pool(anims, 'idle', 'stand', 'default')
                 if idle_pool:
@@ -944,10 +932,10 @@ def _spawn_building_segment(seg, bldg, f0, obj_index):
 def import_all():
     global SC2_FPS, JSON_UNIFIED_PATH, UNITS_MODELS_FOLDER_PATH, BUILDINGS_MODELS_FOLDER_PATH, \
         SAVE_FULL_RENDER, ANALYSIS, OUTPUT_FILE_PATH
-    print("[Step 1] Очистка сцены...")
+    print("Очистка сцены...")
     clear_scene()
 
-    print("[Step 2] Чтение метаданных...")
+    print("Чтение метаданных...")
     if not os.path.exists(JSON_UNIFIED_PATH):
         print(f"Ошибка: Файл {JSON_UNIFIED_PATH} не найден!")
         return
@@ -960,16 +948,15 @@ def import_all():
     races_in_replay = set(RACE_FOLDER_MAP.get('Neutral')) | set(
         [RACE_FOLDER_MAP.get(player.get('race'), [""])[0] for player in
          replay_data.get('metadata', {}).get('players', [])])
-    print(f"Загружены расы: {races_in_replay}")
 
     units_data = replay_data.get('units', [])
     buildings_data = replay_data.get('buildings', [])
 
-    print("[Step 3] Настройка освещения и размещение поверхности...")
+    print("Настройка освещения и размещение поверхности...")
     setup_scene_lighting()
     setup_ground_plane()
 
-    print("[Step 4] Загрузка ресурсов...")
+    print("Загрузка ресурсов...")
     required_types = set()
     for u in units_data:
         if u.get('type'): required_types.add(normalize_type(u['type']))
@@ -982,56 +969,47 @@ def import_all():
     load_resources_from_folder(UNITS_MODELS_FOLDER_PATH, races_in_replay, required_types, is_building_folder=False)
     load_resources_from_folder(BUILDINGS_MODELS_FOLDER_PATH, races_in_replay, required_types, is_building_folder=True)
 
-    print("[Step 5] Предобработка...")
+    print("Предобработка...")
     units_data, buildings_data, _ = preprocess_data(units_data, buildings_data)
 
-    print("[Step 6] Генерация сцены...")
+    print("Генерация сцены...")
     import_units(units_data)
     import_buildings(buildings_data, max_frame)
 
-    print("[Step 7] Подготовка пролёта камеры...")
+    print("Подготовка пролёта камеры...")
     camera, scene = None, bpy.context.scene
     if ANALYSIS and ANALYSIS.get("success"):
         camera = setup_analysis_camera(ANALYSIS)
     scene.camera = camera
 
-    print("[Step 8] Финализация сцены...")
+    print("Финализация сцены...")
     final_frame = max_frame + 100
     scene.frame_start = 0
     scene.frame_end = final_frame
     scene.render.fps = BLENDER_FPS
-    print(f"Импорт завершен! Таймлайн: 0 - {final_frame}")
 
-    print("[Step 9] Рендер и запись в файл...")
+    print("Рендер и запись в файл...")
     render_scene(scene, OUTPUT_FILE_PATH, ANALYSIS, SAVE_FULL_RENDER)
-    print("ГОТОВО!")
 
 
 def load_config_from_args():
     """
     Парсит аргументы из sys.argv.
-    Ожидает: blender --background --python script.py -- render_payload.json output.mp4
+    Input: blender --background --python script.py -- render_payload.json output.mp4
     """
     global JSON_UNIFIED_PATH, JSON_SPEEDS_PATH, UNITS_MODELS_FOLDER_PATH, \
         BUILDINGS_MODELS_FOLDER_PATH, TEXTURES_FOLDER_PATH, OUTPUT_FILE_PATH, RENDER_CONFIG, \
         SAVE_FULL_RENDER, ANALYSIS
 
-    print(f"DEBUG: sys.argv = {sys.argv}")
-
-    # Ищем индекс "--" разделителя
     separator_idx = -1
     try:
         separator_idx = sys.argv.index("--")
     except ValueError:
         pass
 
-    # Если нашли "--", берём аргументы после него
     args_start_idx = separator_idx + 1 if separator_idx >= 0 else 1
     remaining_args = sys.argv[args_start_idx:] if args_start_idx < len(sys.argv) else []
 
-    print(f"DEBUG: args_start_idx = {args_start_idx}, remaining_args = {remaining_args}")
-
-    # Ищем JSON файл с конфигом
     render_payload_path = None
     output_file = None
 
@@ -1042,21 +1020,14 @@ def load_config_from_args():
                 output_file = remaining_args[i + 1]
             break
 
-    # Если не нашли через JSON, берём первые два аргумента
     if not render_payload_path and len(remaining_args) >= 2:
         render_payload_path = remaining_args[0]
         output_file = remaining_args[1]
-
-    print(f"DEBUG: render_payload_path = {render_payload_path}")
-    print(f"DEBUG: output_file = {output_file}")
-
-    # Загружаем конфиг
     if render_payload_path and os.path.exists(render_payload_path):
         try:
             with open(render_payload_path, 'r', encoding='utf-8') as f:
                 RENDER_CONFIG = json.load(f)
 
-            # Извлекаем пути из конфига
             JSON_UNIFIED_PATH = RENDER_CONFIG.get('unified_json_path', JSON_UNIFIED_PATH)
             JSON_SPEEDS_PATH = RENDER_CONFIG.get('speeds_json_path', JSON_SPEEDS_PATH)
             UNITS_MODELS_FOLDER_PATH = RENDER_CONFIG.get('units_path', UNITS_MODELS_FOLDER_PATH)
@@ -1066,10 +1037,6 @@ def load_config_from_args():
             ANALYSIS = RENDER_CONFIG.get('analysis', ANALYSIS)
             OUTPUT_FILE_PATH = RENDER_CONFIG.get('output_path', OUTPUT_FILE_PATH)
 
-            print(f"✓ Загруженный конфиг из: {render_payload_path}")
-            print(f"  JSON_UNIFIED_PATH: {JSON_UNIFIED_PATH}")
-            print(f"  UNITS_MODELS_FOLDER_PATH: {UNITS_MODELS_FOLDER_PATH}")
-            print(f"  BUILDINGS_MODELS_FOLDER_PATH: {BUILDINGS_MODELS_FOLDER_PATH}")
         except Exception as e:
             print(f"⚠ Ошибка при загрузке конфига: {e}")
             import traceback
@@ -1077,7 +1044,6 @@ def load_config_from_args():
 
     if output_file:
         OUTPUT_FILE_PATH = output_file
-        print(f"✓ Output файл: {OUTPUT_FILE_PATH}")
 
 
 if __name__ == "__main__":
