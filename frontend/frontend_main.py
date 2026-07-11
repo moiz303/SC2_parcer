@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import os
-import sys
 import json
 import threading
+import shutil, os, sys
+from pathlib import Path
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from dataclasses import asdict, dataclass
@@ -228,6 +228,7 @@ class FrontendApp(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.controller = FrontendController()
+        self.clear_temp()
         self.backend = BackendController()
         self.title("Replay Master")
         self.geometry("1100x720")
@@ -299,6 +300,7 @@ class FrontendApp(tk.Tk):
 
     def _on_close_app(self):
         self.save_history()
+        self.clear_temp()
         self.destroy()
 
     def build_screens(self) -> None:
@@ -689,10 +691,8 @@ class FrontendApp(tk.Tk):
                                                                                                     sticky="ew",
                                                                                                     pady=(8, 16))
 
-        # Сохраняем размеры как атрибуты класса, чтобы использовать их при показе экрана
         self.MAX_W, self.MAX_H = 560, 280
 
-        # ВАЖНО: Используем Frame + Label, а не Canvas!
         preview_frame = tk.Frame(main, bg="#111827", bd=0, width=self.MAX_W, height=self.MAX_H)
         preview_frame.grid(row=2, column=0, pady=(0, 16), sticky="n")
         preview_frame.grid_propagate(False)
@@ -712,7 +712,7 @@ class FrontendApp(tk.Tk):
 
         RoundedButton(buttons, text="Новая обработка", command=self.on_reset,
                       bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=0, sticky="w")
-        RoundedButton(buttons, text="Готово", command=self.destroy,
+        RoundedButton(buttons, text="Готово", command=self._on_close_app,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="w", padx=(8, 0))
         return frame
 
@@ -820,7 +820,6 @@ class FrontendApp(tk.Tk):
         self.loading_label["text"] = message
 
     def on_reset(self) -> None:
-        self.controller.reset()
         self.replay_var.set(self.controller.state.replay_path)
         self.output_var.set(self.controller.state.output_path)
         self.save_full_var.set(self.controller.state.save_full_render)
@@ -829,8 +828,15 @@ class FrontendApp(tk.Tk):
         self.textures_var.set(self.controller.state.textures_path)
         self.version_var.set(self.controller.state.selected_version)
         self.duration_var.set(self.controller.state.animation_duration)
+        self.controller.reset()
 
         self.show_screen(Screen.WELCOME)
+
+    def clear_temp(self):
+        path = Path(__file__).resolve().parent.parent
+        temp_path = path / "temp"
+        if temp_path.exists():
+            shutil.rmtree(temp_path, ignore_errors=True)
 
 
 def build_frontend_controller() -> FrontendController:

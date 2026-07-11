@@ -36,10 +36,6 @@ class BackendController:
     def __init__(self, base_dir: Optional[str] = None) -> None:
         self.base_dir = Path(base_dir or Path(__file__).resolve().parent)
         self.temp_dir = self.base_dir / "temp"
-
-        if self.temp_dir.exists():
-            shutil.rmtree(self.temp_dir)
-
         self.temp_dir.mkdir(parents=True, exist_ok=True)
 
     def build_job_config(self, frontend_state: Dict[str, Any]) -> JobConfig:
