@@ -14,8 +14,7 @@ from parce_replay import parse_replay_unified
 
 STAGE_ORDER = ("parse_replay", "find_main_battle", "import_scene", "final_render")
 ProgressCallback = Callable[[str, int, str], None]
-
-_RENDER_FRAME_RE = re.compile(r"Video append frame (\d+)")
+_RENDER_FRAME_RE = re.compile(r"Video append frame\s+(\d+)")
 
 
 class _RenderProgressTracker:
@@ -41,7 +40,7 @@ class _RenderProgressTracker:
 
     def feed_line(self, line: str) -> bool:
         """Пробует распознать в строке 'Video append frame N'.
-        Возвращает True, если строка была отрендер-кадровой (для информации звонящему)."""
+        Возвращает True, если строка была отрендер-кадровой."""
         match = _RENDER_FRAME_RE.search(line)
         if not match:
             return False
@@ -67,7 +66,7 @@ class _RenderProgressTracker:
             self._last_message_at = rendered
 
         if self._progress_cb:
-            self._progress_cb("render", progress, message)
+            self._progress_cb("final_render", progress, message)
 
         return True
 

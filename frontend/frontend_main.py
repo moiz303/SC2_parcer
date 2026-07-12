@@ -724,9 +724,6 @@ class FrontendApp(tk.Tk):
 
         ttk.Label(frame, text="Генерация…", style="Title.TLabel").grid(row=0, column=0)
 
-        self.loading_label = ttk.Label(frame, text="Ожидание запуска...", style="Body.TLabel")
-        self.loading_label.grid(row=1, column=0, pady=(6, 22))
-
         stages = ttk.Frame(frame, style="Card.TFrame")
         stages.grid(row=2, column=0, sticky="ew")
         stages.columnconfigure(0, weight=1)
@@ -892,7 +889,6 @@ class FrontendApp(tk.Tk):
             entry["bar"]._draw()
             entry["percent"].config(text="0%")
             entry["message"].config(text="")
-        self.loading_label.config(text="Ожидание запуска...")
 
     def _run_backend_job(self, job_config: JobConfig) -> None:
         result = self.backend.run_job(job_config, progress_cb=self._update_loading_status)
@@ -913,7 +909,6 @@ class FrontendApp(tk.Tk):
         entry["percent"].config(text=f"{progress}%")
         if message:
             entry["message"].config(text=message)
-            self.loading_label.config(text=message)
 
         if progress >= 100:
             entry["badge"].config(bg="#22c55e", fg="#ffffff")
