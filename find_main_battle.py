@@ -6,8 +6,15 @@ from pathlib import Path
 from collections import defaultdict
 from typing import List, Tuple, Optional, Dict, Any, Union
 
-logger = logging.getLogger(__name__)
+from ui_processing import ui_progress
 
+"""LOG_FILE = Path(__file__).resolve().parent / "find_battle.log"
+logging.basicConfig(
+    filename=LOG_FILE,
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+"""
 
 def load_replay(filepath: Path) -> dict:
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -88,10 +95,12 @@ def calculate_battle_center(battle_segment: List[Dict[str, Any]]) -> Tuple[float
 def get_battle_interval(data: dict, window_seconds: float = 30.0) -> Tuple[
     Optional[int], Optional[int], Optional[Tuple[float, float]], str]:
     fps = 30
+    ui_progress("find_main_battle", 30, "Данные загружены. Приступаю к анализу боёв...")
     deaths = extract_combat_deaths(data)
     if not deaths:
         return None, None, None, "В реплее нет смертей боевых юнитов."
 
+    ui_progress("find_main_battle", 65, "Бои найдены. Поиск главного сражения...")
     deaths = clean_spatial_noise(deaths, radius=20.0)
     deaths.sort(key=lambda x: x['frame'])
 
@@ -117,6 +126,7 @@ def get_battle_interval(data: dict, window_seconds: float = 30.0) -> Tuple[
     start_frame = battle_segment[0]['frame'] - 100
     end_frame = battle_segment[-1]['frame'] + 100
 
+    ui_progress("find_main_battle", 80, "Главное сражение найдено. Поиск локации основной битвы...")
     center_x, center_y = calculate_battle_center(battle_segment)
 
     birth_frames = [d['init_frame'] for d in battle_segment if d['init_frame'] is not None]
@@ -133,7 +143,9 @@ def get_battle_interval(data: dict, window_seconds: float = 30.0) -> Tuple[
 def analyze_replay_file(filepath: Union[str, Path], window_seconds: float = 30.0) -> Dict[str, Any]:
     """Интерфейсная функция для бэкенда. Возвращает структурированный Python-словарь."""
     try:
+        logging.info(f"Поиск основной битвы...")
         path = Path(filepath)
+        ui_progress("find_main_battle", 5, "Загрузка данных для поиска основной битвы...")
         data = load_replay(path)
 
         start, end, center, desc = get_battle_interval(data, window_seconds=window_seconds)
@@ -147,6 +159,7 @@ def analyze_replay_file(filepath: Union[str, Path], window_seconds: float = 30.0
             success = False
             center_x, center_y = None, None
 
+        ui_progress("find_main_battle", 100, "ГОТОВО")
         return {
             "success": success,
             "start_frame": start,
@@ -157,7 +170,7 @@ def analyze_replay_file(filepath: Union[str, Path], window_seconds: float = 30.0
             "error": None
         }
     except Exception as e:
-        logger.error(f"Ошибка при обработке реплея {filepath}: {e}", exc_info=True)
+        logging.error(f"Ошибка при обработке реплея {filepath}: {e}", exc_info=True)
         return {
             "success": False,
             "start_frame": None,

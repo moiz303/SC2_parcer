@@ -77,6 +77,19 @@ ALL_STATE_KEYWORDS = set(
 # ==============================================================================
 # 3. ТЕХНИЧЕСКИЕ ХЕЛПЕРЫ
 # ==============================================================================
+def ui_progress(stage, progress, message=""):
+    """Микро-хелпер для передачи сообщений с backend на frontend"""
+    print(
+        "__UI__" +
+        json.dumps({
+            "stage": stage,
+            "progress": progress,
+            "message": message
+        }),
+        flush=True
+    )
+
+
 def sc2_to_blender(x, y, z): return x * COORD_SCALE, -y * COORD_SCALE, z * COORD_SCALE
 
 
@@ -932,10 +945,10 @@ def _spawn_building_segment(seg, bldg, f0, obj_index):
 def import_all():
     global SC2_FPS, JSON_UNIFIED_PATH, UNITS_MODELS_FOLDER_PATH, BUILDINGS_MODELS_FOLDER_PATH, \
         SAVE_FULL_RENDER, ANALYSIS, OUTPUT_FILE_PATH
-    print("Очистка сцены...")
+    ui_progress("import_scene", 0, "Очистка сцены...")
     clear_scene()
 
-    print("Чтение метаданных...")
+    ui_progress("import_scene", 10, "Чтение метаданных...")
     if not os.path.exists(JSON_UNIFIED_PATH):
         print(f"Ошибка: Файл {JSON_UNIFIED_PATH} не найден!")
         return
@@ -952,11 +965,11 @@ def import_all():
     units_data = replay_data.get('units', [])
     buildings_data = replay_data.get('buildings', [])
 
-    print("Настройка освещения и размещение поверхности...")
+    ui_progress("import_scene", 20, "Настройка освещения и размещение поверхности...")
     setup_scene_lighting()
     setup_ground_plane()
 
-    print("Загрузка ресурсов...")
+    ui_progress("import_scene", 35, "Загрузка ресурсов...")
     required_types = set()
     for u in units_data:
         if u.get('type'): required_types.add(normalize_type(u['type']))
@@ -969,26 +982,26 @@ def import_all():
     load_resources_from_folder(UNITS_MODELS_FOLDER_PATH, races_in_replay, required_types, is_building_folder=False)
     load_resources_from_folder(BUILDINGS_MODELS_FOLDER_PATH, races_in_replay, required_types, is_building_folder=True)
 
-    print("Предобработка...")
+    ui_progress("import_scene", 55, "Предобработка...")
     units_data, buildings_data, _ = preprocess_data(units_data, buildings_data)
 
-    print("Генерация сцены...")
+    ui_progress("import_scene", 70, "Генерация сцены...")
     import_units(units_data)
     import_buildings(buildings_data, max_frame)
 
-    print("Подготовка пролёта камеры...")
+    ui_progress("import_scene", 80, "Подготовка пролёта камеры...")
     camera, scene = None, bpy.context.scene
     if ANALYSIS and ANALYSIS.get("success"):
         camera = setup_analysis_camera(ANALYSIS)
     scene.camera = camera
 
-    print("Финализация сцены...")
+    ui_progress("import_scene", 90, "Финализация сцены...")
     final_frame = max_frame + 100
     scene.frame_start = 0
     scene.frame_end = final_frame
     scene.render.fps = BLENDER_FPS
+    ui_progress("import_scene", 100, "ГОТОВО")
 
-    print("Рендер и запись в файл...")
     render_scene(scene, OUTPUT_FILE_PATH, ANALYSIS, SAVE_FULL_RENDER)
 
 

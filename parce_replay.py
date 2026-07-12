@@ -7,14 +7,16 @@ from collections import defaultdict
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, asdict
 
+from ui_processing import ui_progress
 
-LOG_FILE = Path(__file__).resolve().parent / "temp" / "parce_replay.log"
+
+"""LOG_FILE = Path(__file__).resolve().parent / "parce_replay.log"
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
-
+"""
 
 @dataclass
 class Position:
@@ -113,6 +115,9 @@ class UnifiedReplayParser:
         self._unit_deaths: Dict[int, int] = {}
         self._unit_last_state: Dict[int, Tuple[Tuple[float, float], int]] = {}
 
+        logging.info("Парсинг реплея...")
+        ui_progress("parse_replay", 0, "Начинаю парсинг реплея...")
+
     def parse_replay(self, replay_path: str, output_path: str = None) -> Dict[str, Any]:
         """Основной метод парсинга реплея"""
 
@@ -125,21 +130,27 @@ class UnifiedReplayParser:
         logging.info(f"📊 Версия: {self.replay.release_string}")
         logging.info(f"🗺️ Карта: {self.replay.map_name}")
         logging.info(f"👥 Игроков: {len(self.replay.players)}")
-        logging.info(f"⚡ FPS: {self.replay.game_fps}")
+        ui_progress("parse_replay", 10, "Сырые данные загружены. Приступаю к предобработке...")
 
         self.players_by_id = {player.pid: player for player in self.replay.players}
         self._parse_events()
+        ui_progress("parse_replay", 30, "Предобработка завершена. Начинаю распределение позиций зданий...")
 
         self._finalize_buildings()
+        ui_progress("parse_replay", 50, "Распределение зданий завершено. Обрабатываю данные армий...")
         self._finalize_units()
+        ui_progress("parse_replay", 70, "Армии обработаны. Приступаю к центровке карты...")
 
         self._normalize_all_positions()
+        ui_progress("parse_replay", 85, "Карта отцентрована. Сборка финального результата...")
         result = self._build_result(replay_path)
+        ui_progress("parse_replay", 95,  "Результат собран. Сохранение в кэш...")
 
         if output_path:
             with open(output_path, 'w', encoding='utf-8') as f:
                 json.dump(result, f, indent=2, ensure_ascii=False)
             logging.info(f"\n💾 Сохранено в: {output_path}")
+            ui_progress("parse_replay", 100, "ГОТОВО")
         return result
 
     def _parse_events(self):

@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import json
-import os
-import shutil
+import re
+import os, sys, shutil
+import contextlib
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -10,6 +11,65 @@ from typing import Any, Callable, Dict, Optional
 
 from find_main_battle import analyze_replay_file
 from parce_replay import parse_replay_unified
+
+STAGE_ORDER = ("parse_replay", "find_main_battle", "import_scene", "final_render")
+ProgressCallback = Callable[[str, int, str], None]
+
+_RENDER_FRAME_RE = re.compile(r"Video append frame (\d+)")
+
+
+class _RenderProgressTracker:
+    """Честный прогресс рендера по номерам кадров из собственного лога Blender."""
+
+    MESSAGE_POOL = (
+        "Совет: чем длиннее ролик, тем дольше рендерится анимация — начните с 30 секунд, чтобы быстрее увидеть результат.",
+        "Blender честно просчитывает каждый кадр отдельно, поэтому финальное видео «весит» по времени куда больше, чем препроцессинг.",
+        "Пока идёт рендер — самое время заварить чай. Мы обязательно покажем превью, как только всё будет готово.",
+        "После завершения рендера ролик можно будет сразу посмотреть прямо в приложении, без сторонних плееров.",
+        "Чем масштабнее было сражение в реплее, тем больше юнитов и зданий нужно анимировать — отсюда и разница во времени.",
+        "Готовое видео сохраняется в указанную вами папку — точный путь появится на следующем экране.",
+    )
+    MESSAGE_EVERY_N_FRAMES = 15
+
+    def __init__(self, total_frames: Optional[int], progress_cb: Optional[ProgressCallback]):
+        self._total_frames = total_frames if total_frames and total_frames > 0 else None
+        self._progress_cb = progress_cb
+        self._first_frame: Optional[int] = None
+        self._last_message_at: Optional[int] = None
+        self._message_idx = 0
+        self._warned_no_total = False
+
+    def feed_line(self, line: str) -> bool:
+        """Пробует распознать в строке 'Video append frame N'.
+        Возвращает True, если строка была отрендер-кадровой (для информации звонящему)."""
+        match = _RENDER_FRAME_RE.search(line)
+        if not match:
+            return False
+
+        frame = int(match.group(1))
+        if self._first_frame is None:
+            self._first_frame = frame
+
+        rendered = frame - self._first_frame
+
+        if self._total_frames:
+            progress = int(min(100, max(0, (rendered / self._total_frames) * 100)))
+        else:
+            if not self._warned_no_total:
+                print("[WARN] Нет analysis.duration_frames в render_payload — честный % рендера недоступен")
+                self._warned_no_total = True
+            progress = 0
+
+        message = ""
+        if self._last_message_at is None or rendered - self._last_message_at >= self.MESSAGE_EVERY_N_FRAMES:
+            message = self.MESSAGE_POOL[self._message_idx % len(self.MESSAGE_POOL)]
+            self._message_idx += 1
+            self._last_message_at = rendered
+
+        if self._progress_cb:
+            self._progress_cb("render", progress, message)
+
+        return True
 
 
 @dataclass
@@ -32,6 +92,42 @@ class JobResult:
     metadata: Optional[Dict[str, Any]] = None
 
 
+class _StdoutUiTap:
+    """Перехватывает print()-вызовы, которые происходят ВНУТРИ текущего процесса
+    и разбирает из них __UI__-строки в реальном времени"""
+
+    def __init__(self, real_stdout, progress_cb: Optional[ProgressCallback]):
+        self._real_stdout = real_stdout
+        self._progress_cb = progress_cb
+        self._buffer = ""
+
+    def write(self, chunk: str) -> int:
+        self._buffer += chunk
+        while "\n" in self._buffer:
+            line, self._buffer = self._buffer.split("\n", 1)
+            self._consume_line(line)
+        return len(chunk)
+
+    def flush(self) -> None:
+        # добираем "хвост" без \n на конце (на случай print(..., end=""))
+        if self._buffer:
+            self._consume_line(self._buffer)
+            self._buffer = ""
+        self._real_stdout.flush()
+
+    def _consume_line(self, line: str) -> None:
+        line = line.rstrip("\r")
+        if not line:
+            return
+        if line.startswith("__UI__"):
+            _handle_ui_line(line, self._progress_cb)
+        else:
+            self._real_stdout.write(line + "\n")
+
+    def isatty(self) -> bool:
+        return False
+
+
 class BackendController:
     def __init__(self, base_dir: Optional[str] = None) -> None:
         self.base_dir = Path(base_dir or Path(__file__).resolve().parent)
@@ -50,7 +146,7 @@ class BackendController:
             selected_version=frontend_state.get("selected_version", "StarCraft II"),
         )
 
-    def run_job(self, job_config: JobConfig, progress_cb: Optional[Callable[[int, str], None]] = None) -> JobResult:
+    def run_job(self, job_config: JobConfig, progress_cb: Optional[ProgressCallback] = None) -> JobResult:
         if not job_config.replay_path:
             return JobResult(success=False, message="Путь к реплею не указан")
 
@@ -61,23 +157,26 @@ class BackendController:
         output_file = self.resolve_output_video_path(job_config)
         output_file.parent.mkdir(parents=True, exist_ok=True)
 
-        self._emit(progress_cb, 10, "Парсим реплей…")
-        temp_unified_path = self.temp_dir / f"unified_{replay_path.stem}.json"
-        parse_replay_unified(str(replay_path), str(temp_unified_path))
+        stdout_tap = _StdoutUiTap(sys.stdout, progress_cb)
+        with contextlib.redirect_stdout(stdout_tap):
+            temp_unified_path = self.temp_dir / f"unified_{replay_path.stem}.json"
+            parse_replay_unified(str(replay_path), str(temp_unified_path))
 
-        self._emit(progress_cb, 25, "Ищем основной бой…")
-        analysis = analyze_replay_file(str(temp_unified_path), window_seconds=min(job_config.animation_duration, 30))
+            analysis = analyze_replay_file(
+                str(temp_unified_path),
+                window_seconds=min(job_config.animation_duration, 30),
+            )
+        stdout_tap.flush()
+
         if not analysis.get("success", False):
             return JobResult(success=False, message=analysis.get("error") or "Не удалось определить основной бой")
 
-        self._emit(progress_cb, 40, "Готовим параметры для Blender…")
+        # ---- Стадии 3-4 (prepare_scene, render) репортит сам Blender через stdout (__UI__ строки) ----
         render_payload = self.prepare_render_payload(job_config, analysis, temp_unified_path)
         render_payload_path = self.write_render_payload(render_payload)
         video_path = self._run_blender_render(job_config, render_payload_path, output_file, render_payload, progress_cb)
         if not video_path:
             return JobResult(success=False, message="Blender не создал итоговый видеофайл")
-
-        self._emit(progress_cb, 100, "Готово")
         return JobResult(
             success=True,
             video_path=str(video_path),
@@ -133,21 +232,17 @@ class BackendController:
             json.dump(render_payload, handle, ensure_ascii=False, indent=2)
         return payload_path
 
-    def _run_blender_render(self, job_config: JobConfig, payload_path: Path, output_file: Path, render_payload: Dict[str, Any], progress_cb: Optional[Callable[[int, str], None]] = None) -> Optional[Path]:
+    def _run_blender_render(self, job_config: JobConfig, payload_path: Path, output_file: Path,
+                            render_payload: Dict[str, Any], progress_cb: Optional[ProgressCallback] = None) -> Optional[Path]:
         blender_script = self.base_dir / "import_to_blender.py"
         if not blender_script.exists():
             return None
 
         output_file.parent.mkdir(parents=True, exist_ok=True)
-
         blender_executable = find_blender_executable()
         if not blender_executable:
             return None
 
-        self._emit(progress_cb, 70, "Запускаем рендер…")
-
-        # Передаём путь к render_payload.json и выходной файл как аргументы
-        # Синтаксис: blender --background --python script.py -- payload.json output.mp4
         cmd = [
             blender_executable,
             "--background",
@@ -157,11 +252,9 @@ class BackendController:
             str(payload_path),
             str(output_file),
         ]
-        return run_blender_render(cmd, output_file)
 
-    def _emit(self, progress_cb: Optional[Callable[[int, str], None]], progress: int, message: str) -> None:
-        if progress_cb:
-            progress_cb(progress, message)
+        total_frames = (render_payload.get("analysis") or {}).get("duration_frames")
+        return run_blender_render(cmd, output_file, progress_cb, total_frames=total_frames)
 
 
 def find_blender_executable() -> Optional[str]:
@@ -175,8 +268,6 @@ def find_blender_executable() -> Optional[str]:
     candidates.extend([
         r"C:\Program Files\Blender Foundation\Blender 5.0\blender.exe",
         r"C:\Program Files\Blender Foundation\Blender 4.4\blender.exe",
-        r"C:\Program Files\Blender Foundation\Blender 4.3\blender.exe",
-        r"C:\Program Files\Blender Foundation\Blender 4.2\blender.exe",
         "blender",
         "blender.exe",
     ])
@@ -192,44 +283,78 @@ def find_blender_executable() -> Optional[str]:
     return None
 
 
-def run_blender_render(command: list[str], expected_output_path: Optional[Path] = None) -> Optional[Path]:
-    """
-    Запускает Blender с указанной командой.
-    
-    Args:
-        command: Список аргументов для subprocess.run
-        expected_output_path: Ожидаемый путь к output файлу
-    
-    Returns:
-        Path к созданному видеофайлу или None при ошибке
-    """
+def run_blender_render(command: list[str], expected_output_path: Optional[Path] = None,
+                       progress_cb: Optional[ProgressCallback] = None, total_frames: Optional[int] = None) -> Optional[Path]:
     try:
-        print(f"▶ Запуск Blender: {' '.join(command)}")
-        completed = subprocess.run(command, capture_output=True, text=True, timeout=900, check=False)
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+        )
     except FileNotFoundError:
         print("✗ Blender не найден в системе")
         return None
+
+    frame_tracker = _RenderProgressTracker(total_frames, progress_cb)
+
+    assert process.stdout is not None
+    for raw_line in process.stdout:
+        line = raw_line.rstrip("\n")
+        if not line:
+            continue
+
+        if line.startswith("__UI__"):
+            _handle_ui_line(line, progress_cb)
+            continue
+
+        frame_tracker.feed_line(line)
+        print(line)
+
+    try:
+        returncode = process.wait(timeout=900)
     except subprocess.TimeoutExpired:
+        process.kill()
         print("✗ Timeout при рендере (900 секунд)")
         return None
 
-    # Логируем вывод Blender для отладки
-    if completed.stdout:
-        print(f"[Blender stdout]\n{completed.stdout[:1000]}")  # Первые 1000 символов
-    if completed.stderr:
-        print(f"[Blender stderr]\n{completed.stderr}")
-
-    if completed.returncode != 0:
-        print(f"✗ Blender завершился с ошибкой (код {completed.returncode})")
-        if completed.stderr:
-            print(f"Детали ошибки: {completed.stderr}")
+    if returncode != 0:
+        print(f"✗ Blender завершился с кодом {returncode}")
         return None
 
-    # Проверяем что output файл был создан
     output_file = expected_output_path
     if output_file and output_file.exists():
-        print(f"✓ Видеофайл создан: {output_file}")
         return output_file
+
+    print(f"✗ Output файл не найден: {output_file}")
+    return None
+
+
+def _handle_ui_line(line: str, progress_cb: Optional[ProgressCallback]) -> None:
+    """Парсит одну строку вида __UI__{...} и вызывает progress_cb, если она валидна."""
+    payload = line[len("__UI__"):]
+    try:
+        event = json.loads(payload)
+    except json.JSONDecodeError:
+        print(f"[WARN] Не удалось разобрать __UI__ сообщение: {line}")
+        return
+
+    stage = event.get("stage")
+    progress = event.get("progress")
+    message = event.get("message", "")
+
+    if stage is None or progress is None:
+        print(f"[WARN] Неполное __UI__ сообщение: {event}")
+        return
+
+    try:
+        progress = int(progress)
+    except (TypeError, ValueError):
+        progress = 0
+    progress = max(0, min(100, progress))
+
+    if progress_cb:
+        progress_cb(stage, progress, message)
     else:
-        print(f"✗ Output файл не найден: {output_file}")
-        return None
+        print(f"[UI] {stage}: {progress}% — {message}")

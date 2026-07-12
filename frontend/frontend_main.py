@@ -59,14 +59,15 @@ def find_resource_folders(root_dir: str, selected_version: str | None = None) ->
                 full_path = os.path.abspath(os.path.join(dirpath, dirname))
                 path_lower = full_path.lower()
 
-                if not result["textures"] and any(token in path_lower for token in ("texture", "textures", "tex", "material", "materials")):
+                if not result["textures"] and any(
+                        token in path_lower for token in ("texture", "textures", "tex", "material", "materials")):
                     result["textures"] = full_path
                 elif not result["units"] and ("unit" in path_lower or "units" in path_lower) and (
-                    "model" in path_lower or "models" in path_lower
+                        "model" in path_lower or "models" in path_lower
                 ):
                     result["units"] = full_path
                 elif not result["buildings"] and ("building" in path_lower or "buildings" in path_lower) and (
-                    "model" in path_lower or "models" in path_lower
+                        "model" in path_lower or "models" in path_lower
                 ):
                     result["buildings"] = full_path
 
@@ -129,6 +130,58 @@ class RoundedButton(tk.Canvas):
     def _on_click(self, event):
         if self.command:
             self.command()
+
+
+class SmoothProgressBar(tk.Canvas):
+    """Прогресс-бар с плавной (анимированной) анимацией заполнения и подписью не хранит —
+    просто красиво и без рывков доезжает до целевого значения, даже если backend
+    присылает редкие/скачкообразные обновления."""
+
+    def __init__(self, parent, width=460, height=10, radius=5,
+                 track_color="#111827", fill_color="#2563eb", parent_bg="#0f172a", **kwargs):
+        super().__init__(parent, width=width, height=height, bg=parent_bg,
+                         highlightthickness=0, **kwargs)
+        self.width = width
+        self.height = height
+        self.radius = radius
+        self.track_color = track_color
+        self.fill_color = fill_color
+        self.value = 0.0
+        self.target = 0.0
+        self._anim_job = None
+        self._draw()
+
+    def _round_rect(self, x0, y0, x1, y1, radius, **kw):
+        x1 = max(x1, x0 + 0.01)
+        points = [
+            x0 + radius, y0, x1 - radius, y0, x1, y0, x1, y0 + radius,
+            x1, y1 - radius, x1, y1, x1 - radius, y1, x0 + radius, y1,
+            x0, y1, x0, y1 - radius, x0, y0 + radius, x0, y0,
+        ]
+        return self.create_polygon(points, smooth=True, **kw)
+
+    def _draw(self):
+        self.delete("all")
+        self._round_rect(0, 0, self.width, self.height, self.radius, fill=self.track_color, outline="")
+        if self.value > 0.3:
+            fill_w = max(self.height, self.width * (self.value / 100))
+            self._round_rect(0, 0, fill_w, self.height, self.radius, fill=self.fill_color, outline="")
+
+    def set_target(self, value: float) -> None:
+        self.target = max(0.0, min(100.0, value))
+        if self._anim_job is None:
+            self._tick()
+
+    def _tick(self) -> None:
+        diff = self.target - self.value
+        if abs(diff) < 0.2:
+            self.value = self.target
+            self._draw()
+            self._anim_job = None
+            return
+        self.value += diff * 0.18
+        self._draw()
+        self._anim_job = self.after(16, self._tick)
 
 
 @dataclass
@@ -316,8 +369,13 @@ class FrontendApp(tk.Tk):
         self.screens[screen].grid(row=0, column=0, sticky="nsew")
         self.status_var.set(self.controller.status_label())
         self.version_var.set(self.controller.state.selected_version)
-        if (screen == Screen.MODELS) and not os.path.exists(self._get_config_path()):
-            self.auto_scan_resources(self.project_root)
+        if screen == Screen.MODELS:
+            if not os.path.exists(self._get_config_path()):
+                self.auto_scan_resources(self.project_root)
+            else:
+                with open(self._get_config_path(), "r") as f:
+                    if not json.load(f)['units_path']:
+                        self.auto_scan_resources(self.project_root)
         if screen == Screen.WELCOME:
             self._update_welcome_layout()
         if screen == Screen.DONE:
@@ -338,7 +396,7 @@ class FrontendApp(tk.Tk):
 
         if output_path.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')):
             self._setup_mp4_player(self.done_label, output_path, self.MAX_W, self.MAX_H)
-    
+
     def auto_scan_resources(self, base_dir: str) -> None:
         """Рекурсивно пытается найти папки с моделями и текстурами без ручного выбора."""
         if not base_dir or not os.path.exists(base_dir):
@@ -464,7 +522,6 @@ class FrontendApp(tk.Tk):
                       font=("Segoe UI", 11, "bold")).grid(row=row, column=0, sticky="w", pady=4)
         return sidebar
 
-
     def _setup_mp4_player(self, label: tk.Label, video_path: str, target_width: int, target_height: int,
                           fps: int = 24) -> None:
         """
@@ -498,7 +555,6 @@ class FrontendApp(tk.Tk):
 
             pil_image = Image.fromarray(frame_rgb)
 
-            # Пропорциональный ресайз (contain)
             img_w, img_h = pil_image.size
             ratio_w = target_width / img_w
             ratio_h = target_height / img_h
@@ -530,7 +586,6 @@ class FrontendApp(tk.Tk):
 
         update_frame()
 
-
     def make_welcome_screen(self) -> ttk.Frame:
         screen_frame = ttk.Frame(self.content, style="Card.TFrame", padding=30)
         screen_frame.columnconfigure(0, weight=1)
@@ -539,7 +594,7 @@ class FrontendApp(tk.Tk):
         inner = ttk.Frame(screen_frame)
         inner.grid(row=0, column=0, sticky="nsew")
         inner.columnconfigure(0, weight=1)
-        inner.rowconfigure(2, weight=1)  # Даем строке с превью приоритет на расширение
+        inner.rowconfigure(2, weight=1)
 
         welcome_title = tk.Label(inner, textvariable=self.welcome_title_var, bg="#0f172a", fg="#f8fafc",
                                  font=("Segoe UI", 27, "bold"), justify="center")
@@ -549,13 +604,11 @@ class FrontendApp(tk.Tk):
                                      font=("Segoe UI", 13), justify="center", wraplength=680)
         self.welcome_desc.grid(row=1, column=0, pady=(0, 20))
 
-        # Контейнер для превью
         preview_frame = tk.Frame(inner, bg="#0f172a", bd=0)
         preview_frame.grid(row=2, column=0, pady=(8, 20), sticky="nsew")
         preview_frame.columnconfigure(0, weight=1)
         preview_frame.rowconfigure(0, weight=1)
 
-        # Жестко говорим фрейму: не раздувайся больше, чем тебе положено!
         preview_frame.grid_propagate(False)
 
         self.preview_label = tk.Label(preview_frame, bg="#0f172a", bd=0, highlightthickness=0)
@@ -633,8 +686,8 @@ class FrontendApp(tk.Tk):
         ttk.Label(main, text="Модели, текстуры и игровой движок", style="Title.TLabel", justify="center").grid(row=0,
                                                                                                                column=0,
                                                                                                                sticky="ew",
-                                                                                                               pady=(
-                                                                                                               0, 18))
+                                                                                                               pady=(0,
+                                                                                                                     18))
 
         self.units_var = tk.StringVar(value=self.controller.state.units_path)
         self.buildings_var = tk.StringVar(value=self.controller.state.buildings_path)
@@ -668,12 +721,49 @@ class FrontendApp(tk.Tk):
     def make_loading_screen(self) -> ttk.Frame:
         frame = ttk.Frame(self.content, style="Card.TFrame", padding=30)
         frame.columnconfigure(0, weight=1)
-        frame.rowconfigure(2, weight=1)
-        ttk.Label(frame, text="Генерация…", style="Title.TLabel").grid(row=0, column=0, sticky="n")
-        self.loading_label = ttk.Label(frame, text="Подготавливаем ассеты…", style="Body.TLabel")
-        self.loading_label.grid(row=1, column=0, pady=(8, 16))
-        self.progress = ttk.Progressbar(frame, mode="determinate", length=320)
-        self.progress.grid(row=2, column=0, sticky="n")
+
+        ttk.Label(frame, text="Генерация…", style="Title.TLabel").grid(row=0, column=0)
+
+        self.loading_label = ttk.Label(frame, text="Ожидание запуска...", style="Body.TLabel")
+        self.loading_label.grid(row=1, column=0, pady=(6, 22))
+
+        stages = ttk.Frame(frame, style="Card.TFrame")
+        stages.grid(row=2, column=0, sticky="ew")
+        stages.columnconfigure(0, weight=1)
+
+        self.loading_stages = {}
+
+        def create_stage(row, key, number, title, color):
+            stage_row = ttk.Frame(stages, style="Card.TFrame")
+            stage_row.grid(row=row, column=0, sticky="ew", pady=(0, 5))
+            stage_row.columnconfigure(1, weight=1)
+
+            badge = tk.Label(stage_row, text=str(number), width=2, bg="#1f2937", fg="#7c879c",
+                             font=("Segoe UI", 10, "bold"))
+            badge.grid(row=0, column=0, padx=(0, 8))
+            ttk.Label(stage_row, text=title, style="Muted.TLabel").grid(row=0, column=1, sticky="w")
+
+            percent = ttk.Label(stage_row, text="0%", style="Muted.TLabel")
+            percent.grid(row=0, column=2, sticky="e")
+
+            message = ttk.Label(stages, text="", style="Body.TLabel")
+            message.grid(row=row + 1, column=0, sticky="w", pady=(0, 2))
+
+            bar = SmoothProgressBar(stages, width=460, height=10, fill_color=color, parent_bg="#0f172a")
+            bar.grid(row=row + 2, column=0, sticky="ew", pady=(0, 18))
+
+            self.loading_stages[key] = {
+                "badge": badge,
+                "percent": percent,
+                "message": message,
+                "bar": bar
+            }
+
+        create_stage(0, "parse_replay", 1, "Парсинг реплея", "#3b82f6")
+        create_stage(3, "find_main_battle", 2, "Поиск главного сражения", "#3b82f6")
+        create_stage(6, "import_scene", 3, "Подготовка сцены Blender", "#3b82f6")
+        create_stage(9, "final_render", 4, "Рендер анимации", "#3b82f6")
+
         return frame
 
     def make_done_screen(self) -> ttk.Frame:
@@ -777,13 +867,9 @@ class FrontendApp(tk.Tk):
             return
         self.save_history()
         self.controller.start_generation()
+        self._reset_loading_bars()
         self.show_screen(Screen.LOADING)
-        self.run_loading_sequence()
-
-    def run_loading_sequence(self) -> None:
-        self.progress["value"] = 0
-        self.loading_label["text"] = "Подготавливаем ассеты…"
-        self.after(150, self._start_backend_job)
+        self._start_backend_job()
 
     def _start_backend_job(self) -> None:
         job_config = JobConfig(
@@ -796,12 +882,41 @@ class FrontendApp(tk.Tk):
             save_full_render=self.controller.state.save_full_render,
             selected_version=self.controller.state.selected_version,
         )
-        self._update_loading_status(10, "Подготавливаем ассеты…")
         threading.Thread(target=self._run_backend_job, args=(job_config,), daemon=True).start()
+
+    def _reset_loading_bars(self) -> None:
+        """Сбрасывает все прогресс-бары перед стартом нового job'а."""
+        for entry in self.loading_stages.values():
+            entry["bar"].value = 0.0
+            entry["bar"].target = 0.0
+            entry["bar"]._draw()
+            entry["percent"].config(text="0%")
+            entry["message"].config(text="")
+        self.loading_label.config(text="Ожидание запуска...")
 
     def _run_backend_job(self, job_config: JobConfig) -> None:
         result = self.backend.run_job(job_config, progress_cb=self._update_loading_status)
         self.after(0, self._finish_backend_job, result)
+
+    def _update_loading_status(self, stage: str, progress: int, message: str) -> None:
+        """Это callback, backend зовёт его из ФОНОВОГО потока — сюда напрямую
+        трогать виджеты Tkinter нельзя, поэтому просто маршалим вызов в главный поток."""
+        self.after(0, self._apply_loading_status, stage, progress, message)
+
+    def _apply_loading_status(self, stage: str, progress: int, message: str) -> None:
+        """А вот это уже безопасно выполняется в главном потоке."""
+        entry = self.loading_stages.get(stage)
+        if entry is None:
+            return
+
+        entry["bar"].set_target(progress)
+        entry["percent"].config(text=f"{progress}%")
+        if message:
+            entry["message"].config(text=message)
+            self.loading_label.config(text=message)
+
+        if progress >= 100:
+            entry["badge"].config(bg="#22c55e", fg="#ffffff")
 
     def _finish_backend_job(self, result) -> None:
         if result.success and result.video_path:
@@ -814,10 +929,6 @@ class FrontendApp(tk.Tk):
             self.done_path_var.set(self.controller.state.output_path or "C:/Users/User/Videos/SC2Renders/output.mp4")
             self.show_screen(Screen.DONE)
             messagebox.showerror("Ошибка генерации", result.message or "Не удалось создать видео")
-
-    def _update_loading_status(self, progress_value: int, message: str) -> None:
-        self.progress["value"] = progress_value
-        self.loading_label["text"] = message
 
     def on_reset(self) -> None:
         self.replay_var.set(self.controller.state.replay_path)
