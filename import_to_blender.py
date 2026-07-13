@@ -10,7 +10,7 @@ import sys
 # 1. ВХОДНЫЕ ПЕРЕМЕННЫЕ И ГЛОБАЛЬНЫЕ НАСТРОЙКИ
 # ==============================================================================
 # Значения по умолчанию (хардкод переменные вроде fps самого реплея)
-JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\temp\unified_Kairos Junction LE.json"
+JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\temp\unified_Blueshift LE.json"
 JSON_SPEEDS_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\speeds.json"
 UNITS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\unit_models"
 BUILDINGS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\building_models"
@@ -180,49 +180,72 @@ def get_race_material(unit_type, race='neutral'):
     mat = bpy.data.materials.new(name=f"Mat_{unit_type}")
     mat.use_nodes = True
     nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
 
-    for node in nodes:
-        nodes.remove(node)
+    nodes.clear()
 
     output_node = nodes.new(type='ShaderNodeOutputMaterial')
     bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
     tex_node = nodes.new(type='ShaderNodeTexImage')
 
     tex_path = None
+
     for suffix in ['_diff.dds', '_diffuse.dds', '_diff.png', '_diffuse.png']:
         path = os.path.join(TEXTURES_FOLDER_PATH, f"{unit_type}{suffix}")
         if os.path.exists(path):
             tex_path = path
             break
 
-    links = mat.node_tree.links
-
     if (tex_path is None) and (
-            unit_type == 'destructiblerockex1diagonalhugeblur'):  # Исключение - камни, у них другoe названиe
-        tex_path = os.path.join(TEXTURES_FOLDER_PATH, 'purifier_destructible_rock_huge_diff.dds')
+            unit_type == 'destructiblerockex1diagonalhugeblur'):
+        tex_path = os.path.join(
+            TEXTURES_FOLDER_PATH,
+            'purifier_destructible_rock_huge_diff.dds'
+        )
 
-    # Если текстура найдена, загружаем и подключаем
+    # ---------------- Загрузка текстуры ----------------
+
     if tex_path:
         try:
             img = bpy.data.images.load(tex_path, check_existing=True)
             tex_node.image = img
-            links.new(tex_node.outputs['Color'], bsdf_node.inputs['Base Color'])
+
+            if unit_type == "rocks_newfolsom":
+                coord_node = nodes.new(type="ShaderNodeTexCoord")
+                links.new(coord_node.outputs["UV"], tex_node.inputs["Vector"])
+
+            links.new(tex_node.outputs["Color"],
+                      bsdf_node.inputs["Base Color"])
+
         except Exception as e:
             print(f"⚠ Ошибка загрузки текстуры {tex_path}: {e}")
 
-    # Если текстуры нет или она не загрузилась, используем цвет расы (fallback)
+    # ---------------- Fallback ----------------
+
     if not tex_node.image:
         race_clean = str(race).strip().lower()
-        race_map = {'терраны': 'terran', 'terran': 'terran',
-                    'зерги': 'zerg', 'zerg': 'zerg',
-                    'протоссы': 'protoss', 'protoss': 'protoss'}
+
+        race_map = {
+            'терраны': 'terran',
+            'terran': 'terran',
+            'зерги': 'zerg',
+            'zerg': 'zerg',
+            'протоссы': 'protoss',
+            'protoss': 'protoss'
+        }
+
         normalized_race = race_map.get(race_clean, 'neutral')
-        colors = {'terran': (0.2, 0.5, 0.8, 1.0), 'zerg': (0.6, 0.2, 0.2, 1.0),
-                  'protoss': (0.8, 0.7, 0.2, 1.0), 'neutral': (0.5, 0.5, 0.5, 1.0)}
+
+        colors = {
+            'terran': (0.2, 0.5, 0.8, 1.0),
+            'zerg': (0.6, 0.2, 0.2, 1.0),
+            'protoss': (0.8, 0.7, 0.2, 1.0),
+            'neutral': (0.5, 0.5, 0.5, 1.0)
+        }
+
         bsdf_node.inputs["Base Color"].default_value = colors[normalized_race]
 
-    # Подключаем BSDF к выходу
-    links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
+    links.new(bsdf_node.outputs["BSDF"], output_node.inputs["Surface"])
 
     RACE_MATERIALS[unit_type] = mat
     return mat
@@ -410,23 +433,33 @@ def setup_scene_lighting():
 
 
 def setup_ground_plane():
+    global TEXTURES_FOLDER_PATH
+
     mesh = bpy.data.meshes.new("Ground_Mesh")
     verts = [(-250, -250, 0), (250, -250, 0), (250, 250, 0), (-250, 250, 0)]
     faces = [(0, 1, 2, 3)]
+
     mesh.from_pydata(verts, [], faces)
     mesh.update()
+
+    uv_layer = mesh.uv_layers.new(name="UVMap")
+
+    # Повторяем текстуру 10×10 раз
+    uvs = [
+        (0.0, 0.0),
+        (10.0, 0.0),
+        (10.0, 10.0),
+        (0.0, 10.0),
+    ]
+
+    for loop, uv in zip(mesh.loops, uvs):
+        uv_layer.data[loop.index].uv = uv
 
     ground_obj = bpy.data.objects.new("Ground_Plane", mesh)
     bpy.context.collection.objects.link(ground_obj)
     ground_obj.location.z = 0
 
-    mat = bpy.data.materials.new(name="Mat_Ground")
-    mat.use_nodes = True
-    bsdf = mat.node_tree.nodes.get("Principled BSDF") or mat.node_tree.nodes.get("Principled")
-    if bsdf:
-        bsdf.inputs["Base Color"].default_value = (0.15, 0.15, 0.15, 1.0)
-        bsdf.inputs["Roughness"].default_value = 0.85
-
+    mat = get_race_material("rocks_newfolsom")
     ground_obj.data.materials.append(mat)
 
 

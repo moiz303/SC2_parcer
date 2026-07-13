@@ -284,7 +284,7 @@ class FrontendApp(tk.Tk):
         self.clear_temp()
         self.backend = BackendController()
         self.title("Replay Master")
-        self.geometry("1100x720")
+        self.geometry("1100x820")
         self.resizable(False, False)
         self.configure(bg="#07111f")
 
@@ -295,15 +295,29 @@ class FrontendApp(tk.Tk):
 
         self.style = ttk.Style(self)
         self.style.theme_use("clam")
-        self.style.configure("TFrame", background="#07111f")
+        self.style.configure("TFrame", background="#0f172a")
         self.style.configure("Card.TFrame", background="#0f172a")
-        self.style.configure("Title.TLabel", background="#07111f", foreground="#f8fafc", font=("Segoe UI", 22, "bold"))
-        self.style.configure("Body.TLabel", background="#07111f", foreground="#cbd5e1", font=("Segoe UI", 12))
-        self.style.configure("Muted.TLabel", background="#07111f", foreground="#7c879c", font=("Segoe UI", 11))
+
+        self.style.configure("Title.TLabel", background="#0f172a", foreground="#f8fafc", font=("Segoe UI", 22, "bold"))
+        self.style.configure("Body.TLabel", background="#0f172a", foreground="#cbd5e1", font=("Segoe UI", 12))
+        self.style.configure("Muted.TLabel", background="#141c2f", foreground="#94a3b8", font=("Segoe UI", 11))
+
         self.style.configure("Primary.TButton", background="#2563eb", foreground="#ffffff")
         self.style.map("Primary.TButton", background=[("active", "#1d4ed8")])
         self.style.configure("Secondary.TButton", background="#1f2937", foreground="#f3f4f6")
         self.style.configure("Outline.TButton", background="#111827", foreground="#e5e7eb")
+
+        self.style.configure("TEntry", fieldbackground="#111827", background="#111827", foreground="#e5e7eb",
+            insertcolor="#e5e7eb", bordercolor="#2a3350", lightcolor="#0f172a", darkcolor="#0f172a", padding=6)
+        self.style.map("TEntry", bordercolor=[("focus", "#2563eb")], fieldbackground=[("disabled", "#0b1220")])
+
+        self.style.configure("TCombobox", fieldbackground="#111827", background="#111827", foreground="#e5e7eb",
+                             arrowcolor="#94a3b8", bordercolor="#2a3350")
+        self.style.map("TCombobox", fieldbackground=[("readonly", "#111827")], foreground=[("readonly", "#e5e7eb")])
+
+        self.style.configure("TCheckbutton", background="#0f172a", foreground="#cbd5e1")
+        self.style.map("TCheckbutton", background=[("active", "#0f172a")],
+                       indicatorcolor=[("selected", "#2563eb"), ("!selected", "#1f2937")])
 
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
@@ -396,6 +410,31 @@ class FrontendApp(tk.Tk):
 
         if output_path.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')):
             self._setup_mp4_player(self.done_label, output_path, self.MAX_W, self.MAX_H)
+
+    def make_path_row(self, parent: ttk.Frame, row: int, label_text: str, var: tk.StringVar,
+                      is_file: bool):
+        card = tk.Frame(parent, bg="#141c2f", highlightbackground="#22314f", highlightcolor="#2563eb",
+                        highlightthickness=1, bd=0)
+        card.grid(row=row, column=0, sticky="ew", pady=(0, 14))
+        card.columnconfigure(0, weight=1)
+
+        inner = tk.Frame(card, bg="#141c2f")
+        inner.pack(fill="x", padx=14, pady=10)
+        inner.columnconfigure(0, weight=1)
+
+        ttk.Label(inner, text=label_text, style="Muted.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 6))
+
+        row_frame = tk.Frame(inner, bg="#141c2f")
+        row_frame.grid(row=1, column=0, sticky="ew")
+        row_frame.columnconfigure(0, weight=1)
+
+        entry = ttk.Entry(row_frame, textvariable=var)
+        entry.grid(row=0, column=0, sticky="ew")
+
+        RoundedButton(row_frame, text="Обзор", command=lambda: self.browse_path(var, is_file),
+                      bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=1, padx=(10, 0))
+
+        return card
 
     def auto_scan_resources(self, base_dir: str) -> None:
         """Рекурсивно пытается найти папки с моделями и текстурами без ручного выбора."""
@@ -646,8 +685,7 @@ class FrontendApp(tk.Tk):
                                 command=self.on_save_full_toggle)
         check.grid(row=5, column=0, sticky="w", pady=(10, 20))
 
-        duration_label = tk.Label(main, text="Длительность анимации (сек):",
-                                  bg="#0f172a", fg="#cbd5e1", font=("Segoe UI", 11))
+        duration_label = ttk.Label(main, text="Длительность анимации (сек):", style="Muted.TLabel")
         duration_label.grid(row=6, column=0, sticky="w", pady=(0, 4))
 
         self.duration_scale = tk.Scale(
@@ -658,19 +696,23 @@ class FrontendApp(tk.Tk):
             variable=self.duration_var,
             command=self.on_duration_change,
             length=320,
+            showvalue=False,
             tickinterval=15,
             bg="#0f172a",
             fg="#cbd5e1",
-            troughcolor="#1f2937",
-            activebackground="#2563eb",
-            highlightthickness=0, bd=0,
-            sliderrelief="flat",
+            troughcolor="#1e293b",
+            activebackground="#60a5fa",
+            highlightthickness=0, bd=2,
+            sliderrelief="raised",
             font=("Segoe UI", 10, "bold")
         )
         self.duration_scale.grid(row=7, column=0, sticky="w", pady=(0, 20))
 
-        RoundedButton(main, text="Далее → Модели", command=self.on_replay_next,
-                      bg="#2563eb", active_bg="#1d4ed8").grid(row=6, column=0, sticky="e")
+        buttons = ttk.Frame(main, style="Card.TFrame")
+        buttons.grid(row=8, column=0, sticky="ew")
+        buttons.columnconfigure(0, weight=1)
+        RoundedButton(buttons, text="Далее → Модели", command=self.on_replay_next,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="e")
         return frame
 
     def make_models_screen(self) -> ttk.Frame:
@@ -683,11 +725,8 @@ class FrontendApp(tk.Tk):
         main.grid(row=0, column=1, sticky="nsew")
         main.columnconfigure(0, weight=1)
 
-        ttk.Label(main, text="Модели, текстуры и игровой движок", style="Title.TLabel", justify="center").grid(row=0,
-                                                                                                               column=0,
-                                                                                                               sticky="ew",
-                                                                                                               pady=(0,
-                                                                                                                     18))
+        ttk.Label(main, text="Модели, текстуры и игровой движок", style="Title.TLabel", justify="center").grid(
+            row=0, column=0, sticky="ew", pady=(0, 18))
 
         self.units_var = tk.StringVar(value=self.controller.state.units_path)
         self.buildings_var = tk.StringVar(value=self.controller.state.buildings_path)
@@ -803,14 +842,7 @@ class FrontendApp(tk.Tk):
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="w", padx=(8, 0))
         return frame
 
-    def make_path_row(self, parent: ttk.Frame, row: int, label_text: str, variable: tk.StringVar,
-                      is_file: bool) -> None:
-        ttk.Label(parent, text=label_text, style="Muted.TLabel").grid(row=row, column=0, sticky="w", pady=(8, 4))
-        entry = ttk.Entry(parent, textvariable=variable, width=55)
-        entry.grid(row=row + 1, column=0, sticky="ew")
-        RoundedButton(parent, text="Обзор", command=lambda: self.browse_path(variable, is_file),
-                      bg="#111827", active_bg="#1f2937", fg="#e5e7eb", outline="#374151",
-                      width=90, height=32, radius=8).grid(row=row + 1, column=1, padx=(8, 0), sticky="e")
+
 
     def browse_path(self, variable: tk.StringVar, is_file: bool) -> None:
         if is_file:

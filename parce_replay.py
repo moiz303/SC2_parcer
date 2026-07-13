@@ -470,7 +470,7 @@ class UnifiedReplayParser:
         logging.info(f"   💀 Уничтожений: {stats['deaths']}")
         logging.info(f"   📊 Всего сущностей: {len(self.buildings) + len(self.units)}")
 
-def parse_replay_unified(replay_path: str, output_path: str = "unified_output.json"):
+def parse_replay_unified(replay_path: str, output_path: str = "unified.json"):
     """Унифицированная функция парсинга"""
     parser = UnifiedReplayParser()
     return parser.parse_replay(replay_path, output_path)
@@ -484,7 +484,7 @@ if __name__ == "__main__":
     else:
         replay_path = input("Введите путь до реплея:\n")
 
-    output_path = "unified_replay_output.json"
+    output_path = "unified.json"
     result = parse_replay_unified(replay_path, output_path)
 
     logging.info(f"\n✅ Готово! Создан единый JSON-файл с зданиями и юнитами")
