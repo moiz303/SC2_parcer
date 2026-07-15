@@ -29,7 +29,7 @@ ANALYSIS = {
 }
 
 COORD_SCALE = 1.0
-MODEL_FORWARD_OFFSET = math.pi / 2
+MODEL_FORWARD_OFFSET = 0
 MOVEMENT_THRESHOLD = 1.8
 ARMY_IDLE_THRESHOLD = 32
 BLENDER_FPS = 30
@@ -353,10 +353,12 @@ def set_visibility_keys(obj, hide_start_frame, show_start_frame, hide_end_frame)
         target.hide_render = True
         target.keyframe_insert("hide_viewport", frame=hide_start_frame)
         target.keyframe_insert("hide_render", frame=hide_start_frame)
+
         target.hide_viewport = False
         target.hide_render = False
         target.keyframe_insert("hide_viewport", frame=show_start_frame)
         target.keyframe_insert("hide_render", frame=show_start_frame)
+
         target.hide_viewport = True
         target.hide_render = True
         target.keyframe_insert("hide_viewport", frame=hide_end_frame)
@@ -521,7 +523,7 @@ def preprocess_data(units_data, buildings_data):
 
     for bldg in buildings_data:
         original_init_frame = bldg.get('init_frame', 0)
-        born_frame = bldg.get('born_frame', -1)
+        born_frame = bldg.get('init_frame', -1)
 
         if born_frame == 0 or original_init_frame == 0:
             bldg['is_starting'] = True
@@ -726,7 +728,7 @@ def import_units(units_data):
     cnt = 0
     for u in units_data:
         ut, rc = u['type'], u.get('owner_race', 'Neutral')
-        born = u.get('born_frame', 0)
+        born = u.get('init_frame', 0)
         died = u.get('died_frame') or 99999
         pos = u.get('positions', [])
         if not pos: continue
@@ -735,6 +737,7 @@ def import_units(units_data):
         src_data = MODEL_CACHE.get(ck, create_fallback_object(ck, rc))
         nr = duplicate_hierarchy(src_data["root"], src_data["hierarchy"], bpy.context.collection)
         nr.name = f"Unit_{ut}_{cnt}"
+        anims = ANIM_CACHE.get(ck, {})
 
         for obj in nr.children_recursive:
             if obj.animation_data: obj.animation_data_clear()
@@ -745,10 +748,22 @@ def import_units(units_data):
         pos = sorted(pos, key=lambda p: p.get('frame', 0))
         base_speed = SPEED_CACHE.get(ut, SPEED_CACHE.get(ck, 2.25))
 
+        birth_pool = get_safe_pool(anims, 'birth')
+        death_pool = get_safe_pool(anims, 'death')
+
+        birth_act = random.choice(birth_pool) if birth_pool else None
+        death_act = random.choice(death_pool) if death_pool else None
+
+        birth_len = int(birth_act.frame_range[1]) if birth_pool else 0
+        death_len = int(death_act.frame_range[1]) if death_pool else 0
+
+        birth_anim_start = max(0, born - birth_len) if birth_len > 0 else born
+        show_frame = birth_anim_start if birth_len > 0 else born
+        death_end = died + death_len if died != 99999 else died
+
         if arm:
             if not arm.animation_data: arm.animation_data_create()
             for tr in list(arm.animation_data.nla_tracks): arm.animation_data.nla_tracks.remove(tr)
-            arm.animation_data.action = None
             arm.data.pose_position = 'REST'
             bpy.context.view_layer.update()
             arm.data.pose_position = 'POSE'
@@ -757,29 +772,10 @@ def import_units(units_data):
 
             p0 = pos[0]
             x0, y0, z0 = sc2_to_blender(p0['x'], p0['y'], p0.get('z', 0))
-            anims = ANIM_CACHE.get(ck, {})
-
-            birth_pool = get_safe_pool(anims, 'birth')
-            death_pool = get_safe_pool(anims, 'death')
-            birth_len, death_len = 0, 0
-
-            if birth_pool:
-                birth_act = random.choice(birth_pool)
-                birth_len = int(birth_act.frame_range[1])
-
-            birth_anim_start = max(0, born - birth_len) if birth_len > 0 else born
-            show_frame = birth_anim_start if birth_len > 0 else born
-
-            if death_pool:
-                death_len = int(random.choice(death_pool).frame_range[1])
-
             if born == 0:
                 birth_start = 0
             else:
                 birth_start = max(0, born - birth_len)
-
-            # конец существования
-            death_end = died if died != 99999 else died
 
             force_keyframe(nr, "location", show_frame, (x0, y0, z0))
             force_keyframe(nr, "rotation_euler", show_frame, (0.0, 0.0, MODEL_FORWARD_OFFSET))
@@ -794,7 +790,6 @@ def import_units(units_data):
 
             else:
                 current_frame = birth_start
-
             prev_frame = current_frame
 
             for i in range(len(pos)):
@@ -849,10 +844,9 @@ def import_units(units_data):
                 force_keyframe(nr, "location", died, prev_pos)
                 force_keyframe(nr, "rotation_euler", died, (0, 0, prev_rot))
                 if death_pool:
-                    death = random.choice(death_pool)
-                    add_nla_strip_safe(nla_track, death, died, death_end, force_loop=False)
+                    add_nla_strip_safe(nla_track, death_act, died, death_end, force_loop=False)
 
-            set_visibility_keys(nr, max(0, show_frame - 1), show_frame, death_end)
+        set_visibility_keys(nr, max(0, show_frame - 1), show_frame, death_end)
         cnt += 1
 
 
