@@ -154,12 +154,12 @@ class UnifiedReplayParser:
         return result
 
     def _get_z_coordinate(self, unit_type_name: str) -> float:
-        """Возвращает 15.0 для летающих юнитов и зданий, 0.0 для остальных"""
+        """Возвращает 10.0 для летающих юнитов и зданий, 0.0 для остальных"""
         if not unit_type_name:
             return 0.0
 
         if unit_type_name.endswith('Flying'):
-            return 15.0
+            return 10.0
 
         flying_types = {
             # Терраны
@@ -170,7 +170,7 @@ class UnifiedReplayParser:
             'Mutalisk', 'Corruptor', 'CorruptorCocoon', 'BroodLord', 'BroodLordCocoon', 'Viper', 'Overlord', 'Overseer', 'OverlordTransport'
         }
 
-        return 15.0 if unit_type_name in flying_types else 0.0
+        return 10.0 if unit_type_name in flying_types else 0.0
 
     def _parse_events(self):
         """Парсинг всех событий реплея"""
