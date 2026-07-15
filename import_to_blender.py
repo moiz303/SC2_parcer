@@ -10,7 +10,7 @@ import sys
 # 1. ВХОДНЫЕ ПЕРЕМЕННЫЕ И ГЛОБАЛЬНЫЕ НАСТРОЙКИ
 # ==============================================================================
 # Значения по умолчанию (хардкод переменные вроде fps самого реплея)
-JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\temp\unified_Blueshift LE.json"
+JSON_UNIFIED_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\unified.json"
 JSON_SPEEDS_PATH = r"C:\Users\0\PycharmProjects\SC2_parcer\speeds.json"
 UNITS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\unit_models"
 BUILDINGS_MODELS_FOLDER_PATH = r"C:\Users\0\Documents\StarCraft II\building_models"
@@ -55,7 +55,7 @@ UNIT_STATE_KEYWORDS = {
     'birth': ['birth', 'spawn', 'hatch', 'warp', 'summon', 'enter', 'appear', 'emerge', 'morphstart'],
     'walk': ['walk', 'move', 'run', 'fly', 'crawl', 'glide', 'sprint', 'travel', 'locomote'],
     'attack': ['attack', 'shoot', 'bite', 'slash', 'cast', 'strike', 'fire', 'melee', 'ranged', 'pounce', 'lunge'],
-    'work': ['gather', 'mine', 'harvest', 'repair', 'extract', 'return', 'construct', 'work', 'carry', 'load'],
+    'work': ['gather', 'mine', 'harvest', 'repair', 'extract', 'return', 'construct', 'work', 'carry'],
     'idle': ['stand', 'idle', 'default', 'rest', 'hover', 'float', 'breathe', 'pose', 'fidget', 'alert', 'turn',
              'shift', 'stance'],
     'death': ['death', 'die', 'explode', 'morphend', 'destroy', 'demise', 'kill', 'end', 'collapse'],
@@ -382,7 +382,8 @@ def add_nla_strip_safe(nla_track, action, start_frame, end_frame, force_loop=Fal
         strip.action_frame_start, strip.action_frame_end = action.frame_range[0], action.frame_range[1]
         strip.blend_in, strip.blend_out = 0.0, 0.0
         strip.blend_type = 'REPLACE'
-        strip.extrapolation = 'HOLD'
+        strip.extrapolation = 'HOLD' if force_loop else 'NOTHING'
+
         if force_loop:
             act_len = max(1.0, action.frame_range[1] - action.frame_range[0])
             strip.repeat = max(1.0, (e_f - s_f) / act_len)
@@ -410,7 +411,6 @@ def force_keyframe(obj, prop, frame, value=None):
 # 4. СЕТАПЫ ОСВЕЩЕНИЯ, КАМЕРЫ И СЦЕНЫ
 # ==============================================================================
 def setup_scene_lighting():
-
     world = bpy.context.scene.world
     if not world:
         world = bpy.data.worlds.new("World")
@@ -602,12 +602,7 @@ def preprocess_data(units_data, buildings_data):
 
             matched_builder["matched"] = True
 
-            build_point = {
-                "frame": construction_start,
-                "x": bx,
-                "y": by,
-                "z": bldg_coords.get("z", 0.0)
-            }
+            build_point = {"frame": construction_start, "x": bx, "y": by, "z": bldg_coords.get("z", 0.0)}
 
             positions = sorted(matched_builder["positions"], key=lambda p: p["frame"])
             arrival_index = None
@@ -638,20 +633,12 @@ def preprocess_data(units_data, buildings_data):
 
             # Добавляем синтетические точки для анимации стройки
             positions.append(build_point)
-            positions.append({
-                "frame": construction_end,
-                "x": bx,
-                "y": by,
-                "z": bldg_coords.get("z", 0.0)
-            })
+            positions.append({"frame": construction_end, "x": bx, "y": by, "z": bldg_coords.get("z", 0.0)})
 
             positions.sort(key=lambda p: p["frame"])
             matched_builder["positions"] = positions
 
-            matched_builder["build_work"] = {
-                "start": construction_start,
-                "end": construction_end
-            }
+            matched_builder["build_work"] = {"start": construction_start, "end": construction_end}
 
             if is_drone:
                 matched_builder["died_frame"] = construction_start
@@ -762,38 +749,53 @@ def import_units(units_data):
             if not arm.animation_data: arm.animation_data_create()
             for tr in list(arm.animation_data.nla_tracks): arm.animation_data.nla_tracks.remove(tr)
             arm.animation_data.action = None
+            arm.data.pose_position = 'REST'
+            bpy.context.view_layer.update()
+            arm.data.pose_position = 'POSE'
             nla_track = arm.animation_data.nla_tracks.new()
             nla_track.name = f"NLA_{arm.name}"
 
             p0 = pos[0]
             x0, y0, z0 = sc2_to_blender(p0['x'], p0['y'], p0.get('z', 0))
-            force_keyframe(nr, "location", born, (x0, y0, z0))
-            force_keyframe(nr, "rotation_euler", born, (0.0, 0.0, MODEL_FORWARD_OFFSET))
-
-            prev_frame = born
-            prev_pos = (x0, y0, z0)
-            prev_rot = MODEL_FORWARD_OFFSET
             anims = ANIM_CACHE.get(ck, {})
 
-            birth_pool = get_safe_pool(anims, 'birth', 'spawn', 'warp', 'morph')
-            birth_end_frame = born
+            birth_pool = get_safe_pool(anims, 'birth')
+            death_pool = get_safe_pool(anims, 'death')
+            birth_len, death_len = 0, 0
 
             if birth_pool:
                 birth_act = random.choice(birth_pool)
-                birth_dur = int(birth_act.frame_range[1] - birth_act.frame_range[0])
-                birth_end_frame = born + birth_dur
-                add_nla_strip_safe(nla_track, birth_act, born, birth_end_frame, force_loop=False)
+                birth_len = int(birth_act.frame_range[1])
+
+            birth_anim_start = max(0, born - birth_len) if birth_len > 0 else born
+            show_frame = birth_anim_start if birth_len > 0 else born
+
+            if death_pool:
+                death_len = int(random.choice(death_pool).frame_range[1])
+
+            if born == 0:
+                birth_start = 0
             else:
-                idle_pool = get_safe_pool(anims, 'idle', 'stand', 'default')
-                if idle_pool:
-                    idle_act = random.choice(idle_pool)
-                    buffer_dur = min(60, int(idle_act.frame_range[1] - idle_act.frame_range[0]))
-                    if buffer_dur < 10: buffer_dur = 15
+                birth_start = max(0, born - birth_len)
 
-                    birth_end_frame = born + buffer_dur
-                    add_nla_strip_safe(nla_track, idle_act, born, birth_end_frame, force_loop=True)
+            # конец существования
+            death_end = died if died != 99999 else died
 
-            prev_frame = birth_end_frame
+            force_keyframe(nr, "location", show_frame, (x0, y0, z0))
+            force_keyframe(nr, "rotation_euler", show_frame, (0.0, 0.0, MODEL_FORWARD_OFFSET))
+
+            prev_pos = (x0, y0, z0)
+            prev_rot = MODEL_FORWARD_OFFSET
+            current_frame = born
+
+            if born != 0 and birth_pool:
+                add_nla_strip_safe(nla_track, birth_act, birth_start, born, force_loop=False)
+                current_frame = born
+
+            else:
+                current_frame = birth_start
+
+            prev_frame = current_frame
 
             for i in range(len(pos)):
                 p = pos[i]
@@ -808,11 +810,11 @@ def import_units(units_data):
                 force_keyframe(nr, "location", curr_frame, new_pos)
 
                 if is_moving:
-                    pool = get_safe_pool(anims, 'walk', 'move', 'run')
+                    pool = get_safe_pool(anims, 'walk')
                 elif u.get('is_army', True) and (curr_frame - prev_frame) < ARMY_IDLE_THRESHOLD:
-                    pool = get_safe_pool(anims, 'attack', 'shoot', 'cast')
+                    pool = get_safe_pool(anims, 'attack')
                 else:
-                    pool = get_safe_pool(anims, 'work', 'idle', 'stand')
+                    pool = get_safe_pool(anims, 'work')
 
                 if not pool: pool = anims.get('idle', [])
                 if pool:
@@ -843,15 +845,14 @@ def import_units(units_data):
                 prev_pos = new_pos
                 prev_frame = curr_frame
 
-            if died and died > prev_frame:
+            if died != 99999:
                 force_keyframe(nr, "location", died, prev_pos)
-                force_keyframe(nr, "rotation_euler", died, (0.0, 0.0, prev_rot))
-                death_pool = anims.get('death', []) + anims.get('die', []) + anims.get('explode', [])
+                force_keyframe(nr, "rotation_euler", died, (0, 0, prev_rot))
                 if death_pool:
-                    add_nla_strip_safe(nla_track, random.choice(death_pool), prev_frame, died, force_loop=False)
+                    death = random.choice(death_pool)
+                    add_nla_strip_safe(nla_track, death, died, death_end, force_loop=False)
 
-            show_start = max(1, born)
-            set_visibility_keys(nr, show_start - 1, show_start, died)
+            set_visibility_keys(nr, max(0, show_frame - 1), show_frame, death_end)
         cnt += 1
 
 
@@ -977,7 +978,7 @@ def _spawn_building_segment(seg, bldg, f0, obj_index):
 # ==============================================================================
 def import_all():
     global SC2_FPS, JSON_UNIFIED_PATH, UNITS_MODELS_FOLDER_PATH, BUILDINGS_MODELS_FOLDER_PATH, \
-        SAVE_FULL_RENDER, ANALYSIS, OUTPUT_FILE_PATH
+        SAVE_FULL_RENDER, ANALYSIS, OUTPUT_FILE_PATH, ANIM_CACHE
     ui_progress("import_scene", 0, "Очистка сцены...")
     clear_scene()
 

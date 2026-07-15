@@ -153,6 +153,25 @@ class UnifiedReplayParser:
             ui_progress("parse_replay", 100, "ГОТОВО")
         return result
 
+    def _get_z_coordinate(self, unit_type_name: str) -> float:
+        """Возвращает 15.0 для летающих юнитов и зданий, 0.0 для остальных"""
+        if not unit_type_name:
+            return 0.0
+
+        if unit_type_name.endswith('Flying'):
+            return 15.0
+
+        flying_types = {
+            # Терраны
+            'VikingAssault', 'Banshee', 'Raven', 'Battlecruiser', 'Medivac', 'LiberatorAG',
+            # Протоссы
+            'Observer', 'Phoenix', 'VoidRay', 'Carrier', 'Tempest', 'Oracle', 'Mothership', 'MothershipCore', 'WarpPrism', 'Interceptor',
+            # Зерги
+            'Mutalisk', 'Corruptor', 'CorruptorCocoon', 'BroodLord', 'BroodLordCocoon', 'Viper', 'Overlord', 'Overseer', 'OverlordTransport'
+        }
+
+        return 15.0 if unit_type_name in flying_types else 0.0
+
     def _parse_events(self):
         """Парсинг всех событий реплея"""
         stats = {
@@ -238,7 +257,7 @@ class UnifiedReplayParser:
                     time=event.frame / self.replay.game_fps,
                     x=float(event.x),
                     y=float(event.y),
-                    z=float(getattr(event, 'z', 0.0))
+                    z=self._get_z_coordinate(event.unit_type_name)
                 ))
 
         elif is_unit:
@@ -259,7 +278,7 @@ class UnifiedReplayParser:
                     time=event.frame / self.replay.game_fps,
                     x=float(event.x),
                     y=float(event.y),
-                    z=float(getattr(event, 'z', 0.0))
+                    z=self._get_z_coordinate(event.unit_type_name)
                 )
                 self._unit_positions[event.unit_id].append(pos)
                 self._unit_last_state[event.unit_id] = ((pos.x, pos.y), event.frame)
@@ -286,7 +305,7 @@ class UnifiedReplayParser:
                     time=event.frame / self.replay.game_fps,
                     x=float(event.x),
                     y=float(event.y),
-                    z=float(getattr(event, 'z', 0.0))
+                    z=self._get_z_coordinate(event.unit_type_name)
                 ))
 
     def _handle_positions_event(self, event, stats):
@@ -298,7 +317,13 @@ class UnifiedReplayParser:
             unit_id = unit_data.id if hasattr(unit_data, 'id') else unit_data
             x = float(cords[0])
             y = float(cords[1])
-            z = float(cords[2]) if len(cords) > 2 else 0.0
+            current_type = ""
+            if unit_id in self.buildings:
+                current_type = self.buildings[unit_id].entity_type
+            elif unit_id in self.units:
+                current_type = self.units[unit_id].entity_type
+
+            z = self._get_z_coordinate(current_type)
 
             if unit_id in self.buildings:
                 self._building_positions[unit_id].append(Position(
@@ -368,7 +393,9 @@ class UnifiedReplayParser:
             self._unit_positions[unit_id].append(Position(
                 frame=event.frame,
                 time=event.frame / self.replay.game_fps,
-                x=death_x, y=death_y, z=0.0
+                x=death_x,
+                y=death_y,
+                z=self._get_z_coordinate(unit.name)
             ))
 
             if unit_id in self._unit_last_state:
