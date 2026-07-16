@@ -409,6 +409,8 @@ class FrontendApp(tk.Tk):
         self.done_label.configure(image="")
 
         if output_path.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')):
+            if hasattr(self.done_label, "video_after_id"):
+                self.done_label.after_cancel(self.done_label.video_after_id)
             self._setup_mp4_player(self.done_label, output_path, self.MAX_W, self.MAX_H)
 
     def make_path_row(self, parent: ttk.Frame, row: int, label_text: str, var: tk.StringVar,
@@ -562,68 +564,75 @@ class FrontendApp(tk.Tk):
         return sidebar
 
     def _setup_mp4_player(self, label: tk.Label, video_path: str, target_width: int, target_height: int,
-                          fps: int = 24) -> None:
-        """
-        Инициализирует и запускает проигрыватель MP4-видео на указанном Label.
-        """
+                          fps: int = 24):
+        import threading
+        import cv2
+        from PIL import Image, ImageTk
+
         if not os.path.exists(video_path):
-            print(f"Предупреждение: Видеофайл не найден по пути: {video_path}")
             return
 
-        try:
-            import cv2
-            from PIL import Image, ImageTk
-        except ImportError:
-            print("Ошибка: Для воспроизведения видео требуется установить opencv-python")
-            print("Выполните: pip install opencv-python")
-            return
-
-        cap = cv2.VideoCapture(video_path)
-        if not cap.isOpened():
-            print(f"Ошибка: Не удалось открыть видео {video_path}")
-            return
+        # если раньше уже было видео
+        if hasattr(label, "video_after"):
+            try:
+                label.after_cancel(label.video_after)
+            except:
+                pass
 
         frames = []
+        loading_finished = False
+        delay = int(1000 / fps)
 
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                break
+        def loader():
+            nonlocal loading_finished
+            cap = cv2.VideoCapture(video_path)
 
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            if not cap.isOpened():
+                loading_finished = True
+                return
 
-            pil_image = Image.fromarray(frame_rgb)
+            video_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            video_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-            img_w, img_h = pil_image.size
-            ratio_w = target_width / img_w
-            ratio_h = target_height / img_h
-            ratio = min(ratio_w, ratio_h)
+            ratio = min(target_width / video_w, target_height / video_h)
 
-            new_w = max(1, int(img_w * ratio))
-            new_h = max(1, int(img_h * ratio))
+            new_size = (max(1, int(video_w * ratio)), max(1, int(video_h * ratio)))
 
-            resized_frame = pil_image.resize((new_w, new_h), Image.Resampling.LANCZOS)
-            photo = ImageTk.PhotoImage(resized_frame)
-            frames.append(photo)
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    break
 
-        cap.release()
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                img = Image.fromarray(frame)
 
-        if not frames:
-            return
+                img = img.resize(new_size, Image.Resampling.BILINEAR)
+                photo = ImageTk.PhotoImage(img)
+                frames.append(photo)
 
-        label.frames = frames
-        label.current_frame_idx = 0
-        delay = max(40, int(1000 / fps))
+            cap.release()
+            loading_finished = True
 
-        def update_frame() -> None:
+        threading.Thread(target=loader, daemon=True).start()
+        current = 0
+
+        def update():
+            nonlocal current
             if not label.winfo_exists():
                 return
-            idx = label.current_frame_idx
-            label.configure(image=label.frames[idx])
-            label.current_frame_idx = (idx + 1) % len(label.frames)
-            label.after(delay, update_frame)
 
-        update_frame()
+            if len(frames):
+                if current >= len(frames):
+                    if loading_finished:
+                        current = 0
+                    else:
+                        current = len(frames) - 1
+
+                label.configure(image=frames[current])
+                label.image = frames[current]
+                current += 1
+            label.video_after = label.after(delay, update)
+        update()
 
     def make_welcome_screen(self) -> ttk.Frame:
         screen_frame = ttk.Frame(self.content, style="Card.TFrame", padding=30)
@@ -654,6 +663,8 @@ class FrontendApp(tk.Tk):
         self.preview_label.grid(row=0, column=0, sticky="")
 
         MAX_W, MAX_H = 560, 280
+        if hasattr(self.preview_label, "video_after_id"):
+            self.preview_label.after_cancel(self.preview_label.video_after_id)
         self._setup_mp4_player(self.preview_label, self.preview_path, MAX_W, MAX_H)
 
         RoundedButton(inner, text="Начать создавать", command=self.on_start,
