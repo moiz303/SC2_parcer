@@ -284,7 +284,7 @@ class FrontendApp(tk.Tk):
         self.clear_temp()
         self.backend = BackendController()
         self.title("Replay Master")
-        self.geometry("1100x820")
+        self.geometry("1100x760")
         self.resizable(False, False)
         self.configure(bg="#07111f")
 
@@ -397,7 +397,7 @@ class FrontendApp(tk.Tk):
 
     def _update_welcome_layout(self) -> None:
         if hasattr(self, "welcome_desc"):
-            width = max(320, self.winfo_width() - 260)
+            width = max(640, self.winfo_width() - 260)
             self.welcome_desc.configure(wraplength=width)
 
     def _load_done_preview(self) -> None:
@@ -550,8 +550,8 @@ class FrontendApp(tk.Tk):
         ttk.Label(sidebar, text="Путь обработки", style="Muted.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 12))
 
         steps = [
-            (1, "Выбор повтора"),
-            (2, "Настройка моделей"),
+            (1, "Повтор"),
+            (2, "Модели"),
             (3, "Готово"),
         ]
         for idx, (step_no, label) in enumerate(steps, start=1):
@@ -642,7 +642,7 @@ class FrontendApp(tk.Tk):
         inner = ttk.Frame(screen_frame)
         inner.grid(row=0, column=0, sticky="nsew")
         inner.columnconfigure(0, weight=1)
-        inner.rowconfigure(2, weight=1)
+        inner.rowconfigure(3, weight=1)
 
         welcome_title = tk.Label(inner, textvariable=self.welcome_title_var, bg="#0f172a", fg="#f8fafc",
                                  font=("Segoe UI", 27, "bold"), justify="center")
@@ -653,7 +653,7 @@ class FrontendApp(tk.Tk):
         self.welcome_desc.grid(row=1, column=0, pady=(0, 20))
 
         preview_frame = tk.Frame(inner, bg="#0f172a", bd=0)
-        preview_frame.grid(row=2, column=0, pady=(8, 20), sticky="nsew")
+        preview_frame.grid(row=3, column=0, pady=(8, 20), sticky="nsew")
         preview_frame.columnconfigure(0, weight=1)
         preview_frame.rowconfigure(0, weight=1)
 
@@ -667,8 +667,8 @@ class FrontendApp(tk.Tk):
             self.preview_label.after_cancel(self.preview_label.video_after_id)
         self._setup_mp4_player(self.preview_label, self.preview_path, MAX_W, MAX_H)
 
-        RoundedButton(inner, text="Начать создавать", command=self.on_start,
-                      bg="#2563eb", active_bg="#1d4ed8").grid(row=3, column=0, pady=(6, 0))
+        RoundedButton(inner, text="Создать", command=self.on_start,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=2, column=0, pady=(6, 0))
         return screen_frame
 
     def make_replay_screen(self) -> ttk.Frame:
@@ -681,7 +681,7 @@ class FrontendApp(tk.Tk):
         main.grid(row=0, column=1, sticky="nsew")
         main.columnconfigure(0, weight=1)
 
-        ttk.Label(main, text="Выберите повтор и папку для анимации", style="Title.TLabel",
+        ttk.Label(main, text="Выберите повтор и папку для сохранения анимации", style="Title.TLabel",
                   justify="center").grid(row=0, column=0, sticky="ew", pady=(0, 18))
         self.replay_var = tk.StringVar(value=self.controller.state.replay_path)
         self.output_var = tk.StringVar(value=self.controller.state.output_path)
@@ -689,7 +689,7 @@ class FrontendApp(tk.Tk):
         self.duration_var = tk.IntVar(value=self.controller.state.animation_duration)
         self.load_history("replay")
 
-        self.make_path_row(main, 1, "Файл повтора", self.replay_var, is_file=True)
+        self.make_path_row(main, 1, "Повтор", self.replay_var, is_file=True)
         self.make_path_row(main, 3, "Папка для сохранения результата", self.output_var, is_file=False)
 
         check = ttk.Checkbutton(main, text="Сохранить полный рендер (весь повтор)", variable=self.save_full_var,
@@ -722,7 +722,7 @@ class FrontendApp(tk.Tk):
         buttons = ttk.Frame(main, style="Card.TFrame")
         buttons.grid(row=8, column=0, sticky="ew")
         buttons.columnconfigure(0, weight=1)
-        RoundedButton(buttons, text="Далее → Модели", command=self.on_replay_next,
+        RoundedButton(buttons, text="Далее", command=self.on_replay_next,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="e")
         return frame
 
@@ -745,24 +745,40 @@ class FrontendApp(tk.Tk):
         self.version_var = tk.StringVar(value=self.controller.state.selected_version)
         self.load_history("models")
 
-        self.make_path_row(main, 1, "Папка с моделями юнитов", self.units_var, is_file=False)
-        self.make_path_row(main, 3, "Папка с моделями зданий", self.buildings_var, is_file=False)
-        self.make_path_row(main, 5, "Папка с текстурами", self.textures_var, is_file=False)
+        self.make_path_row(main, 1, "Модели юнитов", self.units_var, is_file=False)
+        self.make_path_row(main, 3, "Модели зданий", self.buildings_var, is_file=False)
+        self.make_path_row(main, 5, "Текстуры", self.textures_var, is_file=False)
 
         ttk.Label(main, text="Игра / Игровой движок", style="Muted.TLabel").grid(row=7, column=0, sticky="w",
                                                                                  pady=(10, 4))
-        self.version_combo = ttk.Combobox(main, textvariable=self.version_var, values=["StarCraft II"],
-                                          state="readonly")
+
+        def on_version_change(event):
+            selected = self.version_combo.get()
+            if "[Скоро...]" in selected:
+                messagebox.showinfo(
+                    "Анонс", f"Реплеи для «{' '.join(selected.split()[1:])}» еще в разработке"
+                )
+                self.version_combo.set("StarCraft II")
+
+        self.version_combo = ttk.Combobox(main, textvariable=self.version_var, values=[
+            "StarCraft II",
+            "[Скоро...] Command & Conquer: Red Alert 3",
+            "[Скоро...] Hearts of Iron IV",
+            "[Скоро...] Warcraft III: Reforged"],
+                state="readonly")
         self.version_combo.grid(row=8, column=0, sticky="ew", pady=(0, 16))
-        self.version_combo.bind("<<ComboboxSelected>>", lambda _event: self.auto_scan_resources(self.project_root))
+
+        self.version_combo.bind("<<ComboboxSelected>>", on_version_change)
+        # В будущем верхняя строка будет не нужна, зато понадобится нижняя
+        # self.version_combo.bind("<<ComboboxSelected>>", lambda _event: self.auto_scan_resources(self.project_root))
 
         buttons = ttk.Frame(main)
         buttons.grid(row=9, column=0, sticky="ew")
         buttons.columnconfigure(0, weight=1)
         RoundedButton(buttons, text="Назад", command=self.on_back,
-                      bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=0, sticky="w")
+                      bg="#1f2937", active_bg="#374151", fg="#f3f4f6").grid(row=0, column=1, sticky="w")
         RoundedButton(buttons, text="Очистить", command=self.on_clear_all,
-                      bg="#111827", active_bg="#1f2937", fg="#e5e7eb", outline="#374151").grid(row=0, column=1,
+                      bg="#111827", active_bg="#1f2937", fg="#e5e7eb", outline="#374151").grid(row=0, column=0,
                                                                                                sticky="w", padx=(8, 0))
         RoundedButton(buttons, text="Сгенерировать", command=self.on_generate,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=2, sticky="e")
