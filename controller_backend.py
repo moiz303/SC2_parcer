@@ -291,7 +291,6 @@ def run_blender_render(command: list[str], expected_output_path: Optional[Path] 
             bufsize=1,
         )
     except FileNotFoundError:
-        print("✗ Blender не найден в системе")
         return None
 
     frame_tracker = _RenderProgressTracker(total_frames, progress_cb)

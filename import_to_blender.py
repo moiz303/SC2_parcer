@@ -79,15 +79,15 @@ ALL_STATE_KEYWORDS = set(
 # ==============================================================================
 def ui_progress(stage, progress, message=""):
     """Микро-хелпер для передачи сообщений с backend на frontend"""
-    print(
+    sys.stdout.write(
         "__UI__" +
         json.dumps({
             "stage": stage,
             "progress": progress,
             "message": message
-        }),
-        flush=True
+        }) + "\n"
     )
+    sys.stdout.flush()
 
 
 def sc2_to_blender(x, y, z): return x * COORD_SCALE, -y * COORD_SCALE, z * COORD_SCALE
@@ -282,16 +282,14 @@ def render_scene(scene, out_file, analysis, save_full: bool):
     scene.eevee.use_raytracing = False
     scene.eevee.use_volumetric_shadows = False
 
+    if save_full:
+        fp = os.path.join(os.path.dirname(out_file), 'result.blend')
+        bpy.ops.wm.save_as_mainfile(filepath=fp, check_existing=False)
+
     scene.frame_start = analysis.get("start_frame", 0)
     scene.frame_end = analysis.get("end_frame", 1000)
     scene.render.filepath = out_file
     bpy.ops.render.render(animation=True)
-
-    if save_full:
-        scene.frame_start = old_start
-        scene.frame_end = old_end
-        scene.render.filepath = out_file
-        bpy.ops.render.render(animation=True)
 
     scene.frame_start = old_start
     scene.frame_end = old_end

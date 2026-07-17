@@ -13,7 +13,7 @@ from typing import Any, Dict
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from controller_backend import BackendController, JobConfig
-from viewer import GLBViewer
+from frontend.viewer import GLBViewer
 
 
 class Screen(str, Enum):

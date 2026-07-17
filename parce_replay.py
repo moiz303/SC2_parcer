@@ -159,7 +159,7 @@ class UnifiedReplayParser:
             return 0.0
 
         if unit_type_name.endswith('Flying'):
-            return 10.0
+            return 7.0
 
         flying_types = {
             # Терраны
@@ -170,7 +170,7 @@ class UnifiedReplayParser:
             'Mutalisk', 'Corruptor', 'CorruptorCocoon', 'BroodLord', 'BroodLordCocoon', 'Viper', 'Overlord', 'Overseer', 'OverlordTransport'
         }
 
-        return 10.0 if unit_type_name in flying_types else 0.0
+        return 7.0 if unit_type_name in flying_types else 0.0
 
     def _parse_events(self):
         """Парсинг всех событий реплея"""
