@@ -1,6 +1,6 @@
 # Replay Master
 
-**Превращайте киберспортовые повторы StarCraft II в кинематографичные 3D-ролики за пару кликов.**
+**Превращайте киберспортивные повторы StarCraft II в кинематографичные 3D-ролики за пару кликов.**
 
 ![Platform](https://img.shields.io/badge/OS-Windows%2010%2F11-blue)
 ![Blender](https://img.shields.io/badge/Blender-4.4%2B-orange)
