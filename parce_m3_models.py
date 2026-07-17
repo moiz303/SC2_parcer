@@ -7,6 +7,7 @@ from pathlib import Path
 
 # ================= НАСТРОЙКИ =================
 SOURCE_DIR = r"C:\Users\0\Documents\StarCraft II\Exported_Buildings\mods\liberty.sc2mod\base.sc2assets\assets\buildings\resources"
+DEST_DIR = ""
 LOG_FILE = Path(__file__).resolve().parent / "parce_m3_models.log"
 # =============================================
 
