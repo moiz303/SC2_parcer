@@ -13,6 +13,7 @@ from typing import Any, Dict
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from controller_backend import BackendController, JobConfig
+from viewer import GLBViewer
 
 
 class Screen(str, Enum):
@@ -300,6 +301,7 @@ class FrontendApp(tk.Tk):
 
         self.style.configure("Title.TLabel", background="#0f172a", foreground="#f8fafc", font=("Segoe UI", 22, "bold"))
         self.style.configure("Body.TLabel", background="#0f172a", foreground="#cbd5e1", font=("Segoe UI", 12))
+        self.style.configure("SubTitle.TLabel", background="#0f172a", foreground="#cbd5e1", font=("Segoe UI", 16))
         self.style.configure("Muted.TLabel", background="#141c2f", foreground="#94a3b8", font=("Segoe UI", 11))
 
         self.style.configure("Primary.TButton", background="#2563eb", foreground="#ffffff")
@@ -720,7 +722,7 @@ class FrontendApp(tk.Tk):
         self.duration_scale.grid(row=7, column=0, sticky="w", pady=(0, 20))
 
         buttons = ttk.Frame(main, style="Card.TFrame")
-        buttons.grid(row=8, column=0, sticky="ew")
+        buttons.grid(row=9, column=0, sticky="ew")
         buttons.columnconfigure(0, weight=1)
         RoundedButton(buttons, text="Далее", command=self.on_replay_next,
                       bg="#2563eb", active_bg="#1d4ed8").grid(row=0, column=1, sticky="e")
@@ -769,7 +771,7 @@ class FrontendApp(tk.Tk):
         self.version_combo.grid(row=8, column=0, sticky="ew", pady=(0, 16))
 
         self.version_combo.bind("<<ComboboxSelected>>", on_version_change)
-        # В будущем верхняя строка будет не нужна, зато понадобится нижняя
+        # В будущем ^ строка будет не нужна, зато понадобится v.
         # self.version_combo.bind("<<ComboboxSelected>>", lambda _event: self.auto_scan_resources(self.project_root))
 
         buttons = ttk.Frame(main)
@@ -786,13 +788,28 @@ class FrontendApp(tk.Tk):
 
     def make_loading_screen(self) -> ttk.Frame:
         frame = ttk.Frame(self.content, style="Card.TFrame", padding=30)
-        frame.columnconfigure(0, weight=1)
+        frame.columnconfigure(0, weight=2, uniform="columns")
+        frame.columnconfigure(1, weight=3, uniform="columns")
 
-        ttk.Label(frame, text="Генерация…", style="Title.TLabel").grid(row=0, column=0)
+        ttk.Label(frame, text="Генерация…", style="Title.TLabel").grid(row=0, column=0, columnspan=2, pady=(0, 20))
 
         stages = ttk.Frame(frame, style="Card.TFrame")
-        stages.grid(row=2, column=0, sticky="ew")
+        stages.grid(row=1, column=0, sticky="nsew", padx=(0, 20))
         stages.columnconfigure(0, weight=1)
+
+        preview = ttk.Frame(frame, style="Card.TFrame", padding=15)
+        preview.grid(row=1, column=1, sticky="nsew")
+        preview.columnconfigure(0, weight=1)
+        preview.rowconfigure(1, weight=1)
+
+        ttk.Label(preview, text="Главное сражение", style="SubTitle.TLabel").grid(row=0, column=0, pady=(0, 10))
+
+        self.preview_container = tk.Frame(preview, bg="#111827", bd=1, relief="solid")
+        self.preview_container.grid(row=1, column=0, sticky="nsew")
+
+        self.preview_placeholder = ttk.Label(self.preview_container, style="Body.TLabel",
+            text="Предпросмотр сцены появится\nв скором времени!", justify="center")
+        self.preview_placeholder.place(relx=0.5, rely=0.5, anchor="center")
 
         self.loading_stages = {}
 
@@ -870,7 +887,6 @@ class FrontendApp(tk.Tk):
         return frame
 
 
-
     def browse_path(self, variable: tk.StringVar, is_file: bool) -> None:
         if is_file:
             path = filedialog.askopenfilename(title="Выберите реплей",
@@ -927,6 +943,14 @@ class FrontendApp(tk.Tk):
         self.show_screen(Screen.LOADING)
         self._start_backend_job()
 
+    def load_scene(self, parent, placeholder):
+        if placeholder is not None:
+            placeholder.destroy()
+
+        '''preview_path = os.path.join(self.project_root, "temp")
+        lbl = GLBViewer(parent, preview_path)
+        lbl.place(relx=0.5, rely=0.5, anchor="center") - ЗАДЕЛ НА БУДУЩЕЕ - ПРЕДПРОСМОТР СЦЕНЫ'''
+
     def _start_backend_job(self) -> None:
         job_config = JobConfig(
             replay_path=self.controller.state.replay_path,
@@ -950,16 +974,18 @@ class FrontendApp(tk.Tk):
             entry["message"].config(text="")
 
     def _run_backend_job(self, job_config: JobConfig) -> None:
-        result = self.backend.run_job(job_config, progress_cb=self._update_loading_status)
+        result = self.backend.run_job(job_config,
+                                      progress_cb=self._update_loading_status,
+                                      glb_ready_cb=self._on_glb_ready)
         self.after(0, self._finish_backend_job, result)
 
     def _update_loading_status(self, stage: str, progress: int, message: str) -> None:
-        """Это callback, backend зовёт его из ФОНОВОГО потока — сюда напрямую
-        трогать виджеты Tkinter нельзя, поэтому просто маршалим вызов в главный поток."""
         self.after(0, self._apply_loading_status, stage, progress, message)
 
+    def _on_glb_ready(self):
+        self.after(0, self._load_glb_preview)
+
     def _apply_loading_status(self, stage: str, progress: int, message: str) -> None:
-        """А вот это уже безопасно выполняется в главном потоке."""
         entry = self.loading_stages.get(stage)
         if entry is None:
             return
@@ -971,6 +997,9 @@ class FrontendApp(tk.Tk):
 
         if progress >= 100:
             entry["badge"].config(bg="#22c55e", fg="#ffffff")
+
+    def _load_glb_preview(self):
+        self.load_scene(self.preview_container, self.preview_placeholder)
 
     def _finish_backend_job(self, result) -> None:
         if result.success and result.video_path:

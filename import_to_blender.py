@@ -1023,6 +1023,18 @@ def import_all():
         camera = setup_analysis_camera(ANALYSIS)
     scene.camera = camera
 
+    ui_progress("import_scene", 85, "Подготовка интерактивного предпросмотра...")
+
+    preview_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "temp", "preview.obj")
+
+    bpy.ops.wm.obj_export(
+        filepath=preview_path,
+        export_materials=True,
+        export_animation=False
+    )
+
+    print("__GLB__")
+
     ui_progress("import_scene", 90, "Финализация сцены...")
     final_frame = max_frame + 100
     scene.frame_start = 0

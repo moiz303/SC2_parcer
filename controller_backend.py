@@ -14,20 +14,14 @@ from parce_replay import parse_replay_unified
 
 STAGE_ORDER = ("parse_replay", "find_main_battle", "import_scene", "final_render")
 ProgressCallback = Callable[[str, int, str], None]
+GlbReadyCallback = Callable[[], None]
 _RENDER_FRAME_RE = re.compile(r"Video append frame\s+(\d+)")
 
 
 class _RenderProgressTracker:
     """Честный прогресс рендера по номерам кадров из собственного лога Blender."""
 
-    MESSAGE_POOL = (
-        "Совет: чем длиннее ролик, тем дольше рендерится анимация — начните с 30 секунд, чтобы быстрее увидеть результат.",
-        "Blender честно просчитывает каждый кадр отдельно, поэтому финальное видео «весит» по времени куда больше, чем препроцессинг.",
-        "Пока идёт рендер — самое время заварить чай. Мы обязательно покажем превью, как только всё будет готово.",
-        "После завершения рендера ролик можно будет сразу посмотреть прямо в приложении, без сторонних плееров.",
-        "Чем масштабнее было сражение в реплее, тем больше юнитов и зданий нужно анимировать — отсюда и разница во времени.",
-        "Готовое видео сохраняется в указанную вами папку — точный путь появится на следующем экране.",
-    )
+    MESSAGE_POOL = ("", "")
     MESSAGE_EVERY_N_FRAMES = 15
 
     def __init__(self, total_frames: Optional[int], progress_cb: Optional[ProgressCallback]):
@@ -145,7 +139,8 @@ class BackendController:
             selected_version=frontend_state.get("selected_version", "StarCraft II"),
         )
 
-    def run_job(self, job_config: JobConfig, progress_cb: Optional[ProgressCallback] = None) -> JobResult:
+    def run_job(self, job_config: JobConfig, progress_cb: Optional[ProgressCallback] = None,
+                glb_ready_cb: Optional[GlbReadyCallback] = None) -> JobResult:
         if not job_config.replay_path:
             return JobResult(success=False, message="Путь к реплею не указан")
 
@@ -173,7 +168,8 @@ class BackendController:
         # ---- Стадии 3-4 (prepare_scene, render) репортит сам Blender через stdout (__UI__ строки) ----
         render_payload = self.prepare_render_payload(job_config, analysis, temp_unified_path)
         render_payload_path = self.write_render_payload(render_payload)
-        video_path = self._run_blender_render(job_config, render_payload_path, output_file, render_payload, progress_cb)
+        video_path = self._run_blender_render(job_config, render_payload_path, output_file, render_payload,
+                                              progress_cb, glb_ready_cb)
         if not video_path:
             return JobResult(success=False, message="Blender не создал итоговый видеофайл")
         return JobResult(
@@ -231,8 +227,9 @@ class BackendController:
             json.dump(render_payload, handle, ensure_ascii=False, indent=2)
         return payload_path
 
-    def _run_blender_render(self, job_config: JobConfig, payload_path: Path, output_file: Path,
-                            render_payload: Dict[str, Any], progress_cb: Optional[ProgressCallback] = None) -> Optional[Path]:
+    def _run_blender_render(self, job_config: JobConfig, payload_path: Path,
+                            output_file: Path, render_payload: Dict[str, Any],
+                            progress_cb: Optional[ProgressCallback] = None, glb_ready_cb=None) -> Optional[Path]:
         blender_script = self.base_dir / "import_to_blender.py"
         if not blender_script.exists():
             return None
@@ -253,7 +250,7 @@ class BackendController:
         ]
 
         total_frames = (render_payload.get("analysis") or {}).get("duration_frames")
-        return run_blender_render(cmd, output_file, progress_cb, total_frames=total_frames)
+        return run_blender_render(cmd, output_file, progress_cb, glb_ready_cb, total_frames=total_frames)
 
 
 def find_blender_executable() -> Optional[str]:
@@ -283,7 +280,8 @@ def find_blender_executable() -> Optional[str]:
 
 
 def run_blender_render(command: list[str], expected_output_path: Optional[Path] = None,
-                       progress_cb: Optional[ProgressCallback] = None, total_frames: Optional[int] = None) -> Optional[Path]:
+                       progress_cb: Optional[ProgressCallback] = None, glb_ready_cb: Optional[GlbReadyCallback] = None,
+                       total_frames: Optional[int] = None) -> Optional[Path]:
     try:
         process = subprocess.Popen(
             command,
@@ -306,6 +304,9 @@ def run_blender_render(command: list[str], expected_output_path: Optional[Path] 
 
         if line.startswith("__UI__"):
             _handle_ui_line(line, progress_cb)
+            continue
+        if line.startswith("__GLB__"):
+            _handle_glb_line(glb_ready_cb)
             continue
 
         frame_tracker.feed_line(line)
@@ -357,3 +358,8 @@ def _handle_ui_line(line: str, progress_cb: Optional[ProgressCallback]) -> None:
         progress_cb(stage, progress, message)
     else:
         print(f"[UI] {stage}: {progress}% — {message}")
+
+
+def _handle_glb_line(glb_ready_cb):
+    if glb_ready_cb:
+        glb_ready_cb()
