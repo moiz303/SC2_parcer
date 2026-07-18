@@ -138,7 +138,7 @@ class SmoothProgressBar(tk.Canvas):
     просто красиво и без рывков доезжает до целевого значения, даже если backend
     присылает редкие/скачкообразные обновления."""
 
-    def __init__(self, parent, width=460, height=10, radius=5,
+    def __init__(self, parent, width=380, height=10, radius=5,
                  track_color="#111827", fill_color="#2563eb", parent_bg="#0f172a", **kwargs):
         super().__init__(parent, width=width, height=height, bg=parent_bg,
                          highlightthickness=0, **kwargs)
@@ -654,6 +654,9 @@ class FrontendApp(tk.Tk):
                                      font=("Segoe UI", 13), justify="center", wraplength=680)
         self.welcome_desc.grid(row=1, column=0, pady=(0, 20))
 
+        RoundedButton(inner, text="Создать", command=self.on_start,
+                      bg="#2563eb", active_bg="#1d4ed8").grid(row=2, column=0, pady=(6, 0))
+
         preview_frame = tk.Frame(inner, bg="#0f172a", bd=0)
         preview_frame.grid(row=3, column=0, pady=(8, 20), sticky="nsew")
         preview_frame.columnconfigure(0, weight=1)
@@ -664,13 +667,11 @@ class FrontendApp(tk.Tk):
         self.preview_label = tk.Label(preview_frame, bg="#0f172a", bd=0, highlightthickness=0)
         self.preview_label.grid(row=0, column=0, sticky="")
 
-        MAX_W, MAX_H = 560, 280
+        MAX_W, MAX_H = 740, 370
         if hasattr(self.preview_label, "video_after_id"):
             self.preview_label.after_cancel(self.preview_label.video_after_id)
         self._setup_mp4_player(self.preview_label, self.preview_path, MAX_W, MAX_H)
 
-        RoundedButton(inner, text="Создать", command=self.on_start,
-                      bg="#2563eb", active_bg="#1d4ed8").grid(row=2, column=0, pady=(6, 0))
         return screen_frame
 
     def make_replay_screen(self) -> ttk.Frame:
@@ -829,7 +830,7 @@ class FrontendApp(tk.Tk):
             message = ttk.Label(stages, text="", style="Body.TLabel")
             message.grid(row=row + 1, column=0, sticky="w", pady=(0, 2))
 
-            bar = SmoothProgressBar(stages, width=460, height=10, fill_color=color, parent_bg="#0f172a")
+            bar = SmoothProgressBar(stages, width=380, height=10, fill_color=color, parent_bg="#0f172a")
             bar.grid(row=row + 2, column=0, sticky="ew", pady=(0, 18))
 
             self.loading_stages[key] = {
